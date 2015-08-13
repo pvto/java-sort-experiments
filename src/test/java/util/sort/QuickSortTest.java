@@ -48,38 +48,10 @@ public class QuickSortTest {
             totals[x] += System.currentTimeMillis() - s;
             System.out.println(String.format("1e6-U [%s] %dms", DESCR[x], totals[x]));
             if (x > 0)
-            {   // sanity check: QuickSort is never twice slower than Arrays.sort, with a large enough array in U
+            {   // sanity check: a large enough array in U; QuickSort is never twice slower than Arrays.sort
                 assertTrue(totals[x] < totals[x - 1] * 2);
             }
         }
 
     }
-
-    
-/*
-#n=1e6
-> a = c(111,169,171,201,129,191,127,156,153,254)
-> sum(a)/length(a)
-[1] 166.2
-> b = c(136,134,139,143,151,135,163,136,172,171)
-> sum(b)/length(b)
-[1] 148
-    
-#n=1e7
-> a2 = c(980,949,1002,947,1004,1005,992,1065,1021,971)
-> mean(a2)
-[1] 993.6
-> b2 = c(1295,1347,1262,1266,1299,1412,1322,1309,1314,1300)
-> mean(b2)
-[1] 1312.6
-# implement insertion sort for n < 47
-> b2b = c(1083,1103,1067,1089,1088,1155,1121,1077,1070,1100)
-> mean(b2b)
-[1] 1095.3
-# narrow insertion sort threshold to 10
-> bb = c(145,152,150,153,143,145,123,154,120,123)
-> mean(bb)
-[1] 140.8
-*/
-
 }

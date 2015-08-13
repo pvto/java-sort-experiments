@@ -44,10 +44,10 @@ public class BleedSort {
         }
         
         int tmpSize = (int)((a.length * 4));
-        System.out.println(String.format(
-                "sample %d min %d max %d mean %d signChanges %.2f tmpSize %d", 
-                sample, min, max, mean, factor, tmpSize
-        ));
+//        System.out.println(String.format(
+//                "sample %d min %d max %d mean %d signChanges %.2f tmpSize %d", 
+//                sample, min, max, mean, factor, tmpSize
+//        ));
         bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), min, max, mean);
     }
     

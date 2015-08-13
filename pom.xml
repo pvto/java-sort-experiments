@@ -5,7 +5,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>pvto</groupId>
+  <groupId>pvto.sort-experiments</groupId>
   <artifactId>sort-experiments</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>

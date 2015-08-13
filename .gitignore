@@ -1,1 +1,4 @@
 /target/
+/src/test/benchmark/quadtree/target/
+/test/benchmark/quadtree/target/
+/test/benchmark/sort-experiments/target/
