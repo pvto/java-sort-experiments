@@ -10,7 +10,7 @@ public class QuickSort {
     };
     
 
-    private static int maxIsThreshold(int arrayLength)
+    public static int maxIsThreshold(int arrayLength)
     {
         int ret = 10;
         for(int i = 0; i < INSERTION_SHORT_THRESHOLD.length;)
@@ -39,7 +39,7 @@ public class QuickSort {
     }
     
     
-    public static int quickSort(int[] arr, int left, int right, int pivot, int MAX_INSERTION_SORT)
+    public static int quickSort(int[] arr, int left, int right, int medianEstimate, int MAX_INSERTION_SORT)
     {
         int length = right - left;
         if (length < 2)
@@ -105,11 +105,11 @@ public class QuickSort {
                 ;
         while(s < e)
         {
-            while (s < e && arr[s] <= pivot)
+            while (s < e && arr[s] <= medianEstimate)
             {
                 s++;
             }
-            while(arr[e] > pivot && s < e)
+            while(arr[e] > medianEstimate && s < e)
             {
                 e--;
             }
@@ -122,19 +122,19 @@ public class QuickSort {
         
         int sum = length;
         
-        while (s > left && arr[s] >= pivot)
+        while (s > left && arr[s] >= medianEstimate)
         {
             s--;
         }
         if (left < s && s < right)
-            sum += quickSort(arr, left, s, (arr[left] + arr[s]) >> 1, maxIsThreshold(length));
+            sum += quickSort(arr, left, s, (arr[left] + arr[left+1] + arr[s-1] + arr[s]) >> 2, maxIsThreshold(length));
         
-        while (s < right && arr[s] <= pivot)
+        while (s < right && arr[s] <= medianEstimate)
         {
             s++;
         }
         if (s < right)
-            sum += quickSort(arr, s, right, (arr[s] + arr[right]) >> 1, maxIsThreshold(length));
+            sum += quickSort(arr, s, right, (arr[s] + arr[s+1] + arr[right-1] + arr[right]) >> 2, maxIsThreshold(length));
         
         return sum;
     }
