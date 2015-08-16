@@ -49,7 +49,8 @@ public class BleedSortTest {
     }
     
     @Ignore
-    @Test
+//    @Test
+// commented out; @Ignore is ignored by my environment, and binomial generation is very slow. need a proper algorithm...
     public void testBS1e5bin1e5()
     {
         int[] t = new int[100000];

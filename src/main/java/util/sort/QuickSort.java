@@ -1,7 +1,5 @@
 package util.sort;
 
-import java.util.Arrays;
-
 public class QuickSort {
 
     private static final int[] INSERTION_SHORT_THRESHOLD = new int[] {
@@ -46,7 +44,9 @@ public class QuickSort {
             return 0;
         
         if (length < MAX_INSERTION_SORT)
-        {
+        {   // falling back to insertion sort for small subarrays;
+            // this is adopted from Java 8 standard library (java.util.DualPivotQuicksort);
+            // copyright for this block is Oracle's and authors' named in java.util.DualPivotQuicksort.java
             if (left == 0)
             {
                 for (int i = left, j = i; i < right; j = ++i) {

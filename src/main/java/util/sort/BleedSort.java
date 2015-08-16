@@ -57,7 +57,7 @@ public class BleedSort {
                 + 1e-6              // add a small expectation
                 ;
         sameAvg = sameAvg * a.length / 100.0;
-//        System.out.println("sameavg=" + sameAvg);
+
         if (sameAvg > 8.0 || a.length < 100000)
         {
             QuickSort.quickSort(a, 0, a.length - 1, mean, QuickSort.maxIsThreshold(a.length));
@@ -121,10 +121,10 @@ public class BleedSort {
                 {   // problem in sample distribution (minimum was estimated too big)
                     // forsake our trial and run again!
                     tmp = newTmpArr(tmp, a);
-                    System.out.println(String.format(
-                            "new trial min %d->%d max %d tmp-size %d",
-                            min, x, max, tmp.length
-                    ));
+//                    System.out.println(String.format(
+//                            "new trial min %d->%d max %d tmp-size %d",
+//                            min, x, max, tmp.length
+//                    ));
                     bleedSort(a, tmp, Math.min(x, min), max, mean, sameness, ++bleeding);
                     return;
                 }
@@ -139,10 +139,10 @@ public class BleedSort {
                 {   // problem in sample distribution (maximum was estimated too small)
                     // forsake our trial and run again!
                     tmp = newTmpArr(tmp, a);
-                    System.out.println(String.format(
-                            "new trial min %d max %d->%d, tmp-size %d",
-                            min, max, x, tmp.length
-                    ));
+//                    System.out.println(String.format(
+//                            "new trial min %d max %d->%d, tmp-size %d",
+//                            min, max, x, tmp.length
+//                    ));
                     bleedSort(a, tmp, min, Math.max(x, max), mean, sameness, ++bleeding);
                     return;
                 }
@@ -155,7 +155,7 @@ public class BleedSort {
                     if ((place & sameness) == 0 && 
                             bleedCount++ > a.length << 1)
                     {
-                        System.out.println("bleed");
+//                        System.out.println("bleed");
                         bleedCount = 0;
                         int newMin = min, newMax = max;
                         for(int j = 0; j < tmp.length; j++)
@@ -171,10 +171,10 @@ public class BleedSort {
                                 break;
                             }
                         tmp = newTmpArr(tmp, a);
-                        System.out.println(String.format(
-                                "new trial min %d->%d max %d->%d, tmp-size %d",
-                                min, newMin, max, newMax, x, tmp.length
-                        ));
+//                        System.out.println(String.format(
+//                                "new trial min %d->%d max %d->%d, tmp-size %d",
+//                                min, newMin, max, newMax, x, tmp.length
+//                        ));
                         bleedSort(a, tmp, Math.min(newMin, min), Math.max(newMax, max), mean, sameness, ++bleeding);
                         return;
                     };
