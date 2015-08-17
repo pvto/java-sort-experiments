@@ -98,6 +98,9 @@ public class MyBenchmark {
 //    @Benchmark @BenchmarkMode(Mode.SampleTime) public void _1e4U() { U(_1e4U); }
 //    @Benchmark @BenchmarkMode(Mode.SampleTime) public void _1e5U() { U(_1e5U); }
 //    @Benchmark @BenchmarkMode(Mode.SampleTime) public void _1e6U() {  U(_1e6U); }
+      @Benchmark @BenchmarkMode(Mode.SampleTime) public void _1e6Iwf010() { Iwf(_1e6U, 0.10); }
+      @Benchmark @BenchmarkMode(Mode.SampleTime) public void _1e6Iwf001() { Iwf(_1e6U, 0.01); }
+    
 //    @Benchmark @BenchmarkMode(Mode.SampleTime) public void _1e7U() { U(_1e7U); }
 //
 //    @Benchmark @BenchmarkMode(Mode.SampleTime) public void int1e4UBleedSort() { BleedSort.bleedSort(U(_1e4U)); }
@@ -122,7 +125,7 @@ public class MyBenchmark {
 
 //    @Benchmark @BenchmarkMode(Mode.SampleTime) public void int1e6Iw001BleedSort()   { BleedSort.bleedSort(Iwf(_1e6U, 0.01)); }
 //    @Benchmark @BenchmarkMode(Mode.SampleTime) public void int1e6Iw001JavaSort()    {  Arrays.sort(Iwf(_1e6U, 0.01)); }
-    @Benchmark @BenchmarkMode(Mode.SampleTime) public void int1e6Iw001QuickSort()   { QuickSort.quickSort(Iwf(_1e6U, 0.01)); }
+//    @Benchmark @BenchmarkMode(Mode.SampleTime) public void int1e6Iw001QuickSort()   { QuickSort.quickSort(Iwf(_1e6U, 0.01)); }
 
 //    @Benchmark @BenchmarkMode(Mode.SampleTime) public void _1e4bin100() { bin(_1e4U, 100); }
 //    @Benchmark @BenchmarkMode(Mode.SampleTime) public void int1e4bin100BleedSort()  { BleedSort.bleedSort(bin(_1e4U, 100)); }
@@ -162,11 +165,14 @@ MyBenchmark.int1e7UBleedSort  sample    373  0.938 ±  0.009   s/op  0.914 ±  0
 MyBenchmark.int1e7UJavaSort   sample    200  1.144 ±  0.009   s/op  1.120 ±  0.010
 MyBenchmark.int1e7UQuickSort  sample    200  1.483 ±  0.014   s/op  1.459 ±  0.015
 
+Benchmark                 Mode     Cnt  Score   Error  Units
+MyBenchmark._1e6Iwf001  sample  148693  1.344 ± 0.003  ms/op
+MyBenchmark._1e6Iwf010  sample   20705  9.701 ± 0.033  ms/op
+
        .int1e6Iw010BleedSort  sample   4159 49.377 ±  0.571  ms/op  25.   ±  1.5
        .int1e6Iw010JavaSort   sample   3937 52.139 ±  0.229  ms/op  28.   ±  1.2
        .int1e6Iw010QuickSort  sample   3899 52.457 ±  0.210  ms/op  28.   ±  1.2
 
-           MyBenchmark._1e6U  sample  8528  23.639 ± 0.056  ms/op
 
        .int1e6Iw001BleedSort  sample   6190 32.821 ±  0.219  ms/op   9.18 ±  0.28
        .int1e6Iw001JavaSort   sample   8113 24.910 ±  0.079  ms/op   1.27 ±  0.14
