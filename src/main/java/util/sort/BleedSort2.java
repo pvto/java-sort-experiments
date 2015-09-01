@@ -22,10 +22,8 @@ public class BleedSort2 {
                 sign = 1,
                 signChanges = 0
                 ;
-        int[] 
-                quantiles = new int[5],
-                sample = new int[sampleSize]
-                ;
+        int[] q = new int[5];   // quantiles 0, 25, 50, 75, 100
+        int[] sample = new int[sampleSize];
         for(int i = 0; i < sampleSize; i++)
         {
             int 
@@ -40,13 +38,19 @@ public class BleedSort2 {
             sample[i] = a[ind];
         }
         Arrays.sort(sample);
-        quantiles[0] = sample[0];
-        quantiles[1] = sample[sample.length >>> 2];
-        quantiles[2] = sample[sample.length >>> 1];
-        quantiles[3] = sample[(sample.length >>> 1) + (sample.length >>> 2)];
-        quantiles[4] = sample[sample.length - 1];
-        
-        double sameAvg = 0;
+        q[0] = sample[0];
+        q[1] = sample[sample.length >>> 2];
+        q[2] = sample[sample.length >>> 1];
+        q[3] = sample[(sample.length >>> 1) + (sample.length >>> 2)];
+        q[4] = sample[sample.length - 1];
+            
+        if (Math.abs((q[2] - q[0])  - (q[4] - q[2])) 
+                > (q[4] - q[2]) / 20)
+        {   // if data is skewed, fallback to a more robust sort
+            Arrays.sort(a);
+            return;
+        }
+        double similarByAvg = 0;
         for(int x = 0; x < 20; x++)
         {
             int 
@@ -56,25 +60,32 @@ public class BleedSort2 {
             for (int i = 1; i < 101; i++)
                 if (a[ind + i] == a[ind])
                     sameCount++;
-            sameAvg += sameCount;
+            similarByAvg += sameCount;
         }
-        sameAvg = sameAvg / 20.0 
+        similarByAvg = similarByAvg / 20.0 
                 + 1e-6              // add a small expectation
                 ;
-        sameAvg = sameAvg * a.length / 100.0;
+        similarByAvg = similarByAvg * a.length / 100.0;
 
-        if (sameAvg > 8.0)
-        {
-            QuickSort.quickSort(a, 0, a.length - 1, quantiles[2], QuickSort.maxIsThreshold(a.length));
+        if (similarByAvg > 8.0)
+        {   // repetitive array, fall back to more robust sort
+            Arrays.sort(a);
+            return;
+        }
+        if (q[4] - q[0] < a.length / 3.5)
+        {   // when we approach the factor of 1/4 for (data_max - data_min) / (array_size), 
+            // bleedsort gets stuck into a loop of expansion and eventually falls back to a more robust sort
+            // ; it's better to fall back early 
+            Arrays.sort(a);
             return;
         }
 
         int 
-                sameness = fillLSDs((int)sameAvg),
+                sameness = fillLSDs((int)similarByAvg),
                 tmpSize = (int)((a.length * 4))
                 ;
 
-        bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), quantiles, sameness, 0);
+        bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, sameness, 0);
     }
     
     public static int fillLSDs(int x)
@@ -90,7 +101,7 @@ public class BleedSort2 {
     
     public static void bleedSort(int[] a, int[] tmp, int[] quantiles, int sameness, int bleeding)
     {
-        if (bleeding > 2)
+        if (bleeding > 0)
         {
             Arrays.sort(a);
             return;
@@ -212,16 +223,19 @@ public class BleedSort2 {
                 if (place >= tmp.length || 
                         (place & sameness) == 0 && bleedCount++ > a.length << 1)
                 {
-                    // first adjust maximum
-                    for(int j = baselines[4]; j < tmp.length; j++)
-                    {
-                        if (tmp[j] > quantiles[4])
-                            quantiles[4] = tmp[j];
-                    }
-                    // then expand tmp-array and try again
-                    tmp = newTmpArr(tmp, a);
-                    bleedSort(a, tmp, quantiles, sameness, ++bleeding);
+                    Arrays.sort(a);
                     return;
+//                    // first adjust maximum
+//                    for(int j = baselines[4]; j < tmp.length; j++)
+//                    {
+//                        if (tmp[j] > quantiles[4])
+//                            quantiles[4] = tmp[j];
+//                    }
+//                    // then expand tmp-array and try again
+//                    System.out.println("bleed");
+//                    tmp = newTmpArr(tmp, a);
+//                    bleedSort(a, tmp, quantiles, sameness, ++bleeding);
+//                    return;
                 };
             }
             

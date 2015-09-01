@@ -85,47 +85,70 @@ public class BleedSort2Test {
         }
     }
     
-    private void fillRandom(int[] a, double similarityFactor)
+    private void fillRandom(int[] a, double similarityFactor, double compressionFactor)
     {
         for(int i = 0; i < a.length; i++)
-            a[i] = (int) (Math.random() * a.length);
+            a[i] = (int) (Math.random() * a.length * compressionFactor);
         similarize(a, similarityFactor);
     }
-    private void fillDecr(int[] a, double mixFactor, double similarityFactor)
+    private void fillDecr(int[] a, double mixFactor, double similarityFactor, double compressionFactor)
     {
         for(int i = 0; i < a.length; i++)
-            a[i] = a.length - i;
+            a[i] = (int) ((a.length - i) * compressionFactor);
         mix(a, mixFactor);
         similarize(a, similarityFactor);
     }
-    private void fillIncr(int[] a, double mixFactor, double similarityFactor)
+    private void fillIncr(int[] a, double mixFactor, double similarityFactor, double compressionFactor)
     {
         for(int i = 0; i < a.length; i++)
-            a[i] = a.length - i;
+            a[i] = (int) ((a.length - i) * compressionFactor);
         mix(a, mixFactor);
         similarize(a, similarityFactor);
+    }
+    private void fillSkewed(int[] a, double p, int exponent, double compressionFactor)
+    {
+        for(int i = 0; i < a.length; i++)
+        {
+            double d = Math.random();
+            for(int n = 0; n < exponent; n++)
+            {
+                if (d > p)
+                    d = Math.random();
+                else break;
+            }
+            a[i] = (int) (a.length * d * compressionFactor);
+        }
     }
     
     @Test
     public void testBS1e6()
     {
-        double similarityFactor = 0.1;
+        double similarityFactor = 0;
+        double compressionFactor = 1.0 / 3;
         double mixFactor = 1.0;
+        double bin_p = 0.5;
+        int exp = 1;
         boolean 
                 random = false,
-                decreasing = false
+                decreasing = false,
+                skewed = true
                 ;
-        int trials = 20, innerTrials = 1;
-        int[] orig = new int[(int)2e7];
+        int 
+                trials = 20, 
+                innerTrials = 50
+                ;
+        int[] orig = new int[(int)1e5];
         int[] t;
         
 
         System.out.println("priming...");
         for(int x = 0; x < 3; x++)
         {
-            if (random) fillRandom(orig, similarityFactor);
-            else if (decreasing) fillDecr(orig, mixFactor, similarityFactor);
-            else if (!decreasing) fillIncr(orig, mixFactor, similarityFactor);
+            if (random) fillRandom(orig, similarityFactor, compressionFactor);
+            else if (skewed) fillSkewed(orig, bin_p, exp, compressionFactor);
+            else if (decreasing) fillDecr(orig, mixFactor, similarityFactor, compressionFactor);
+            else if (!decreasing) fillIncr(orig, mixFactor, similarityFactor, compressionFactor);
+            
             
             t = Arrays.copyOf(orig, orig.length);
             BleedSort2.bleedSort(t);
@@ -140,9 +163,10 @@ public class BleedSort2Test {
         {
 
             orig = new int[orig.length];
-            if (random) fillRandom(orig, similarityFactor);
-            else if (decreasing) fillDecr(orig, mixFactor, similarityFactor);
-            else if (!decreasing) fillIncr(orig, mixFactor, similarityFactor);
+            if (random) fillRandom(orig, similarityFactor, compressionFactor);
+            else if (skewed) fillSkewed(orig, bin_p, exp, compressionFactor);
+            else if (decreasing) fillDecr(orig, mixFactor, similarityFactor, compressionFactor);
+            else if (!decreasing) fillIncr(orig, mixFactor, similarityFactor, compressionFactor);
 
 
             elapsed = 0;
@@ -170,7 +194,14 @@ public class BleedSort2Test {
         double bss, ass;
         System.out.println("bleedsort[avg]: " + (bss=(bs / (double)trials / (double)innerTrials)));
         System.out.println("Arrays.sort[avg]: " + (ass=(as / (double)trials / (double)innerTrials)));
-        System.out.println("Factor [for "+(random?"rnd":(decreasing?"decr":"incr"))+" "+orig.length+", simil. "+similarityFactor+", mix. "+mixFactor+"]: " + bss / ass);
+        System.out.println("Factor [for "+(random?"rnd":(skewed?"skewed":(decreasing?"decr":"incr")))
+                +" "+orig.length
+                + ", simil. "+similarityFactor
+                + ", compr. " +compressionFactor
+                + ", mix. "+mixFactor
+                + ", p "+bin_p + ", exp " + exp
+                +"]: " + bss / ass
+        );
 //bleedsort[avg]: 0.3922
 //Arrays.sort[avg]: 0.4777
 //Factor [for 10000, simil. 0]: 0.8210173749214988
@@ -179,6 +210,95 @@ public class BleedSort2Test {
 //Arrays.sort[avg]: 6.0729999999999995
 //Factor [for 100000, simil. 0]: 0.7006421867281409
 
+//bleedsort[avg]: 6.551
+//Arrays.sort[avg]: 6.292000000000001
+//Factor [for rnd 100000, simil. 0.0, compr. 0.0625, mix. 1.0]: 1.0411633820724728
+//bleedsort[avg]: 7.125
+//Arrays.sort[avg]: 6.82
+//Factor [for rnd 100000, simil. 0.0, compr. 0.125, mix. 1.0]: 1.0447214076246334
+//bleedsort[avg]: 6.88
+//Arrays.sort[avg]: 6.8
+//Factor [for rnd 100000, simil. 0.0, compr. 0.25, mix. 1.0]: 1.011764705882353
+//bleedsort[avg]: 5.2925
+//Arrays.sort[avg]: 6.395
+//Factor [for rnd 100000, simil. 0.0, compr. 0.3333333333333333, mix. 1.0]: 0.8275996872556686
+//bleedsort[avg]: 5.0475
+//Arrays.sort[avg]: 6.660833333333333
+//Factor [for rnd 100000, simil. 0.0, compr. 0.5, mix. 1.0]: 0.7577880645564871
+//bleedsort[avg]: 4.965
+//Arrays.sort[avg]: 6.529166666666667
+//Factor [for rnd 100000, simil. 0.0, compr. 1.0, mix. 1.0]: 0.760433950223356
+//bleedsort[avg]: 4.42
+//Arrays.sort[avg]: 7.015000000000001
+//Factor [for rnd 100000, simil. 0.0, compr. 32.0, mix. 1.0]: 0.63007840342124017
+//bleedsort[avg]: 4.715
+//Arrays.sort[avg]: 7.640000000000001
+//Factor [for rnd 100000, simil. 0.0, compr. 256.0, mix. 1.0]: 0.6171465968586387
+//bleedsort[avg]: 4.6049999999999995
+//Arrays.sort[avg]: 7.125
+//Factor [for rnd 100000, simil. 0.0, compr. 2048.0, mix. 1.0]: 0.6463157894736842
+
+        
+//bleedsort[avg]: 7.189
+//Arrays.sort[avg]: 7.14
+//Factor [for incr 100000, simil. 0.0, compr. 0.25, mix. 1.0]: 1.0068627450980392
+//bleedsort[avg]: 6.896
+//Arrays.sort[avg]: 6.93
+//Factor [for incr 100000, simil. 0.0, compr. 0.2857142857142857, mix. 1.0]: 0.9950937950937951
+//bleedsort[avg]: 5.455
+//Arrays.sort[avg]: 6.99
+//Factor [for incr 100000, simil. 0.0, compr. 0.3333333333333333, mix. 1.0]: 0.7804005722460658
+//bleedsort[avg]: 3.78
+//Arrays.sort[avg]: 7.01
+//Factor [for incr 100000, simil. 0.0, compr. 0.5, mix. 1.0]: 0.5392296718972895
+//bleedsort[avg]: 2.44
+//Arrays.sort[avg]: 7.025
+//Factor [for incr 100000, simil. 0.0, compr. 1.0, mix. 1.0]: 0.3473309608540925
+//bleedsort[avg]: 2.145
+//Arrays.sort[avg]: 6.876
+//Factor [for incr 100000, simil. 0.0, compr. 2.0, mix. 1.0]: 0.3119546247818499
+        
+        //before adding fallback rule
+//bleedsort[avg]: 8.332
+//Arrays.sort[avg]: 6.712999999999999
+//Factor [for skewed 100000, simil. 0.0, compr. 0.3333333333333333, mix. 1.0, p 0.5, exp 6]: 1.2411738417994937
+//bleedsort[avg]: 10.844000000000001
+//Arrays.sort[avg]: 7.157
+//Factor [for incr 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 6]: 1.5151599832331983
+//bleedsort[avg]: 9.488999999999999
+//Arrays.sort[avg]: 6.85
+//Factor [for skewed 100000, simil. 0.0, compr. 4.0, mix. 1.0, p 0.5, exp 6]: 1.3852554744525547
+//bleedsort[avg]: 9.5
+//Arrays.sort[avg]: 6.602
+//Factor [for skewed 100000, simil. 0.0, compr. 16.0, mix. 1.0, p 0.5, exp 6]: 1.4389578915480157
+
+        //after adding fallback rule
+//bleedsort[avg]: 7.468999999999999
+//Arrays.sort[avg]: 7.437
+//Factor [for skewed 100000, simil. 0.0, compr. 0.3333333333333333, mix. 1.0, p 0.5, exp 6]: 1.0043028102729594
+//bleedsort[avg]: 7.182
+//Arrays.sort[avg]: 7.015
+//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 1]: 1.0238061297220242
+//bleedsort[avg]: 7.216
+//Arrays.sort[avg]: 7.124
+//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 2]: 1.012914093206064
+//bleedsort[avg]: 7.175
+//Arrays.sort[avg]: 7.528
+//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 3]: 0.9531083953241233
+//bleedsort[avg]: 7.109
+//Arrays.sort[avg]: 7.314
+//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 4]: 0.9719715613891168
+//bleedsort[avg]: 8.07
+//Arrays.sort[avg]: 7.42
+//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 5]: 1.087601078167116
+//bleedsort[avg]: 7.712999999999999
+//Arrays.sort[avg]: 7.372000000000001
+//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 6]: 1.0462561041779705
+//bleedsort[avg]: 7.489
+//Arrays.sort[avg]: 7.095
+//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 8]: 1.0555320648343904
+
+//######## 1000_000
 //bleedsort[avg]: 59.379999999999995
 //Arrays.sort[avg]: 76.09
 //Factor [for 1000000, simil. 0]: 0.78
