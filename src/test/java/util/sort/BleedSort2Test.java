@@ -1,6 +1,9 @@
 
 package util.sort;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -60,7 +63,7 @@ public class BleedSort2Test {
     }
     
 
-    private void similarize(int[] a , double similarityFactor)
+    public static void similarize(int[] a , double similarityFactor)
     {
         for(int i = 0; i < a.length * similarityFactor; i++)
         {
@@ -71,7 +74,7 @@ public class BleedSort2Test {
             a[x] = a[y];
         }
     }
-    private void mix(int[] a, double mixFactor)
+    public static void mix(int[] a, double mixFactor)
     {
         for(int i = 0; i < a.length * mixFactor; i++)
         {
@@ -85,34 +88,43 @@ public class BleedSort2Test {
         }
     }
     
-    private void fillRandom(int[] a, double similarityFactor, double compressionFactor)
-    {
-        for(int i = 0; i < a.length; i++)
-            a[i] = (int) (Math.random() * a.length * compressionFactor);
-        similarize(a, similarityFactor);
-    }
-    private void fillDecr(int[] a, double mixFactor, double similarityFactor, double compressionFactor)
-    {
-        for(int i = 0; i < a.length; i++)
-            a[i] = (int) ((a.length - i) * compressionFactor);
-        mix(a, mixFactor);
-        similarize(a, similarityFactor);
-    }
-    private void fillIncr(int[] a, double mixFactor, double similarityFactor, double compressionFactor)
-    {
-        for(int i = 0; i < a.length; i++)
-            a[i] = (int) ((a.length - i) * compressionFactor);
-        mix(a, mixFactor);
-        similarize(a, similarityFactor);
-    }
-    private void fillSkewed(int[] a, double p, int exponent, double compressionFactor)
+    public static void fillRandom(int[] a, double similarityFactor, double compressionFactor, double curveExponent)
     {
         for(int i = 0; i < a.length; i++)
         {
+            double d = Math.pow(Math.random(), curveExponent);
+            a[i] = (int) (a.length * d * compressionFactor);
+        }
+        similarize(a, similarityFactor);
+    }
+    public static void fillDecr(int[] a, double mixFactor, double similarityFactor, double compressionFactor)
+    {
+        for(int i = 0; i < a.length; i++)
+            a[i] = (int) ((a.length - i) * compressionFactor);
+        mix(a, mixFactor);
+        similarize(a, similarityFactor);
+    }
+    public static void fillIncr(int[] a, double mixFactor, double similarityFactor, double compressionFactor)
+    {
+        for(int i = 0; i < a.length; i++)
+            a[i] = (int) ((a.length - i) * compressionFactor);
+        mix(a, mixFactor);
+        similarize(a, similarityFactor);
+    }
+    public static void fillSkewed(int[] a, double p, double exponent, double compressionFactor)
+    {
+        double[] skewThresholds = new double[(int)exponent];
+        double pn = p;
+        for (int i = 0; i < skewThresholds.length; i++) {
+            skewThresholds[i] = pn;
+            pn *= p;
+        }
+        for(int i = 0; i < a.length; i++)
+        {
             double d = Math.random();
-            for(int n = 0; n < exponent; n++)
+            for(int n = skewThresholds.length - 1; n >= 0; n--)
             {
-                if (d > p)
+                if (d > skewThresholds[n])
                     d = Math.random();
                 else break;
             }
@@ -121,35 +133,36 @@ public class BleedSort2Test {
     }
     
     @Test
-    public void testBS1e6()
+    public void testBS1e6() throws IOException
     {
-        double similarityFactor = 0;
-        double compressionFactor = 1.0 / 3;
+        BufferedWriter bf = new BufferedWriter(new FileWriter("sort-times-2.txt", true));
+        double similarityFactor = 0.0;
+        double compressionFactor = 1.0 * 1;
         double mixFactor = 1.0;
-        double bin_p = 0.5;
-        int exp = 1;
+        double bin_p = 0.4;
+        double exp = 1.25;
         boolean 
-                random = false,
+                random = true,
                 decreasing = false,
-                skewed = true
+                skewed = false
                 ;
         int 
                 trials = 20, 
-                innerTrials = 50
+                innerTrials = 5
                 ;
-        int[] orig = new int[(int)1e5];
+        int[] orig = new int[(int)1e6];
         int[] t;
         
 
         System.out.println("priming...");
         for(int x = 0; x < 3; x++)
         {
-            if (random) fillRandom(orig, similarityFactor, compressionFactor);
+            if (random) fillRandom(orig, similarityFactor, compressionFactor, exp);
             else if (skewed) fillSkewed(orig, bin_p, exp, compressionFactor);
             else if (decreasing) fillDecr(orig, mixFactor, similarityFactor, compressionFactor);
             else if (!decreasing) fillIncr(orig, mixFactor, similarityFactor, compressionFactor);
             
-            
+            //System.out.println(Arrays.toString(orig));
             t = Arrays.copyOf(orig, orig.length);
             BleedSort2.bleedSort(t);
             t = Arrays.copyOf(orig, orig.length);
@@ -163,7 +176,7 @@ public class BleedSort2Test {
         {
 
             orig = new int[orig.length];
-            if (random) fillRandom(orig, similarityFactor, compressionFactor);
+            if (random) fillRandom(orig, similarityFactor, compressionFactor, exp);
             else if (skewed) fillSkewed(orig, bin_p, exp, compressionFactor);
             else if (decreasing) fillDecr(orig, mixFactor, similarityFactor, compressionFactor);
             else if (!decreasing) fillIncr(orig, mixFactor, similarityFactor, compressionFactor);
@@ -192,16 +205,20 @@ public class BleedSort2Test {
             System.out.println("Arrays.sort " + (elapsed / (double)innerTrials));
         }
         double bss, ass;
-        System.out.println("bleedsort[avg]: " + (bss=(bs / (double)trials / (double)innerTrials)));
-        System.out.println("Arrays.sort[avg]: " + (ass=(as / (double)trials / (double)innerTrials)));
-        System.out.println("Factor [for "+(random?"rnd":(skewed?"skewed":(decreasing?"decr":"incr")))
-                +" "+orig.length
-                + ", simil. "+similarityFactor
-                + ", compr. " +compressionFactor
-                + ", mix. "+mixFactor
-                + ", p "+bin_p + ", exp " + exp
-                +"]: " + bss / ass
-        );
+        String s = 
+            "\nbleedsort[avg]: " + (bss=(bs / (double)trials / (double)innerTrials))
+            + "\nArrays.sort[avg]: " + (ass=(as / (double)trials / (double)innerTrials))
+            + "\nFactor [for "+(random?"rnd":(skewed?"skewed":(decreasing?"decr":"incr")))
+                    +" "+orig.length
+                    + ", simil. "+similarityFactor
+                    + ", compr. " +compressionFactor
+                    + ", mix. "+mixFactor
+                    + ", p "+bin_p + ", exp " + exp
+                    +"]: " + bss / ass
+            ;
+        System.out.println(s);
+        bf.append(s);
+        bf.close();
 //bleedsort[avg]: 0.3922
 //Arrays.sort[avg]: 0.4777
 //Factor [for 10000, simil. 0]: 0.8210173749214988
@@ -258,45 +275,7 @@ public class BleedSort2Test {
 //Arrays.sort[avg]: 6.876
 //Factor [for incr 100000, simil. 0.0, compr. 2.0, mix. 1.0]: 0.3119546247818499
         
-        //before adding fallback rule
-//bleedsort[avg]: 8.332
-//Arrays.sort[avg]: 6.712999999999999
-//Factor [for skewed 100000, simil. 0.0, compr. 0.3333333333333333, mix. 1.0, p 0.5, exp 6]: 1.2411738417994937
-//bleedsort[avg]: 10.844000000000001
-//Arrays.sort[avg]: 7.157
-//Factor [for incr 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 6]: 1.5151599832331983
-//bleedsort[avg]: 9.488999999999999
-//Arrays.sort[avg]: 6.85
-//Factor [for skewed 100000, simil. 0.0, compr. 4.0, mix. 1.0, p 0.5, exp 6]: 1.3852554744525547
-//bleedsort[avg]: 9.5
-//Arrays.sort[avg]: 6.602
-//Factor [for skewed 100000, simil. 0.0, compr. 16.0, mix. 1.0, p 0.5, exp 6]: 1.4389578915480157
 
-        //after adding fallback rule
-//bleedsort[avg]: 7.468999999999999
-//Arrays.sort[avg]: 7.437
-//Factor [for skewed 100000, simil. 0.0, compr. 0.3333333333333333, mix. 1.0, p 0.5, exp 6]: 1.0043028102729594
-//bleedsort[avg]: 7.182
-//Arrays.sort[avg]: 7.015
-//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 1]: 1.0238061297220242
-//bleedsort[avg]: 7.216
-//Arrays.sort[avg]: 7.124
-//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 2]: 1.012914093206064
-//bleedsort[avg]: 7.175
-//Arrays.sort[avg]: 7.528
-//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 3]: 0.9531083953241233
-//bleedsort[avg]: 7.109
-//Arrays.sort[avg]: 7.314
-//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 4]: 0.9719715613891168
-//bleedsort[avg]: 8.07
-//Arrays.sort[avg]: 7.42
-//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 5]: 1.087601078167116
-//bleedsort[avg]: 7.712999999999999
-//Arrays.sort[avg]: 7.372000000000001
-//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 6]: 1.0462561041779705
-//bleedsort[avg]: 7.489
-//Arrays.sort[avg]: 7.095
-//Factor [for skewed 100000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.5, exp 8]: 1.0555320648343904
 
 //######## 1000_000
 //bleedsort[avg]: 59.379999999999995

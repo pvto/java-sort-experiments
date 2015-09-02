@@ -1,0 +1,79 @@
+
+bleedsort3[avg]: 162.2
+Arrays.sort[avg]: 208.10999999999999
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.25]: 0.779395511988852
+bleedsort3[avg]: 138.94
+Arrays.sort[avg]: 212.95
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.0]: 0.6524536276121156
+bleedsort3[avg]: 182.1
+Arrays.sort[avg]: 221.7
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.3]: 0.8213802435723951
+bleedsort3[avg]: 231.56
+Arrays.sort[avg]: 189.31
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.4]: 1.2231789128941948
+bleedsort3[avg]: 252.76999999999998
+Arrays.sort[avg]: 200.14000000000001
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.4]: 1.2629659238533024
+bleedsort3[avg]: 242.75
+Arrays.sort[avg]: 214.93
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.4]: 1.1294374912762295
+bleedsort3[avg]: 271.6
+Arrays.sort[avg]: 222.65
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.4]: 1.219851785313272
+bleedsort3[avg]: 219.67
+Arrays.sort[avg]: 219.56
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.4]: 1.000501002004008
+bleedsort3[avg]: 232.16
+Arrays.sort[avg]: 228.63000000000002
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.3]: 1.015439793552902
+bleedsort3[avg]: 209.82
+Arrays.sort[avg]: 210.75
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.3]: 0.9955871886120996
+bleedsort3[avg]: 212.51
+Arrays.sort[avg]: 205.63000000000002
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.3]: 1.03345815299324
+bleedsort3[avg]: 224.68
+Arrays.sort[avg]: 218.61999999999998
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.5]: 1.0277193303448908
+bleedsort3[avg]: 208.67
+Arrays.sort[avg]: 215.86999999999998
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.2]: 0.966646592856812
+bleedsort3[avg]: 216.46999999999997
+Arrays.sort[avg]: 220.85
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.0]: 0.980167534525696
+bleedsort3[avg]: 143.92000000000002
+Arrays.sort[avg]: 218.39000000000001
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.0]: 0.659004533174596
+bleedsort3[avg]: 147.22
+Arrays.sort[avg]: 220.63000000000002
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.2]: 0.6672709966912931
+bleedsort3[avg]: 188.60999999999999
+Arrays.sort[avg]: 224.66
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.3]: 0.8395352977833169
+bleedsort3[avg]: 261.14
+Arrays.sort[avg]: 196.26
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.4]: 1.3305818811780292
+bleedsort3[avg]: 214.79000000000002
+Arrays.sort[avg]: 197.88
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.35]: 1.0854558318172631
+bleedsort3[avg]: 283.29
+Arrays.sort[avg]: 225.57
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.5]: 1.2558850911025403
+bleedsort3[avg]: 216.96999999999997
+Arrays.sort[avg]: 214.39000000000001
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.5]: 1.0120341433835531
+bleedsort3[avg]: 178.22
+Arrays.sort[avg]: 216.28000000000003
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.35]: 0.8240244127982244
+bleedsort3[avg]: 242.48000000000002
+Arrays.sort[avg]: 207.26999999999998
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 1.6]: 1.169875042215468
+bleedsort3[avg]: 224.78000000000003
+Arrays.sort[avg]: 214.1
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 2.0]: 1.0498832321345168
+bleedsort3[avg]: 178.44
+Arrays.sort[avg]: 189.32
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 3.0]: 0.9425311641664906
+bleedsort3[avg]: 135.55
+Arrays.sort[avg]: 217.45999999999998
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 0.5]: 0.6233330267635429
