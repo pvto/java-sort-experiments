@@ -8,6 +8,7 @@ import java.util.Arrays;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
+import util.Prob;
 
 public class BleedSort2Test {
 
@@ -131,7 +132,14 @@ public class BleedSort2Test {
             a[i] = (int) (a.length * d * compressionFactor);
         }
     }
+    public static void fillBinomial(int[] a, double p, int n)
+    {
+        for(int i = 0; i < a.length; i++)
+            a[i] = Prob.binmRnd(n, p, Math.random());
+    }
     
+    
+    @Ignore
     @Test
     public void testBS1e6() throws IOException
     {

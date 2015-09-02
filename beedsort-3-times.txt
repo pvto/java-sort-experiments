@@ -77,3 +77,6 @@ Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 3.0]: 0.94
 bleedsort3[avg]: 135.55
 Arrays.sort[avg]: 217.45999999999998
 Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 0.5]: 0.6233330267635429
+bleedsort3[avg]: 75.57000000000001
+Arrays.sort[avg]: 82.57000000000001
+Factor [for rnd 1000000, simil. 0.0, compr. 1.0, mix. 1.0, p 0.4, exp 0.5]: 0.9152234467724355
