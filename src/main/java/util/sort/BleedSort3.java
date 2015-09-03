@@ -15,7 +15,7 @@ public class BleedSort3 {
         double sampledRepetition = sampleRepetition(a, 20);
         if (sampledRepetition > 20)
         {
-            //Arrays.sort(a);
+            //Arrays.sort(a); //mostly slower?
             InntTreeSort.inntTreeSort(a);
             return;
         }
@@ -101,9 +101,6 @@ public class BleedSort3 {
         double mult6 = (baseline7 - baseline6) / (double) (q7 - q6);
         double mult7 = (baseline8 - baseline7) / (double) (q8 - q7);
 
-//        System.out.println("baselines: " + Arrays.toString(baselines));
-//        System.out.println("quantiles: " + Arrays.toString(quantiles));
-        //System.out.println("multipliers: " + Arrays.toString(mult));
         int     // these help in reacting to bad estimates of the distribution
                 minHelper = 0, 
                 minHelpCount = 0,
@@ -200,7 +197,6 @@ public class BleedSort3 {
             }
             if (++place == tmp.length)
             {
-                System.out.println("bleed!");
                 fillPartially(a, tmp);
                 Arrays.sort(a);
                 return;
@@ -218,7 +214,6 @@ public class BleedSort3 {
                 if ((place & repetitionBitmap) == 0 && bleedCount++ > a.length << 1
                         || place == tmp.length) 
                 {   // excessive bleeding; get out
-                    System.out.println("bleed");
                     fillPartially(a, tmp);
                     Arrays.sort(a);
                     return;
@@ -227,14 +222,6 @@ public class BleedSort3 {
             
             tmp[place] = x;
         }
-//        for(int i = 0; i < tmp.length; i++)
-//        {
-//            if (tmp[i] == Integer.MIN_VALUE)
-//                System.out.print("#");
-//            else
-//                System.out.print(tmp[i] + " ");
-//        }
-//        System.out.println("");
         for(int i = 0, j = 0; i < a.length; i++)
         {
             while(tmp[j] == Integer.MIN_VALUE)

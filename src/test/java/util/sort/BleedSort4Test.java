@@ -1,4 +1,3 @@
-
 package util.sort;
 
 import java.io.BufferedWriter;
@@ -14,30 +13,28 @@ import static util.sort.Util.fillIncr;
 import static util.sort.Util.fillRandom;
 import static util.sort.Util.fillSkewed;
 
-public class BleedSort3Test {
+public class BleedSort4Test {
 
-    
-    @Ignore
     @Test
     public void testBS1e6() throws IOException
     {
-        BufferedWriter bf = new BufferedWriter(new FileWriter("bleedsort-3-times-phase-2.txt", true));
-        double  similarityFactor = 8.0;
-        double  compressionFactor = 1.0 * 1;
-        double  mixFactor = 0.0;
+        double  similarityFactor = 0.0;
+        double  compressionFactor = 1.0 * 0.01;
+        double  mixFactor = 0.1;
         double  bin_p = 0.5;
-        int     n = 1000;
-        double  exp = 8;
-        boolean uniform = true;
+        int     n = 180000;
+        double  exp = 1;
+        boolean uniform = false;
         boolean decreasing = false;
         boolean skewed = false;
-        boolean binomial = false;
+        boolean binomial = true;
         int     trials = 20;
         int     innerTrials = 50;
         int[] orig = new int[ (int)1e5 ];
         int[] t;
         
-
+        BufferedWriter bf = new BufferedWriter(new FileWriter("bleedsort-4-times.txt", true));
+        
         System.out.println("priming...");
         for(int x = 0; x < 3; x++)
         {
@@ -47,8 +44,14 @@ public class BleedSort3Test {
             else if (decreasing) fillDecr(orig, mixFactor, similarityFactor, compressionFactor);
             else if (!decreasing) fillIncr(orig, mixFactor, similarityFactor, compressionFactor);
 
+//            for(int i = 0; i < Math.min(1000, orig.length); i++) 
+//                System.out.print(orig[i] + " ");
+//            System.exit(0);
+            
             t = Arrays.copyOf(orig, orig.length);
             BleedSort3.bleedSort(t);
+            t = Arrays.copyOf(orig, orig.length);
+            BleedSort4.bleedSort(t);
             int[] tu = t;
             
             t = Arrays.copyOf(orig, orig.length);
@@ -62,7 +65,7 @@ public class BleedSort3Test {
         }
         
         System.out.println("benchmark...");
-        long bs = 0, as = 0;
+        long bs3 = 0, bs4 = 0, as = 0;
         long start, elapsed;
         for(int x = 0; x < trials; x++)
         {
@@ -78,40 +81,60 @@ public class BleedSort3Test {
             elapsed = 0;
             for(int j = 0; j < innerTrials; j++)
             {
-                start = System.currentTimeMillis();
                 t = Arrays.copyOf(orig, orig.length);
+                start = System.currentTimeMillis();
                 BleedSort3.bleedSort(t);
                 elapsed += System.currentTimeMillis() - start;
+                if (orig.length > 2e6)
+                    System.gc();
             }
-            bs += elapsed;
-            System.out.println("bleedsort3 " + (elapsed / (double)innerTrials));
-            
+            System.out.println("Bleedsort3 " + elapsed);
+            bs3 += elapsed;
+
             elapsed = 0;
             for(int j = 0; j < innerTrials; j++)
             {
-                start = System.currentTimeMillis();
                 t = Arrays.copyOf(orig, orig.length);
+                start = System.currentTimeMillis();
+                BleedSort4.bleedSort(t);
+                elapsed += System.currentTimeMillis() - start;
+                if (orig.length > 2e6)
+                    System.gc();
+            }
+            System.out.println("Bleedsort4 " + elapsed);
+            bs4 += elapsed;
+
+            elapsed = 0;
+            for(int j = 0; j < innerTrials; j++)
+            {
+                t = Arrays.copyOf(orig, orig.length);
+                start = System.currentTimeMillis();
                 java.util.Arrays.sort(t);
                 elapsed += System.currentTimeMillis() - start;
+                if (orig.length > 2e6)
+                    System.gc();
             }
+            System.out.println("Arrays.sort " + elapsed);
             as += elapsed;
-            System.out.println("Arrays.sort " + (elapsed / (double)innerTrials));
         }
-        double bss, ass;
+        double bss, bss4, ass;
         String s = 
-            "\nbleedsort3[avg]: " + (bss=(bs / (double)trials / (double)innerTrials))
-            + "\nArrays.sort[avg]: " + (ass=(as / (double)trials / (double)innerTrials))
-            + "\nFactor [for "+(uniform?"rnd":(binomial?"bin":(skewed?"skewed":(decreasing?"decr":"incr"))))
+            "bleedsort3 " + (bss=(bs3 / (double)trials / (double)innerTrials))
+            + " bleedsort4 " + (bss4=(bs4 / (double)trials / (double)innerTrials))
+            + " Arrays.sort " + (ass=(as / (double)trials / (double)innerTrials))
+            + " [ "+(uniform?"rnd":(binomial?"bin":(skewed?"skewed":(decreasing?"decr":"incr"))))
                     +" "+orig.length
-                    + ", simil. "+similarityFactor
-                    + ", compr. " +compressionFactor
-                    + ", mix. "+mixFactor
-                    + ", p "+bin_p + ", exp " + exp
-                    + ", n "+n
-                    +"]: " + bss / ass
+                    + " simil. "+similarityFactor
+                    + " compr. " +compressionFactor
+                    + " mix. "+mixFactor
+                    + " p "+bin_p + ", exp " + exp
+                    + " n "+n
+                    +" ]: " + (bss / ass) + " " + (bss4 / ass)
+                    + "\n"
             ;
-        System.out.println(s);
+        System.out.print(s);
         bf.append(s);
         bf.close();
     }
+
 }
