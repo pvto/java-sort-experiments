@@ -20,7 +20,7 @@ public class BleedSort3Test {
     public void testBS1e6() throws IOException
     {
         BufferedWriter bf = new BufferedWriter(new FileWriter("bleedsort-3-times-phase-2.txt", true));
-        double  similarityFactor = 4.0;
+        double  similarityFactor = 8.0;
         double  compressionFactor = 1.0 * 1;
         double  mixFactor = 0.0;
         double  bin_p = 0.5;
@@ -31,8 +31,8 @@ public class BleedSort3Test {
         boolean skewed = false;
         boolean binomial = false;
         int     trials = 20;
-        int     innerTrials = 5;
-        int[] orig = new int[ (int)2e2 ];
+        int     innerTrials = 50;
+        int[] orig = new int[ (int)1e5 ];
         int[] t;
         
 
@@ -52,8 +52,6 @@ public class BleedSort3Test {
             t = Arrays.copyOf(orig, orig.length);
             java.util.Arrays.sort(t);
             
-            System.out.println(Arrays.toString(t));
-            System.out.println(Arrays.toString(tu));
             for (int i = 0; i < t.length; i++) {
                 
                 assertEquals(i + "", t[i], tu[i]);

@@ -228,3 +228,27 @@ Factor [for rnd 1000000, simil. 4.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 100
 bleedsort3[avg]: 0.27999999999999997
 Arrays.sort[avg]: 0.02
 Factor [for rnd 200, simil. 4.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 13.999999999999998
+bleedsort3[avg]: 25.839999999999996
+Arrays.sort[avg]: 54.3
+Factor [for rnd 1000000, simil. 4.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 0.4758747697974217
+bleedsort3[avg]: 1.6159999999999999
+Arrays.sort[avg]: 4.255
+Factor [for rnd 100000, simil. 3.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 0.3797884841363102
+bleedsort3[avg]: 1.7519999999999998
+Arrays.sort[avg]: 4.216
+Factor [for rnd 100000, simil. 2.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 0.4155597722960151
+bleedsort3[avg]: 1.733
+Arrays.sort[avg]: 4.4110000000000005
+Factor [for rnd 100000, simil. 1.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 0.39288143278168214
+bleedsort3[avg]: 1.722
+Arrays.sort[avg]: 4.071000000000001
+Factor [for rnd 100000, simil. 5.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 0.4229918938835666
+bleedsort3[avg]: 1.6019999999999999
+Arrays.sort[avg]: 4.029
+Factor [for rnd 100000, simil. 6.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 0.39761727475800446
+bleedsort3[avg]: 1.558
+Arrays.sort[avg]: 4.037
+Factor [for rnd 100000, simil. 7.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 0.3859301461481298
+bleedsort3[avg]: 1.5530000000000002
+Arrays.sort[avg]: 4.006
+Factor [for rnd 100000, simil. 8.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 0.38766849725411884
