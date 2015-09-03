@@ -227,14 +227,14 @@ public class BleedSort3 {
             
             tmp[place] = x;
         }
-        for(int i = 0; i < tmp.length; i++)
-        {
-            if (tmp[i] == Integer.MIN_VALUE)
-                System.out.print("#");
-            else
-                System.out.print(tmp[i] + " ");
-        }
-        System.out.println("");
+//        for(int i = 0; i < tmp.length; i++)
+//        {
+//            if (tmp[i] == Integer.MIN_VALUE)
+//                System.out.print("#");
+//            else
+//                System.out.print(tmp[i] + " ");
+//        }
+//        System.out.println("");
         for(int i = 0, j = 0; i < a.length; i++)
         {
             while(tmp[j] == Integer.MIN_VALUE)

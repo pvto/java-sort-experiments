@@ -3,7 +3,7 @@ package util.sort;
 
 /**
  * This is a somewhat memory-hungry fast-put fast-get treebag
- * implementation.  Counts inserted ints.
+ * implementation.  What it does?  Counts inserted ints.
  * 
  * @author Paavo Toivanen https://github.com/pvto
  */
