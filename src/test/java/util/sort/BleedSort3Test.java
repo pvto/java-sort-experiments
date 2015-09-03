@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import static util.sort.BleedSort2Test.fillBinomial;
 import static util.sort.BleedSort2Test.fillDecr;
@@ -31,7 +32,7 @@ public class BleedSort3Test {
         boolean binomial = false;
         int     trials = 20;
         int     innerTrials = 5;
-        int[] orig = new int[ (int)1e6 ];
+        int[] orig = new int[ (int)2e2 ];
         int[] t;
         
 
@@ -46,8 +47,18 @@ public class BleedSort3Test {
 
             t = Arrays.copyOf(orig, orig.length);
             BleedSort3.bleedSort(t);
+            int[] tu = t;
+            
             t = Arrays.copyOf(orig, orig.length);
             java.util.Arrays.sort(t);
+            
+            System.out.println(Arrays.toString(t));
+            System.out.println(Arrays.toString(tu));
+            for (int i = 0; i < t.length; i++) {
+                
+                assertEquals(i + "", t[i], tu[i]);
+                
+            }
         }
         
         System.out.println("benchmark...");
