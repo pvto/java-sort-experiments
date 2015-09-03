@@ -40,11 +40,11 @@ public class InntTree {
         InntTree.N1 = N1;
         InntTree.N2 = INTBITS - N0 + 1 - N1;
 	N0shr = INTBITS - N0;
-	N1shr = N1;
+	N1shr = N2;
 	N0Nbm = (1 << (N0 - 1)) - 1;
 	N0Padd = (1 << (N0 - 1));
-	N1bm = (1 << (INTBITS - N0)) - 1;
-	N2bm = (1 << (INTBITS - N0 + 1 - N1)) - 1;
+	N1bm = (1 << N1) - 1;
+	N2bm = (1 << N2) - 1;
     }
     
     public void put(int rank)
@@ -63,11 +63,11 @@ public class InntTree {
             int x;
             if ((rank & 0x80000000) == 0x80000000) // negative key (rank < 0f)
             {
-                x = (rank >> N0shr) & N0Nbm;
+                x = (rank >>> N0shr) & N0Nbm;
             }
             else
             {
-                x = (rank >> N0shr) + N0Padd;
+                x = (rank >>> N0shr) + N0Padd;
             }
             if (children[x] == null)
                 children[x] = new Node1();
@@ -81,7 +81,7 @@ public class InntTree {
         
         public void put(int rank)
         {
-            int x = (rank & N1bm) >> N1shr;
+            int x = (rank >>> N1shr ) & N1bm;
             if (children[x] == null)
                 children[x] = new Node2();
             children[x].put(rank);
@@ -99,6 +99,25 @@ public class InntTree {
             children[x] = rank;
             counts[x]++;
         }
+    }
+
+    
+    
+    
+    
+    
+    public long estimateSizeInBytes()
+    {
+        long res = root.children.length << 2;
+        for(Node1 n1 : root.children) if (n1 != null)
+        {
+            res += n1.children.length << 2;
+            for(Node2 n2 : n1.children) if (n2 != null)
+            {
+                res += n2.children.length << 3;
+            }
+        }
+        return res;   
     }
     
 }
