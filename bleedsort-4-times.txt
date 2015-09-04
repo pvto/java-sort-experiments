@@ -1,116 +1,3 @@
-
-bleedsort3[avg]: 3.748
-Arrays.sort[avg]: 4.343999999999999
-Factor [for rnd 100000, simil. 8.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 0.8627992633517497
-bleedsort3[avg]: 3.9360000000000004
-Arrays.sort[avg]: 4.626
-Factor [for rnd 100000, simil. 1.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 0.8508430609597925
-bleedsort4[avg]: 4.165
-Arrays.sort[avg]: 4.457
-Factor [for rnd 100000, simil. 1.0, compr. 1.0, mix. 0.0, p 0.5, exp 8.0, n 1000]: 0.9344850796499888
-bleedsort4[avg]: 5.697
-Arrays.sort[avg]: 6.54
-Factor [for rnd 100000, simil. 1.0, compr. 1.0, mix. 0.0, p 0.5, exp 1.0, n 1000]: 0.8711009174311927
-bleedsort4[avg]: 5.901
-Arrays.sort[avg]: 6.825
-Factor [for rnd 100000, simil. 1.0, compr. 1.0, mix. 0.0, p 0.5, exp 1.0, n 1000]: 0.8646153846153846
-bleedsort3[avg]: 5.445
-Arrays.sort[avg]: 6.962000000000001
-Factor [for skewed 100000, simil. 1.0, compr. 1.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7821028440103418
-bleedsort4[avg]: 5.471
-Arrays.sort[avg]: 7.361000000000001
-Factor [for skewed 100000, simil. 1.0, compr. 1.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7432414074174704
-bleedsort3[avg]: 5.265
-Arrays.sort[avg]: 6.51
-Factor [for skewed 100000, simil. 1.0, compr. 2.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.8087557603686636
-bleedsort4[avg]: 5.6160000000000005
-Arrays.sort[avg]: 6.406000000000001
-Factor [for skewed 100000, simil. 1.0, compr. 2.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.8766781142678739
-bleedsort3[avg]: 5.215
-Arrays.sort[avg]: 6.477
-Factor [for skewed 100000, simil. 1.0, compr. 3.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.8051567083526323
-bleedsort3[avg]: 5.417999999999999
-Arrays.sort[avg]: 7.1579999999999995
-Factor [for skewed 100000, simil. 1.0, compr. 4.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7569153394803018
-bleedsort4[avg]: 5.135
-Arrays.sort[avg]: 6.49
-Factor [for skewed 100000, simil. 1.0, compr. 3.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7912172573189522
-bleedsort4[avg]: 5.083
-Arrays.sort[avg]: 7.151
-Factor [for skewed 100000, simil. 1.0, compr. 4.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7108096769682563
-bleedsort3[avg]: 5.437
-Arrays.sort[avg]: 7.2620000000000005
-Factor [for skewed 100000, simil. 1.0, compr. 5.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7486918204351418
-bleedsort4[avg]: 5.461
-Arrays.sort[avg]: 6.944
-Factor [for skewed 100000, simil. 1.0, compr. 5.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7864343317972351
-bleedsort3[avg]: 5.26
-Arrays.sort[avg]: 7.244
-Factor [for skewed 100000, simil. 1.0, compr. 6.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7261181667586969
-bleedsort4[avg]: 4.834
-Arrays.sort[avg]: 6.732
-Factor [for skewed 100000, simil. 1.0, compr. 6.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.718062982768865
-bleedsort3[avg]: 5.106
-Arrays.sort[avg]: 6.6339999999999995
-Factor [for skewed 100000, simil. 1.0, compr. 10.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7696713898100693
-bleedsort4[avg]: 4.993
-Arrays.sort[avg]: 7.215
-Factor [for skewed 100000, simil. 1.0, compr. 10.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.692030492030492
-bleedsort3[avg]: 4.788
-Arrays.sort[avg]: 6.59
-Factor [for skewed 100000, simil. 1.0, compr. 40.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7265553869499242
-bleedsort4[avg]: 4.975
-Arrays.sort[avg]: 6.43
-Factor [for skewed 100000, simil. 1.0, compr. 40.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7737169517884914
-bleedsort3[avg]: 5.218
-Arrays.sort[avg]: 7.0920000000000005
-Factor [for skewed 100000, simil. 1.0, compr. 100.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7357586012408347
-bleedsort4[avg]: 5.182
-Arrays.sort[avg]: 7.145
-Factor [for skewed 100000, simil. 1.0, compr. 100.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7252624212736181
-bleedsort3[avg]: 4.994
-Arrays.sort[avg]: 6.874
-Factor [for skewed 100000, simil. 1.0, compr. 1000.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7265056735525167
-bleedsort4[avg]: 5.284
-Arrays.sort[avg]: 6.84
-Factor [for skewed 100000, simil. 1.0, compr. 1000.0, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.7725146198830409
-bleedsort3[avg]: 5.879
-Arrays.sort[avg]: 6.125
-Factor [for skewed 100000, simil. 1.0, compr. 0.1, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.9598367346938774
-bleedsort4[avg]: 6.568
-Arrays.sort[avg]: 6.242000000000001
-Factor [for skewed 100000, simil. 1.0, compr. 0.1, mix. 0.0, p 0.4, exp 5.0, n 1000]: 1.0522268503684715
-bleedsort4[avg]: 6.8229999999999995
-Arrays.sort[avg]: 5.957999999999999
-Factor [for skewed 100000, simil. 1.0, compr. 0.1, mix. 0.0, p 0.4, exp 5.0, n 1000]: 1.145182947297751
-bleedsort4[avg]: 6.682
-Arrays.sort[avg]: 5.682
-Factor [for skewed 100000, simil. 1.0, compr. 0.1, mix. 0.0, p 0.4, exp 5.0, n 1000]: 1.1759943681802183
-bleedsort4[avg]: 5.827000000000001
-Arrays.sort[avg]: 5.6770000000000005
-Factor [for skewed 100000, simil. 1.0, compr. 0.1, mix. 0.0, p 0.4, exp 5.0, n 1000]: 1.026422406200458
-bleedsort4[avg]: 5.707999999999999
-Arrays.sort[avg]: 6.001
-Factor [for skewed 100000, simil. 1.0, compr. 0.1, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.9511748041992999
-bleedsort3[avg]: 2.2569999999999997
-Arrays.sort[avg]: 4.944
-Factor [for skewed 100000, simil. 1.0, compr. 0.02, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.4565129449838187
-bleedsort4[avg]: 3.0780000000000003
-Arrays.sort[avg]: 4.88
-Factor [for skewed 100000, simil. 1.0, compr. 0.02, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.6307377049180328
-bleedsort3[avg]: 1.359
-Arrays.sort[avg]: 4.357
-Factor [for skewed 100000, simil. 1.0, compr. 0.01, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.31191186596281845
-bleedsort4[avg]: 2.904
-Arrays.sort[avg]: 4.18
-Factor [for skewed 100000, simil. 1.0, compr. 0.01, mix. 0.0, p 0.4, exp 5.0, n 1000]: 0.6947368421052632bleedsort3 1.185 bleedsort4 2.7710000000000004 Arrays.sort 2.64 Factor [for skewed 100000, simil. 1.0, compr. 0.001, mix. 0.0, p 0.4, exp 5.0, n 1000]: 1.0496212121212123bleedsort3 1.249 bleedsort4 2.6830000000000003 Arrays.sort 2.536 [ skewed 100000 simil. 1.0 compr. 0.001 mix. 0.0 p 0.4, exp 5.0 n 1000 ]: 0.4925078864353313 1.0579652996845428
-bleedsort3 1.137 bleedsort4 2.7460000000000004 Arrays.sort 2.481 [ skewed 100000 simil. 1.0 compr. 0.001 mix. 0.0 p 0.4, exp 5.0 n 1000 ]: 0.4582829504232165 1.1068117694478035
-bleedsort3 1.135 bleedsort4 2.738 Arrays.sort 2.738 [ skewed 100000 simil. 1.0 compr. 0.001 mix. 0.0 p 0.4, exp 5.0 n 1000 ]: 0.414536157779401 1.0
-bleedsort3 0.001 bleedsort4 3.06 Arrays.sort 2.9139999999999997 [ skewed 100000 simil. 1.0 compr. 0.001 mix. 0.0 p 0.4, exp 5.0 n 1000 ]: 3.431708991077557E-4 1.0501029512697324
-bleedsort3 0.0 bleedsort4 2.394 Arrays.sort 2.884 [ skewed 100000 simil. 1.0 compr. 0.001 mix. 0.0 p 0.4, exp 5.0 n 1000 ]: 0.0 0.8300970873786409
-bleedsort3 1.12 bleedsort4 2.037 Arrays.sort 2.589 [ skewed 100000 simil. 1.0 compr. 0.001 mix. 0.0 p 0.4, exp 5.0 n 1000 ]: 0.432599459250676 0.7867902665121669
-bleedsort3 1.056 bleedsort4 1.965 Arrays.sort 1.187 [ skewed 100000 simil. 1.0 compr. 1.0E-4 mix. 0.0 p 0.4, exp 5.0 n 1000 ]: 0.8896377422072451 1.6554338668913227
-bleedsort3 1.0859999999999999 bleedsort4 1.1540000000000001 Arrays.sort 1.3 [ skewed 100000 simil. 1.0 compr. 1.0E-4 mix. 0.0 p 0.4, exp 5.0 n 1000 ]: 0.8353846153846153 0.8876923076923078
 bleedsort3 1.105 bleedsort4 1.072 Arrays.sort 2.079 [ decr 100000 simil. 0.0 compr. 0.01 mix. 0.1 p 0.5, exp 1.0 n 1000 ]: 0.5315055315055315 0.5156325156325157
 bleedsort3 1.0759999999999998 bleedsort4 1.092 Arrays.sort 2.4419999999999997 [ decr 100000 simil. 0.1 compr. 0.01 mix. 0.1 p 0.5, exp 1.0 n 1000 ]: 0.4406224406224406 0.44717444717444726
 bleedsort3 1.07 bleedsort4 1.064 Arrays.sort 2.779 [ decr 100000 simil. 0.2 compr. 0.01 mix. 0.1 p 0.5, exp 1.0 n 1000 ]: 0.38503058654192157 0.3828715365239295
@@ -200,3 +87,105 @@ bleedsort3 1.475 bleedsort4 1.291 Arrays.sort 4.24 [ bin 100000 simil. 0.0 compr
 bleedsort3 1.3840000000000001 bleedsort4 1.3159999999999998 Arrays.sort 4.252 [ bin 100000 simil. 0.0 compr. 0.01 mix. 0.1 p 0.5, exp 1.0 n 160000 ]: 0.32549388523047984 0.3095014111006585
 bleedsort3 1.57 bleedsort4 1.3130000000000002 Arrays.sort 4.378 [ bin 100000 simil. 0.0 compr. 0.01 mix. 0.1 p 0.5, exp 1.0 n 170000 ]: 0.3586112380082229 0.29990863407948837
 bleedsort3 1.569 bleedsort4 1.33 Arrays.sort 4.178999999999999 [ bin 100000 simil. 0.0 compr. 0.01 mix. 0.1 p 0.5, exp 1.0 n 180000 ]: 0.37544867193108405 0.3182579564489113
+bleedsort3 4.205 bleedsort4 4.215 Arrays.sort 6.4639999999999995 [ rnd 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.6505259900990099 0.6520730198019802
+bleedsort3 5.763999999999999 bleedsort4 2.005 Arrays.sort 5.947 [ rnd 100000 simil. 0.0 compr. 0.1 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.9692281822767781 0.3371447788801076
+bleedsort3 1.535 bleedsort4 1.1340000000000001 Arrays.sort 3.827 [ rnd 100000 simil. 0.0 compr. 0.01 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.40109746537758034 0.29631565194669457
+bleedsort3 1.003 bleedsort4 1.021 Arrays.sort 2.6239999999999997 [ rnd 100000 simil. 0.0 compr. 0.001 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.3822408536585366 0.38910060975609756
+bleedsort3 1.0979999999999999 bleedsort4 1.031 Arrays.sort 1.2790000000000001 [ rnd 100000 simil. 0.0 compr. 1.0E-4 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.8584831899921812 0.8060985144644252
+bleedsort3 4.004 bleedsort4 3.944 Arrays.sort 5.9879999999999995 [ rnd 100000 simil. 0.0 compr. 10.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.6686706746826987 0.6586506346025385
+bleedsort3 3.95 bleedsort4 3.907 Arrays.sort 5.809 [ rnd 100000 simil. 0.0 compr. 100.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.6799793423997246 0.6725770356343604
+bleedsort3 4.15 bleedsort4 4.122 Arrays.sort 6.351 [ rnd 100000 simil. 0.0 compr. 1000.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.6534404030861283 0.649031648559282
+bleedsort3 3.935 bleedsort4 4.012 Arrays.sort 6.085 [ rnd 100000 simil. 0.0 compr. 10000.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.6466721446179129 0.6593262119967132
+bleedsort3 11.11 bleedsort4 10.75 Arrays.sort 12.190000000000001 [ rnd 1000000 simil. 0.0 compr. 1.0E-5 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.9114027891714519 0.8818703855619359
+bleedsort3 9.17 bleedsort4 9.26 Arrays.sort 25.660000000000004 [ rnd 1000000 simil. 0.0 compr. 1.0E-4 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.35736554949337485 0.3608729540140296
+bleedsort3 13.969999999999999 bleedsort4 10.64 Arrays.sort 38.79 [ rnd 1000000 simil. 0.0 compr. 0.001 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.3601443671049239 0.274297499355504
+bleedsort3 53.92999999999999 bleedsort4 16.78 Arrays.sort 48.61 [ rnd 1000000 simil. 0.0 compr. 0.01 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.1094425015428924 0.3451964616334088
+bleedsort3 84.74 bleedsort4 30.82 Arrays.sort 68.97 [ rnd 1000000 simil. 0.0 compr. 0.1 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.2286501377410468 0.44686095403798753
+bleedsort3 54.39 bleedsort4 53.83 Arrays.sort 70.12 [ rnd 1000000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.7756702795208215 0.7676839703365658
+bleedsort3 49.57 bleedsort4 48.93 Arrays.sort 70.16 [ rnd 1000000 simil. 0.0 compr. 10.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.7065279361459521 0.697405929304447
+bleedsort3 49.95 bleedsort4 49.769999999999996 Arrays.sort 74.08 [ rnd 1000000 simil. 0.0 compr. 100.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.6742710583153348 0.671841252699784
+bleedsort3 54.36 bleedsort4 53.0 Arrays.sort 71.55 [ rnd 1000000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.759748427672956 0.7407407407407408
+bleedsort3 56.879999999999995 bleedsort4 56.11 Arrays.sort 69.74 [ rnd 1000000 simil. 0.1 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.8156008029825065 0.8045597935187841
+bleedsort3 58.86 bleedsort4 60.120000000000005 Arrays.sort 77.55 [ rnd 1000000 simil. 0.2 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.7589941972920696 0.7752417794970987
+bleedsort3 61.220000000000006 bleedsort4 60.5 Arrays.sort 74.39 [ rnd 1000000 simil. 0.3 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.8229600752789354 0.8132813550208361
+bleedsort3 64.26 bleedsort4 63.75 Arrays.sort 72.47999999999999 [ rnd 1000000 simil. 0.4 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.8865894039735102 0.8795529801324504
+bleedsort3 66.45 bleedsort4 65.88 Arrays.sort 78.87 [ rnd 1000000 simil. 0.5 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.8425256751616584 0.8352985926207682
+bleedsort3 68.03 bleedsort4 67.84 Arrays.sort 71.72999999999999 [ rnd 1000000 simil. 0.6 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.9484176774013664 0.9457688554300853
+bleedsort3 69.27000000000001 bleedsort4 69.49 Arrays.sort 72.5 [ rnd 1000000 simil. 0.7 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.9554482758620692 0.9584827586206895
+bleedsort3 71.07000000000001 bleedsort4 71.95 Arrays.sort 72.02000000000001 [ rnd 1000000 simil. 0.8 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.9868092196612052 0.9990280477645097
+bleedsort3 71.22999999999999 bleedsort4 71.92999999999999 Arrays.sort 76.83 [ rnd 1000000 simil. 0.9 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.927111805284394 0.9362228296238447
+bleedsort3 73.39 bleedsort4 72.22 Arrays.sort 71.22999999999999 [ rnd 1000000 simil. 1.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.0303243015583323 1.0138986382142356
+bleedsort3 73.64 bleedsort4 72.77000000000001 Arrays.sort 71.3 [ rnd 1000000 simil. 1.1 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.0328190743338008 1.020617110799439
+bleedsort3 74.59 bleedsort4 75.31 Arrays.sort 75.36 [ rnd 1000000 simil. 1.2 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.9897823779193207 0.9993365180467092
+bleedsort3 75.02000000000001 bleedsort4 78.13 Arrays.sort 72.07000000000001 [ rnd 1000000 simil. 1.3 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.0409324268072708 1.0840849174413763
+bleedsort3 76.31 bleedsort4 76.09 Arrays.sort 71.82000000000001 [ rnd 1000000 simil. 1.4 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.0625174046226677 1.0594541910331383
+bleedsort3 76.77000000000001 bleedsort4 80.97 Arrays.sort 72.38 [ rnd 1000000 simil. 1.5 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.0606521138436034 1.1186791931472784
+bleedsort3 77.28999999999999 bleedsort4 78.55 Arrays.sort 71.32000000000001 [ rnd 1000000 simil. 1.6 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.0837072349971955 1.101374088614694
+bleedsort3 79.06 bleedsort4 78.95 Arrays.sort 70.63 [ rnd 1000000 simil. 1.7 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.1193543819906557 1.1177969701260089
+bleedsort3 79.59 bleedsort4 79.05 Arrays.sort 73.22 [ rnd 1000000 simil. 1.8 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.086998087954111 1.0796230538104343
+bleedsort3 78.6 bleedsort4 80.4 Arrays.sort 76.44 [ rnd 1000000 simil. 1.9 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.0282574568288854 1.0518053375196232
+bleedsort3 79.41 bleedsort4 79.39 Arrays.sort 76.21000000000001 [ rnd 1000000 simil. 2.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.041989240257184 1.0417268075055766
+bleedsort3 79.22 bleedsort4 80.35 Arrays.sort 69.66 [ rnd 1000000 simil. 2.1 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.1372380132070055 1.1534596612115993
+bleedsort3 81.53999999999999 bleedsort4 84.33 Arrays.sort 76.4 [ rnd 1000000 simil. 2.5 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.0672774869109947 1.1037958115183244
+bleedsort3 89.75 bleedsort4 91.08 Arrays.sort 72.78999999999999 [ rnd 1000000 simil. 3.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.232999038329441 1.251270778953153
+bleedsort3 92.24 bleedsort4 92.44 Arrays.sort 70.86 [ rnd 1000000 simil. 3.5 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.301721704769969 1.3045441716059836
+bleedsort3 93.17 bleedsort4 96.31 Arrays.sort 69.17999999999999 [ rnd 1000000 simil. 4.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.3467765250072277 1.3921653657126338
+bleedsort3 92.69 bleedsort4 93.2 Arrays.sort 67.19 [ rnd 1000000 simil. 5.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.3795207620181575 1.3871111772585207
+bleedsort3 96.36 bleedsort4 96.51 Arrays.sort 71.01 [ rnd 1000000 simil. 6.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.3569919729615547 1.3591043514997887
+bleedsort3 94.6 bleedsort4 95.88 Arrays.sort 66.57000000000001 [ rnd 1000000 simil. 7.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.4210605377797805 1.440288418206399
+bleedsort3 91.31 bleedsort4 94.62 Arrays.sort 68.53999999999999 [ rnd 1000000 simil. 8.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.3322147651006713 1.380507732710826
+bleedsort3 92.11 bleedsort4 61.760000000000005 Arrays.sort 69.5 [ rnd-bs4b 1000000 simil. 8.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.3253237410071943 0.8886330935251799
+bleedsort3 92.09 bleedsort4 92.67999999999999 Arrays.sort 65.01 [ rnd 1000000 simil. 9.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.4165512998000307 1.4256268266420549
+bleedsort3 90.22999999999999 bleedsort4 90.03 Arrays.sort 63.720000000000006 [ rnd 1000000 simil. 10.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.416038920276208 1.412900188323917
+bleedsort3 72.82000000000001 bleedsort4 75.3 Arrays.sort 57.96 [ rnd 1000000 simil. 20.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.2563837129054523 1.2991718426501035
+bleedsort3 66.34 bleedsort4 69.6 Arrays.sort 54.089999999999996 [ rnd 1000000 simil. 30.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 1.2264743945276393 1.2867443150305047
+bleedsort3 2.642 bleedsort4 2.679 Arrays.sort 5.585 [ rnd 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.5, exp 4.0 n 0 ]: 0.4730528200537153 0.4796777081468218
+bleedsort3 2.37 bleedsort4 2.374 Arrays.sort 5.296 [ rnd 100000 simil. 5.0 compr. 1.0 mix. 0.1 p 0.5, exp 4.0 n 0 ]: 0.44750755287009064 0.44826283987915405
+bleedsort3 2.048 bleedsort4 2.1719999999999997 Arrays.sort 4.522 [ rnd 100000 simil. 10.0 compr. 1.0 mix. 0.1 p 0.5, exp 4.0 n 0 ]: 0.4528969482529854 0.48031844316674027
+bleedsort3 2.026 bleedsort4 2.008 Arrays.sort 4.645 [ rnd 100000 simil. 15.0 compr. 1.0 mix. 0.1 p 0.5, exp 4.0 n 0 ]: 0.43616792249730896 0.43229278794402587
+bleedsort3 1.837 bleedsort4 1.828 Arrays.sort 4.191 [ rnd 100000 simil. 20.0 compr. 1.0 mix. 0.1 p 0.5, exp 4.0 n 0 ]: 0.4383202099737533 0.4361727511333811
+bleedsort3 1.972 bleedsort4 1.8319999999999999 Arrays.sort 4.434 [ rnd 100000 simil. 25.0 compr. 1.0 mix. 0.1 p 0.5, exp 4.0 n 0 ]: 0.44474515110509694 0.4131709517365809
+bleedsort3 1.82 bleedsort4 1.714 Arrays.sort 4.124 [ rnd 100000 simil. 30.0 compr. 1.0 mix. 0.1 p 0.5, exp 4.0 n 0 ]: 0.4413191076624637 0.41561590688651795
+bleedsort3 1.051 bleedsort4 1.008 Arrays.sort 0.883 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25, exp 4.0 n 10 ]: 1.190260475651189 1.1415628539071347
+bleedsort3 1.071 bleedsort4 1.0290000000000001 Arrays.sort 1.1420000000000001 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25, exp 4.0 n 20 ]: 0.9378283712784588 0.9010507880910683
+bleedsort3 1.083 bleedsort4 1.03 Arrays.sort 1.235 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25, exp 4.0 n 30 ]: 0.8769230769230768 0.8340080971659919
+bleedsort3 1.033 bleedsort4 1.04 Arrays.sort 1.271 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25, exp 4.0 n 40 ]: 0.8127458693941778 0.8182533438237609
+bleedsort3 1.045 bleedsort4 1.011 Arrays.sort 1.34 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25, exp 4.0 n 50 ]: 0.7798507462686566 0.7544776119402984
+bleedsort3 1.0270000000000001 bleedsort4 1.02 Arrays.sort 1.456 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25, exp 4.0 n 60 ]: 0.705357142857143 0.7005494505494506
+bleedsort3 1.072 bleedsort4 1.023 Arrays.sort 1.4909999999999999 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25, exp 4.0 n 70 ]: 0.7189805499664655 0.6861167002012072
+bleedsort3 1.026 bleedsort4 1.004 Arrays.sort 1.4869999999999999 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25, exp 4.0 n 80 ]: 0.6899798251513114 0.6751849361129793
+bleedsort3 1.054 bleedsort4 1.025 Arrays.sort 1.486 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25, exp 4.0 n 90 ]: 0.7092866756393001 0.6897711978465679
+bleedsort3 1.044 bleedsort4 1.022 Arrays.sort 1.619 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25, exp 4.0 n 100 ]: 0.6448424953675108 0.6312538604076591
+bleedsort3 1.0590000000000002 bleedsort4 1.041 Arrays.sort 1.801 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp 4.0 n 200 ]: 0.5880066629650196 0.5780122154358689
+bleedsort3 1.06 bleedsort4 1.0290000000000001 Arrays.sort 1.819 [ bin 100000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp 4.0 n 300 ]: 0.582737768004398 0.5656954370533261
+bleedsort3 0.15830000000000002 bleedsort4 0.15259999999999999 Arrays.sort 0.2585 [ bin 10000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.6123791102514508 0.590328820116054
+bleedsort3 0.26180000000000003 bleedsort4 0.2576 Arrays.sort 0.5542 [ bin 20000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.47239263803680986 0.4648141465175027
+bleedsort3 0.4348 bleedsort4 0.436 Arrays.sort 1.0528 [ bin 40000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.4129939209726444 0.41413373860182373
+bleedsort3 1.586290322580645 bleedsort4 1.6290322580645162 Arrays.sort 4.176612903225807 [ bin 160000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.3798030507820042 0.39003668661903845
+bleedsort3 2.9578125 bleedsort4 3.01875 Arrays.sort 8.2625 [ bin 320000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.35798033282904695 0.3653555219364599
+bleedsort3 5.85 bleedsort4 6.0125 Arrays.sort 16.934375 [ bin 640000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.3454511902565049 0.35504705665251896
+bleedsort3 11.84375 bleedsort4 12.05625 Arrays.sort 32.74375 [ bin 1280000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.36171025004771906 0.3682000381752243
+bleedsort3 27.1125 bleedsort4 27.575 Arrays.sort 68.5 [ bin 2560000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.3958029197080292 0.40255474452554746
+bleedsort3 49.2 bleedsort4 50.25 Arrays.sort 131.15 [ bin 5120000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.3751429660693862 0.3831490659550133
+bleedsort3 94.85 bleedsort4 96.4 Arrays.sort 261.4 [ bin 10240000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.3628538638102525 0.3687834736036726
+bleedsort3 190.3 bleedsort4 193.75 Arrays.sort 528.0 [ bin 20480000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.36041666666666666 0.36695075757575757
+bleedsort3 381.0 bleedsort4 383.3 Arrays.sort 1002.35 [ bin 40960000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.38010674913952214 0.382401356811493
+bleedsort3 767.2 bleedsort4 766.4 Arrays.sort 2015.2 [ bin 81920000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.1 exp 1.0 n 10000 ]: 0.3807066296149266 0.3803096466851925
+bleedsort3 32.44 bleedsort4 32.485 Arrays.sort 34.385000000000005 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 1.0 n 1 ]: 0.9434346371964517 0.9447433473898501
+bleedsort3 32.245 bleedsort4 32.03 Arrays.sort 33.935 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 1.5 n 1 ]: 0.950198909680271 0.9438632680123765
+bleedsort3 33.1 bleedsort4 32.975 Arrays.sort 36.839999999999996 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 1.75 n 1 ]: 0.8984799131378938 0.8950868621064062
+bleedsort3 26.555 bleedsort4 26.419999999999998 Arrays.sort 36.495 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 2.0 n 1 ]: 0.7276339224551309 0.7239347855870667
+bleedsort3 26.71 bleedsort4 27.115 Arrays.sort 34.585 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 2.25 n 1 ]: 0.7723001301142114 0.784010409136909
+bleedsort3 26.839999999999996 bleedsort4 26.49 Arrays.sort 33.785000000000004 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 2.5 n 1 ]: 0.7944354003255881 0.784075773272162
+bleedsort3 31.68 bleedsort4 31.014999999999997 Arrays.sort 33.205 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 3.0 n 1 ]: 0.9540731817497365 0.9340460773979822
+bleedsort3 32.33 bleedsort4 31.889999999999997 Arrays.sort 35.205 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 3.5 n 1 ]: 0.9183354637125408 0.9058372390285471
+bleedsort3 32.75 bleedsort4 33.105000000000004 Arrays.sort 33.86 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 4.0 n 1 ]: 0.9672179562906084 0.9777023036030716
+bleedsort3 32.19 bleedsort4 33.25 Arrays.sort 33.38 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 4.25 n 1 ]: 0.9643499101258237 0.9961054523666866
+bleedsort3 36.93 bleedsort4 37.12 Arrays.sort 36.905 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 4.5 n 1 ]: 1.0006774149844193 1.0058257688660073
+bleedsort3 32.6 bleedsort4 33.135000000000005 Arrays.sort 33.875 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 4.75 n 1 ]: 0.9623616236162362 0.9781549815498156
+bleedsort3 30.264999999999997 bleedsort4 30.525 Arrays.sort 33.989999999999995 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 5.0 n 1 ]: 0.8904089438070021 0.8980582524271845
+bleedsort3 30.005000000000003 bleedsort4 29.46 Arrays.sort 34.38 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 6.0 n 1 ]: 0.8727457824316464 0.856893542757417
+bleedsort3 30.78 bleedsort4 30.275 Arrays.sort 33.29 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 7.0 n 1 ]: 0.9246019825773506 0.9094322619405226
+bleedsort3 31.080000000000002 bleedsort4 31.155 Arrays.sort 36.195 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 8.0 n 1 ]: 0.8586821384169084 0.8607542478242851
+bleedsort3 32.485 bleedsort4 32.230000000000004 Arrays.sort 32.855000000000004 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 9.0 n 1 ]: 0.9887383959823466 0.9809770202404504
+bleedsort3 32.72 bleedsort4 31.785000000000004 Arrays.sort 35.485 [ skewed 500000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.7 exp 10.0 n 1 ]: 0.9220797520078906 0.8957305903903059

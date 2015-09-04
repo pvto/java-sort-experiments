@@ -18,19 +18,19 @@ public class BleedSort4Test {
     @Test
     public void testBS1e6() throws IOException
     {
-        double  similarityFactor = 0.0;
-        double  compressionFactor = 1.0 * 0.01;
+        double  similarityFactor = 0;
+        double  compressionFactor = 1.0 * 1;
         double  mixFactor = 0.1;
-        double  bin_p = 0.5;
-        int     n = 180000;
-        double  exp = 1;
+        double  bin_p = 0.7;
+        int     n = 1;
+        double  exp = 4.75;
         boolean uniform = false;
         boolean decreasing = false;
-        boolean skewed = false;
-        boolean binomial = true;
+        boolean skewed = true;
+        boolean binomial = false;
         int     trials = 20;
-        int     innerTrials = 50;
-        int[] orig = new int[ (int)1e5 ];
+        int     innerTrials = 10;
+        int[] orig = new int[ (int)5e5 ];
         int[] t;
         
         BufferedWriter bf = new BufferedWriter(new FileWriter("bleedsort-4-times.txt", true));
@@ -127,7 +127,7 @@ public class BleedSort4Test {
                     + " simil. "+similarityFactor
                     + " compr. " +compressionFactor
                     + " mix. "+mixFactor
-                    + " p "+bin_p + ", exp " + exp
+                    + " p "+bin_p + " exp " + exp
                     + " n "+n
                     +" ]: " + (bss / ass) + " " + (bss4 / ass)
                     + "\n"
