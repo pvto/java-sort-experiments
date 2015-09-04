@@ -10,12 +10,15 @@ public class BleedSort4b {
 
         public static void bleedSort(int[] a)
     {
-        double sampledRepetition = sampleRepetition(a, 20);
-        if (sampledRepetition > 20)
+        double[] sampledRepetition = sampleRepetition(a, 20);
+        if (sampledRepetition[0] > 20)
         {
             if (nfy++ == 0)
                 System.out.println("tree-sort(20)");
-            InntTreeSort.inntTreeSort(a);
+            if (sampledRepetition[1] > 6)
+                InntTreeSort.inntTreeHungrySort(a);
+            else
+                InntTreeSort.inntTreeSort(a);
             return;
         }
 
@@ -47,7 +50,7 @@ public class BleedSort4b {
         q[8] = sample[sample.length - 1];
 
         int tmpSize = (int) (a.length * 4);
-        if (sampledRepetition > 4 
+        if (sampledRepetition[0] > 4 
                 || q[8] - q[0] < a.length >>> 1)
         {
             if (nfy++ == 0)
@@ -58,36 +61,61 @@ public class BleedSort4b {
         {
             if (nfy++ == 0)
                 System.out.println("bleed-sort");
-            int repetitionBitmap = fillLSDs((int)sampledRepetition);
+            int repetitionBitmap = fillLSDs((int)sampledRepetition[0]);
             bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
         }
     }
     
     private static int nfy = 0;
     
-    public static double sampleRepetition(int[] a, int sampleSize)
+    public static double[] sampleRepetition(int[] a, int sampleSize)
     {
         double repetitionAvg = 0;
-        for(int x = 0; x < sampleSize - 4; x++)
+        
+        int runLength = 0;
+        int sameCount = 0;
+        for(int x = a[0], last = x, i = 1; i < a.length >>> 2; i++)
+        {
+            int s = a[i];
+            if (s == x)
+                sameCount++;
+            if (s == last)
+                runLength++;
+            else 
+                runLength--;
+            last = s;
+            if (runLength > 1000)
+                return new double[]{1000.0, runLength};
+        }
+        repetitionAvg += sameCount / (double) (a.length >>> 2) * 100.0;
+        
+        for(int j = 0; j < sampleSize - 4; j++)
         {
             int ind = (int) (Math.random() * (a.length - 101));
-            int sameCount = 0;
+            sameCount = 0;
             for (int i = 1; i < 101; i++)
                 if (a[ind + i] == a[ind])
                     sameCount++;
             repetitionAvg += sameCount;
         }
-        for(int j = 0; j < 4; j++)
+
+        for(int j = 2; j < 4; j++)
         {
-            int x = a[0];
-            int sameCount = 0;
-            for(int i = 1; i < a.length >>> 2; i++)
-                if (a[i] == x)
+            int x = a[j];
+            sameCount = 0;
+            for(int i = j + 1; i < a.length >>> 2; i++)
+            {
+                int s = a[i];
+                if (s == x)
                     sameCount++;
+            }
             repetitionAvg += sameCount / (double) (a.length >>> 2) * 100.0;
         }
-        return ( repetitionAvg / sampleSize / 100.0 + 1e-6 ) * a.length; // add a small expectation    
-    }
+        return new double[] {
+            ( repetitionAvg / sampleSize / 100.0 + 1e-6 ) * a.length, // add a small expectation
+            runLength
+        };
+    } 
     
     public static int fillLSDs(int x)
     {

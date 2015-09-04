@@ -83,6 +83,12 @@ public class Util {
         for(int i = 0; i < a.length; i++)
             a[i] = Prob.binmRnd(n, p, Math.random());
     }
+    public static void fillTwinBinomial(int[] a, double p, int n)
+    {
+        double q = 1.0-p;
+        for(int i = 0; i < a.length; i++)
+            a[i] = Prob.binmRnd(n, p, Math.random()) + Prob.binmRnd(n, q, Math.random());
+    }
     
 
 }

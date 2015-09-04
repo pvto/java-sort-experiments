@@ -157,6 +157,7 @@ public final class Prob {
     private static double[] binmCache(int n, double p)
     {
         double key = n+p/2.0;
+        double symmKey = n+(1.0-p)/2.0;
         double[] cached = new double[n+1];
         for(int i = 0; i <= (n >> 1); i++)
             cached[i] = cached[cached.length - i - 1] = binm(n, p, i);
@@ -169,6 +170,7 @@ public final class Prob {
         }
         cached = tmp;
         binmcache.put(key, cached);
+        binmcache.put(symmKey, cached);
 //        System.out.println(Arrays.toString(cached));
         double[] cumul = new double[cached.length];
         cumul[0] = cached[0];
@@ -178,8 +180,18 @@ public final class Prob {
             d += cached[i];
             cumul[i] = d;
         }
-//        System.out.println(Arrays.toString(cumul));
         binmcache.put(-key, cumul);
+        
+        cumul = new double[cached.length];
+        cumul[0] = cached[0];
+        d = 0;
+        for(i = cached.length - 1; i > 0; i--)
+        {
+            d += cached[i];
+            cumul[cached.length - i] = d;
+        }
+        binmcache.put(-symmKey, cumul);
+        
         return cached;
     }
     

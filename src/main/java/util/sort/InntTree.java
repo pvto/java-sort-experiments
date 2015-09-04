@@ -53,6 +53,11 @@ public class InntTree {
 //        size++;
     }
     
+    public void put(int rank, int n)
+    {
+        root.put(rank, n);
+    }
+    
     
     public static class Node0 {
         
@@ -73,6 +78,22 @@ public class InntTree {
                 children[x] = new Node1();
             children[x].put(rank);
         }
+        
+        public void put(int rank, int n)
+        {
+            int x;
+            if ((rank & 0x80000000) == 0x80000000) // negative key (rank < 0f)
+            {
+                x = (rank >>> N0shr) & N0Nbm;
+            }
+            else
+            {
+                x = (rank >>> N0shr) + N0Padd;
+            }
+            if (children[x] == null)
+                children[x] = new Node1();
+            children[x].put(rank, n);
+        }
     }
     
     public static class Node1 {
@@ -86,6 +107,14 @@ public class InntTree {
                 children[x] = new Node2();
             children[x].put(rank);
         }
+        
+        public void put(int rank, int n)
+        {
+            int x = (rank >>> N1shr ) & N1bm;
+            if (children[x] == null)
+                children[x] = new Node2();
+            children[x].put(rank, n);
+        }
     }
     
     public static class Node2 {
@@ -98,6 +127,13 @@ public class InntTree {
             int x = (rank & N2bm);
             children[x] = rank;
             counts[x]++;
+        }
+        
+        public void put(int rank, int n)
+        {
+            int x = (rank & N2bm);
+            children[x] = rank;
+            counts[x] += n;
         }
     }
 

@@ -16,6 +16,11 @@ public class InntTreeSort {
         for(int i : a)
             it.put(i);
         
+        pasteIntoArray(it, a);
+    }
+    
+    private static void pasteIntoArray(InntTree it, int[] a)
+    {
         int place = 0;
         for(Node1 n1 : it.root.children) if (n1 != null)
             for(Node2 n2 : n1.children) if (n2 != null)
@@ -27,5 +32,24 @@ public class InntTreeSort {
                         a[place++] = val;
                     }
                 }
+    }
+    
+    public static void inntTreeHungrySort(int[] a)
+    {
+        int last = a[0];
+        int ind = 0;
+        InntTree it = new InntTree();
+        for(int i = 1; i < a.length; i++)
+        {
+            int t = a[i];
+            if (t == last)
+                continue;
+            it.put(last, i - ind);
+            ind = i;
+            last = t;
         }
+        it.put(last, a.length - ind);
+     
+        pasteIntoArray(it, a);
+    }
 }

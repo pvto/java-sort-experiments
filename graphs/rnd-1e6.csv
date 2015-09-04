@@ -6,3 +6,4 @@ bleedsort3 84.74 bleedsort4 30.82 Arrays.sort 68.97 [ rnd 1000000 simil. 0.0 com
 bleedsort3 54.39 bleedsort4 53.83 Arrays.sort 70.12 [ rnd 1000000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.7756702795208215 0.7676839703365658
 bleedsort3 49.57 bleedsort4 48.93 Arrays.sort 70.16 [ rnd 1000000 simil. 0.0 compr. 10.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.7065279361459521 0.697405929304447
 bleedsort3 49.95 bleedsort4 49.769999999999996 Arrays.sort 74.08 [ rnd 1000000 simil. 0.0 compr. 100.0 mix. 0.1 p 0.5, exp 1.0 n 0 ]: 0.6742710583153348 0.671841252699784
+bleedsort3 58.32000000000001 bleedsort4 58.58 Arrays.sort 84.53 [ rnd 1000000 simil. 0.0 compr. 1000.0 mix. 0.1 p 0.5 exp 1.0 n 5000 ]: 0.6899325683189401 0.6930083993848337

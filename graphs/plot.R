@@ -188,6 +188,22 @@ title(main=lbl, xlab=xlab, ylab=ylab)
 
 
 
+t = read.table("rnd-exp-dupl020-3e4.csv", header=FALSE)
+x = t$V19
+xlab = "x = exponent of U"
+ylab = "y = ms"
+lbl = "n=3e4, ~ U^x(0,1) * 3e4, with 2e4 random duplications"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = 0 #min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+lines(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+legend(min(x), 20, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
+title(main=lbl, xlab=xlab, ylab=ylab)
+
+
+
 t = read.table("skew-07-5e5.csv", header=FALSE)
 x = t$V19
 xlab = "x = skew iterations"
@@ -203,4 +219,60 @@ lines(x, t$V6, col=cols[3])
 legend(min(x), 20, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
 title(main=lbl, sub=sub, xlab=xlab, ylab=ylab)
 #text(x, t$V4, round(t$V4, 2), cex=.75) text(x, t$V6, round(t$V6, 2), cex=.75)
+grid (NULL,NULL, lty = 6, col = "cornsilk2")
+
+
+
+
+cols = c(rgb(0,0,1,1), rgb(1,0,0,1), rgb(0,1,0,1))
+
+t = read.table("bin2-p02-5e4.csv", header=FALSE, sep=' ')
+x = t$V21
+xlab = "x = n"
+ylab = "y = ms"
+lbl = "n=5e4, ~ bin(0.2, n) + bin(0.8, n)"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = 0 #min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+lines(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+legend(min(x), ymax, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
+title(main=lbl, xlab=xlab, ylab=ylab)
+grid (NULL,NULL, lty = 6, col = "cornsilk2")
+
+
+
+
+t = read.table("bin2-p01-5e3.csv", header=FALSE, sep=' ')
+x = t$V21
+xlab = "x = n"
+ylab = "y = ms"
+lbl = "n=5000  ~ (bin(0.1, n) + bin(0.9, n))"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = 0 #min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+lines(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+legend(min(x), 0.027, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
+title(main=lbl, xlab=xlab, ylab=ylab)
+grid (NULL,NULL, lty = 6, col = "cornsilk2")
+
+
+
+
+t = read.table("bin2-5e6.csv", header=FALSE, sep=' ')
+x = t$V17
+xlab = "x = p"
+ylab = "y = ms"
+lbl = "n=5e6,  ~ (bin(p, 5000) + bin(1-p, 5000))"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = 0 #min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+lines(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+legend(min(x), 27, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
+title(main=lbl, xlab=xlab, ylab=ylab)
 grid (NULL,NULL, lty = 6, col = "cornsilk2")
