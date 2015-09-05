@@ -8,17 +8,31 @@ import util.Int;
  */
 public class BleedSort4b {
 
-        public static void bleedSort(int[] a)
+    public static int lastSortStatistics = 0;
+    public static final int 
+            TREESORT = 1,
+            BLEEDSORT3 = 2,
+            BLEEDSORT4 = 4,
+            VERY_REPETITIVE = 256,
+            REPETITIVE = 512,
+            SMALL_RANGE = 1024,
+            LONG_UNCHANGING_RUNS_IN_DATA = 2048;
+    
+    public static void bleedSort(int[] a)
     {
         double[] sampledRepetition = sampleRepetition(a, 20);
         if (sampledRepetition[0] > 20)
         {
-            if (nfy++ == 0)
-                System.out.println("tree-sort(20)");
             if (sampledRepetition[1] > 6)
+            {
+                lastSortStatistics |= VERY_REPETITIVE + LONG_UNCHANGING_RUNS_IN_DATA + TREESORT;
                 InntTreeSort.inntTreeHungrySort(a);
+            }
             else
+            {
+                lastSortStatistics |= VERY_REPETITIVE + TREESORT;
                 InntTreeSort.inntTreeSort(a);
+            }
             return;
         }
 
@@ -33,8 +47,7 @@ public class BleedSort4b {
         
         if (sample[sample.length - 1] - sample[0] < 2048)
         {
-            if (nfy++ == 0)
-                System.out.println("tree-sort(2048)");
+            lastSortStatistics |= SMALL_RANGE + TREESORT;
             InntTreeSort.inntTreeSort(a);
         }
 
@@ -53,20 +66,17 @@ public class BleedSort4b {
         if (sampledRepetition[0] > 4 
                 || q[8] - q[0] < a.length >>> 1)
         {
-            if (nfy++ == 0)
-                System.out.println("counting-bleed-sort");
+            lastSortStatistics |= REPETITIVE + BLEEDSORT4;
             countingBleedSort(a, Int.fill(tmpSize >> 1, Integer.MIN_VALUE), q);
         }
         else
         {
-            if (nfy++ == 0)
-                System.out.println("bleed-sort");
+            lastSortStatistics |= BLEEDSORT3;
             int repetitionBitmap = fillLSDs((int)sampledRepetition[0]);
             bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
         }
     }
     
-    private static int nfy = 0;
     
     public static double[] sampleRepetition(int[] a, int sampleSize)
     {

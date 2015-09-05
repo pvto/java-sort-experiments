@@ -9,12 +9,21 @@ import util.Int;
  */
 public class BleedSort4 {
     
+    public static int lastSortStatistics = 0;
+    public static final int 
+            TREESORT = 1,
+            BLEEDSORT3 = 2,
+            BLEEDSORT4 = 4,
+            VERY_REPETITIVE = 256,
+            REPETITIVE = 512,
+            SMALL_RANGE = 1024;
     
     public static void bleedSort(int[] a)
     {
         double sampledRepetition = sampleRepetition(a, 20);
         if (sampledRepetition > 20)
         {
+            lastSortStatistics |= VERY_REPETITIVE + TREESORT;
             InntTreeSort.inntTreeSort(a);
             return;
         }
@@ -30,6 +39,7 @@ public class BleedSort4 {
         
         if (sample[sample.length - 1] - sample[0] < 2048)
         {
+            lastSortStatistics |= SMALL_RANGE + TREESORT;
             InntTreeSort.inntTreeSort(a);
         }
 
@@ -48,10 +58,12 @@ public class BleedSort4 {
         if (sampledRepetition > 4 
                 || q[8] - q[0] < a.length >>> 1)
         {
+            lastSortStatistics |= REPETITIVE + BLEEDSORT4;
             countingBleedSort(a, Int.fill(tmpSize >> 1, Integer.MIN_VALUE), q);
         }
         else
         {
+            lastSortStatistics |= BLEEDSORT3;
             int repetitionBitmap = fillLSDs((int)sampledRepetition);
             bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
         }
