@@ -1,10 +1,10 @@
 cols = c(rgb(0,0,1,1), rgb(1,0,0,1), rgb(0,1,0,1))
 
-t = read.table("bin-100000.csv", header=FALSE, sep=',')
-x = t$V22
+t = read.table("bin-100000.csv", header=FALSE, sep=' ')
+x = t$V21
 xlab = "x = n"
 ylab = "y = ms"
-lbl = "1e5 ~bin(0.5, n)"
+lbl = "1e5, ~bin(0.5, n)"
 
 ymax = max(max(t$V2),max(t$V4),max(t$V6))
 ymin = min(min(t$V2),min(t$V4),min(t$V6))
@@ -243,6 +243,7 @@ grid (NULL,NULL, lty = 6, col = "cornsilk2")
 
 
 
+cols = c(rgb(0,0,1,1), rgb(1,0,0,1), rgb(0,1,0,1))
 
 t = read.table("bin2-p01-5e3.csv", header=FALSE, sep=' ')
 x = t$V21
