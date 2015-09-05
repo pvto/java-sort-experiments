@@ -19,6 +19,7 @@ public class BleedSortTest {
         System.out.println("elapsed " + elapsed);
     }
 
+    @Ignore
     @Test
     public void testBS1e6_010()
     {

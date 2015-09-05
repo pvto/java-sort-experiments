@@ -19,26 +19,26 @@ public class BleedSort4Test {
     @Test
     public void testBS1e6() throws IOException
     {
-        double  similarityFactor = 0.2;
+        double  similarityFactor = 0.0;
         double  compressionFactor = 1.0 * 1;
         double  mixFactor = 0.1;
-        double  bin_p = 0.50;
-        int     n = 5000;
-        double  exp = 100.0;
+        double  bin_p = -1.001;
+        int     n = 300000;
+        double  exp = 1.0;
         boolean uniform = true;
         boolean decreasing = false;
         boolean skewed = false;
-        boolean binomial = false;
-        int peaks = 2;
+        boolean binomial = true;
+        int peaks = 1;
         int     trials = 20;
-        int     innerTrials = 1000;
-        int[] orig = new int[ (int)6e4 ];
+        int     innerTrials = 1;
+        int[] orig = new int[ (int)2e7 ];
         int[] t;
 
         BufferedWriter bf = new BufferedWriter(new FileWriter("bleedsort-4-times.txt", true));
 
         System.out.println("priming...");
-        for(int x = 0; x < 3; x++)
+        for(int x = 0; x < 0; x++)
         {
             if (uniform) fillRandom(orig, similarityFactor, compressionFactor, exp);
             else if (binomial && peaks == 2) fillTwinBinomial(orig, bin_p, n);
@@ -105,7 +105,7 @@ public class BleedSort4Test {
                 if (orig.length > 2e6)
                     System.gc();
             }
-            System.out.println("Bleedsort4 " + elapsed);
+            System.out.println("Bleedsort4 " + elapsed + " " + BleedSort4.lastSortStatistics);
             bs4 += elapsed;
 
             elapsed = 0;
