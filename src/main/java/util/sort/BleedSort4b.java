@@ -85,15 +85,17 @@ public class BleedSort4b {
         
         int runLength = 0;
         int sameCount = 0;
-        for(int x = a[0], last = x, i = 1; i < a.length >>> 2; i++)
+        for(int x =a[0], last = x, i = 1; i < a.length >>> 2; i++)
         {
             int s = a[i];
+            if (s == last)
+            {
+                runLength++;
+            }
+            else
+                runLength++;
             if (s == x)
                 sameCount++;
-            if (s == last)
-                runLength++;
-            else 
-                runLength--;
             last = s;
             if (runLength > 1000)
                 return new double[]{1000.0, runLength};
