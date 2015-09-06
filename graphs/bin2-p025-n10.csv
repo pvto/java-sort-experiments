@@ -1,0 +1,15 @@
+bleedsort3 0.15125 bleedsort4 0.133 Arrays.sort 0.02275 [ bin2 1000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 6.648351648351649 5.846153846153847
+bleedsort3 0.1265 bleedsort4 0.107 Arrays.sort 0.042 [ bin2 2000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 3.011904761904762 2.5476190476190474
+bleedsort3 0.1425 bleedsort4 0.14150000000000001 Arrays.sort 0.0435 [ bin2 4000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 3.2758620689655173 3.252873563218391
+bleedsort3 0.185 bleedsort4 0.174 Arrays.sort 0.1165 [ bin2 8000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 1.5879828326180256 1.4935622317596564
+bleedsort3 0.28375 bleedsort4 0.281 Arrays.sort 0.23600000000000002 [ bin2 16000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 1.2023305084745761 1.1906779661016949
+bleedsort3 0.48200000000000004 bleedsort4 0.4625 Arrays.sort 0.4 [ bin2 32000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 1.205 1.15625
+bleedsort3 0.8155 bleedsort4 0.7865000000000001 Arrays.sort 0.8095 [ bin2 64000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 1.0074119827053738 0.971587399629401
+bleedsort3 1.589 bleedsort4 1.6815 Arrays.sort 1.6784999999999999 [ bin2 128000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 0.946678582067322 1.0017873100983021
+bleedsort3 3.302 bleedsort4 3.248 Arrays.sort 3.09 [ bin2 256000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 1.0686084142394823 1.0511326860841426
+bleedsort3 6.4 bleedsort4 6.047999999999999 Arrays.sort 6.006 [ bin2 512000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 1.0656010656010657 1.0069930069930069
+bleedsort3 12.6 bleedsort4 12.05 Arrays.sort 12.33 [ bin2 1024000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 1.021897810218978 0.9772911597729117
+bleedsort3 24.55 bleedsort4 26.925 Arrays.sort 31.1 [ bin2 2048000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 0.7893890675241158 0.8657556270096463
+bleedsort3 46.8 bleedsort4 49.1 Arrays.sort 56.35 [ bin2 4096000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 0.8305235137533273 0.8713398402839396
+bleedsort3 93.0 bleedsort4 94.45 Arrays.sort 106.95 [ bin2 8192000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 0.8695652173913043 0.8831229546517064
+bleedsort3 182.9 bleedsort4 191.85 Arrays.sort 190.55 [ bin2 16384000 simil. 0.0 compr. 1.0 mix. 0.1 p 0.25 exp -1.002 n 10 bs4 257 ]: 0.9598530569404355 1.0068223563369194

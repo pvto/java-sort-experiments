@@ -297,3 +297,19 @@ lines(x, t$V6, col=cols[3])
 legend(min(x), 27, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
 title(main=lbl, xlab=xlab, ylab=ylab)
 grid (NULL,NULL, lty = 6, col = "cornsilk2")
+
+
+t = read.table("bin2-p025-n10.csv", header=FALSE, sep=' ')
+x = t$V9
+xlab = "x = array size"
+ylab = "y = ms"
+lbl = "~ (bin(0.25, 10) + bin(0.75, 10))"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = 0 #min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+lines(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+legend(min(x), ymax, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
+title(main=lbl, xlab=xlab, ylab=ylab)
+grid (NULL,NULL, lty = 6, col = "cornsilk2")
