@@ -1,4 +1,4 @@
 /target/
 /src/test/benchmark/quadtree/target/
 /test/benchmark/quadtree/target/
-/test/benchmark/sort-experiments/target/
+/test/benchmark/sort-experiments/target/nbactions.xml
