@@ -204,6 +204,26 @@ title(main=lbl, xlab=xlab, ylab=ylab)
 
 
 
+cols = c(rgb(0,0,1,1), rgb(1,0,0,1), rgb(0,1,0,1))
+
+t = read.table("rnd-u.csv", header=FALSE)
+x = t$V9
+xlab = "x = array size"
+ylab = "y = ms"
+lbl = "~U(0, x)"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = 0  #min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+points(x, t$V4, col=cols[1])
+lines(x, t$V2, col=cols[2]);  points(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3]);  points(x, t$V6, col=cols[3])
+legend(min(x), ymax, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
+title(main=lbl, xlab=xlab, ylab=ylab)
+grid (NULL,NULL, lty = 6, col = "cornsilk2")
+
+
+
 t = read.table("skew-07-5e5.csv", header=FALSE)
 x = t$V19
 xlab = "x = skew iterations"

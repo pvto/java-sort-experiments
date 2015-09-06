@@ -16,12 +16,13 @@ public class BleedSort4b {
             VERY_REPETITIVE = 256,
             REPETITIVE = 512,
             SMALL_RANGE = 1024,
-            LONG_UNCHANGING_RUNS_IN_DATA = 2048;
+            LONG_UNCHANGING_RUNS_IN_DATA = 2048,
+            SMALL_TARGET = 4096;
     
     public static void bleedSort(int[] a)
     {
         double[] sampledRepetition = sampleRepetition(a, 20);
-        if (sampledRepetition[0] > 20)
+        if (sampledRepetition[0] > Math.max(20, a.length / 1000000))
         {
             if (sampledRepetition[1] > 6)
             {
