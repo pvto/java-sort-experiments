@@ -22,7 +22,7 @@ public class BleedSort4b {
     public static void bleedSort(int[] a)
     {
         double[] sampledRepetition = sampleRepetition(a, 20);
-        if (sampledRepetition[0] > Math.max(20, a.length / 1000000))
+        if (sampledRepetition[0] > Math.max(20, a.length / 1000000.0))
         {
             if (sampledRepetition[1] > 6)
             {
