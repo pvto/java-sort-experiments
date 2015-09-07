@@ -20,6 +20,7 @@ public class BleedSort4 {
     
     public static void bleedSort(int[] a)
     {
+        lastSortStatistics = 0;
         double sampledRepetition = sampleRepetition(a, 20);
         if (sampledRepetition > 20)
         {
@@ -41,6 +42,7 @@ public class BleedSort4 {
         {
             lastSortStatistics |= SMALL_RANGE + TREESORT;
             InntTreeSort.inntTreeSort(a);
+            return;
         }
 
         int[] q = new int[9];   // quantiles 0, 12.5, 25, 37.5, 50, 62.5, 75, 87.5, 100
@@ -60,12 +62,14 @@ public class BleedSort4 {
         {
             lastSortStatistics |= REPETITIVE + BLEEDSORT4;
             countingBleedSort(a, Int.fill(tmpSize >> 1, Integer.MIN_VALUE), q);
+            return;
         }
         else
         {
             lastSortStatistics |= BLEEDSORT3;
             int repetitionBitmap = fillLSDs((int)sampledRepetition);
             bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
+            return;
         }
     }
     
