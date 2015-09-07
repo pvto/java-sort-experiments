@@ -313,3 +313,126 @@ lines(x, t$V6, col=cols[3])
 legend(min(x), ymax, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
 title(main=lbl, xlab=xlab, ylab=ylab)
 grid (NULL,NULL, lty = 6, col = "cornsilk2")
+
+
+
+############## bleedsort4b
+###########################
+
+cols = c(rgb(0,0,1,1), rgb(0,.5,1,1), rgb(0,1,0,1))
+
+t = read.table("bleedsort-4b-times.txt", header=FALSE)
+t = subset(t, t$V21 == 1006)
+t = t[order(t$V11),]
+x = t$V11
+
+xlab = "x = item random duplication factor"
+ylab = "y = ms"
+lbl = "1e6, U(0,1e6) with x * 1e6 random duplications"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = 0 #min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+lines(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+legend(min(x), 20, c("bleedsort4b", "bleedsort4", "Arrays.sort"), col=cols, lty=c(1,1))
+title(main=lbl, xlab=xlab, ylab=ylab)
+
+
+
+t = read.table("bleedsort-4b-times.txt", header=FALSE)
+t = subset(t, t$V19 == -1.004)
+t = t[order(t$V9),]
+x = t$V9
+xlab = "x = array size"
+ylab = "y = ms"
+lbl = "~bin(0.1, 10000)"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, log="xy", col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+#points(x, t$V4, col=cols[1])
+lines(x, t$V2, col=cols[2])
+#points(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+#points(x, t$V6, col=cols[3])
+legend(min(x), ymax, c("bleedsort4b", "bleedsort4", "Arrays.sort"), col=cols, lty=c(1,1))
+text(x, t$V4, round(t$V4, 2), cex=1)
+text(x, t$V6, round(t$V6, 2), cex=1)
+title(main=lbl, xlab=xlab, ylab=ylab)
+grid (NULL,NULL, lty = 6, col = "cornsilk2")
+
+
+
+
+t = read.table("bleedsort-4b-times.txt", header=FALSE)
+t = subset(t, t$V21 == 1007)
+t = t[order(t$V19),]
+x = t$V19
+xlab = "x = exponent of U"
+ylab = "y = ms"
+lbl = "3e4, ~ U^x(0,1) * 3e4, with 3e4 random duplications"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = 0 #min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+lines(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+legend(min(x), 20, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
+title(main=lbl, xlab=xlab, ylab=ylab)
+
+
+
+t = read.table("bleedsort-4b-times.txt", header=FALSE)
+t = subset(t, t$V21 == 1010)
+t = t[order(t$V19),]
+x = t$V19
+xlab = "x = skew iterations"
+ylab = "y = ms"
+lbl = "5e5, skewed"
+sub = "for t in [1..x]: pick z from U(0,1) iff z < 0.7^t; return first such t * 5e5"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+lines(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+legend(min(x), 20, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
+title(main=lbl, sub=sub, xlab=xlab, ylab=ylab)
+#text(x, t$V4, round(t$V4, 2), cex=.75) text(x, t$V6, round(t$V6, 2), cex=.75)
+grid (NULL,NULL, lty = 6, col = "cornsilk2")
+
+
+
+t = read.table("bleedsort-4b-times.txt", header=FALSE)
+t = subset(t, t$V21 == 1012)
+t = t[order(t$V11),]
+x = t$V11
+xlab = "x = item random duplication factor"
+ylab = "y = ms"
+lbl = "1e6, monotonously decreasing at x=0"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = 0  #min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+lines(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+legend(min(x), ymax, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
+title(main=lbl, xlab=xlab, ylab=ylab)
+
+
+t = read.table("bleedsort-4b-times.txt", header=FALSE)
+t = subset(t, t$V21 == 1013)
+t = t[order(t$V15),]
+x = t$V15
+xlab = "x = mixing factor"
+ylab = "y = ms"
+lbl = "1e6, monotonously decreasing, range [0,1e5]"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = 0  #min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+lines(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+legend(min(x), ymax, c("bleedsort4", "bleedsort3", "Arrays.sort"), col=cols, lty=c(1,1))
+title(main=lbl, xlab=xlab, ylab=ylab)
