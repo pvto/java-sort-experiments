@@ -21,6 +21,7 @@ public class BleedSort4b {
     
     public static void bleedSort(int[] a)
     {
+        lastSortStatistics = 0;
         double[] sampledRepetition = sampleRepetition(a, 20);
         if (sampledRepetition[0] > Math.max(20, a.length / 1000000.0))
         {
@@ -28,13 +29,14 @@ public class BleedSort4b {
             {
                 lastSortStatistics |= VERY_REPETITIVE + LONG_UNCHANGING_RUNS_IN_DATA + TREESORT;
                 InntTreeSort.inntTreeHungrySort(a);
+                return;
             }
             else
             {
                 lastSortStatistics |= VERY_REPETITIVE + TREESORT;
                 InntTreeSort.inntTreeSort(a);
+                return;
             }
-            return;
         }
 
         int sampleSize = 160;
@@ -50,6 +52,7 @@ public class BleedSort4b {
         {
             lastSortStatistics |= SMALL_RANGE + TREESORT;
             InntTreeSort.inntTreeSort(a);
+            return;
         }
 
         int[] q = new int[9];   // quantiles 0, 12.5, 25, 37.5, 50, 62.5, 75, 87.5, 100
@@ -69,12 +72,14 @@ public class BleedSort4b {
         {
             lastSortStatistics |= REPETITIVE + BLEEDSORT4;
             countingBleedSort(a, Int.fill(tmpSize >> 1, Integer.MIN_VALUE), q);
+            return;
         }
         else
         {
             lastSortStatistics |= BLEEDSORT3;
             int repetitionBitmap = fillLSDs((int)sampledRepetition[0]);
             bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
+            return;
         }
     }
     
@@ -85,7 +90,7 @@ public class BleedSort4b {
         
         int runLength = 0;
         int sameCount = 0;
-        for(int x =a[0], last = x, i = 1; i < a.length >>> 2; i++)
+        for(int x =a[0], last = x, i = 1; i < a.length >>> 3; i++)
         {
             int s = a[i];
             if (s == last)
@@ -93,14 +98,16 @@ public class BleedSort4b {
                 runLength++;
             }
             else
-                runLength++;
+            {
+                runLength--;
+            }
             if (s == x)
                 sameCount++;
             last = s;
             if (runLength > 1000)
                 return new double[]{1000.0, runLength};
         }
-        repetitionAvg += sameCount / (double) (a.length >>> 2) * 100.0;
+        repetitionAvg += sameCount * 100.0 / (double) (a.length >>> 3);
         
         for(int j = 0; j < sampleSize - 4; j++)
         {
@@ -116,13 +123,13 @@ public class BleedSort4b {
         {
             int x = a[j];
             sameCount = 0;
-            for(int i = j + 1; i < a.length >>> 2; i++)
+            for(int i = j + 1; i < a.length >>> 3; i++)
             {
                 int s = a[i];
                 if (s == x)
                     sameCount++;
             }
-            repetitionAvg += sameCount / (double) (a.length >>> 2) * 100.0;
+            repetitionAvg += sameCount * 100.0 / (double) (a.length >>> 3);
         }
         return new double[] {
             ( repetitionAvg / sampleSize / 100.0 + 1e-6 ) * a.length, // add a small expectation
