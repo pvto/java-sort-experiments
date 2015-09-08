@@ -35,6 +35,8 @@ public class Util {
         }
     }
     
+    
+    
     public static void fillRandom(int[] a, double similarityFactor, double compressionFactor, double curveExponent)
     {
         for(int i = 0; i < a.length; i++)
@@ -44,6 +46,7 @@ public class Util {
         }
         similarize(a, similarityFactor);
     }
+    
     public static void fillDecr(int[] a, double mixFactor, double similarityFactor, double compressionFactor)
     {
         for(int i = 0; i < a.length; i++)
@@ -51,6 +54,7 @@ public class Util {
         mix(a, mixFactor);
         similarize(a, similarityFactor);
     }
+    
     public static void fillIncr(int[] a, double mixFactor, double similarityFactor, double compressionFactor)
     {
         for(int i = 0; i < a.length; i++)
@@ -58,6 +62,7 @@ public class Util {
         mix(a, mixFactor);
         similarize(a, similarityFactor);
     }
+    
     public static void fillSkewed(int[] a, double p, double exponent, double compressionFactor)
     {
         double[] skewThresholds = new double[(int)exponent];
@@ -78,11 +83,13 @@ public class Util {
             a[i] = (int) (a.length * d * compressionFactor);
         }
     }
+    
     public static void fillBinomial(int[] a, double p, int n)
     {
         for(int i = 0; i < a.length; i++)
             a[i] = Prob.binmRnd(n, p, Math.random());
     }
+    
     public static void fillTwinBinomial(int[] a, double p, int n)
     {
         double q = 1.0-p;
@@ -90,5 +97,31 @@ public class Util {
             a[i] = Prob.binmRnd(n, p, Math.random()) + Prob.binmRnd(n, q, Math.random());
     }
     
-
+    public static void fillSinusoidal(int[] a, double frequency, double altitude, double exponent, double mixFactor, double mixXFrequency)
+    {
+        double place = 0.0;
+        double add = Math.PI * 2.0 * frequency / a.length; 
+        for(int i = 0; i < a.length; i++)
+        {
+            double val = Math.sin(place);
+            if (exponent != 1.0) 
+                val = Math.pow(val, exponent);
+            a[i] = (int) (altitude * val);
+            
+            place += add;
+        }
+        if (mixFactor > 0)
+            for(int i = 0; i < mixFactor * a.length; i++)
+            {
+                int x = Math.min(a.length - 1,
+                        (int) (mixXFrequency * a.length + Math.random() * (a.length * (1.0 - mixXFrequency * 2)))
+                );
+                int y = (int) (Math.random() * mixXFrequency);
+                if (y < 0) y = 0;
+                else if (y >= a.length) y = a.length;
+                int tmp = a[x];
+                a[x] = a[y];
+                a[y] = tmp;
+            }
+    }
 }

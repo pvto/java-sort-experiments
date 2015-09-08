@@ -11,6 +11,7 @@ import static util.sort.Util.fillBinomial;
 import static util.sort.Util.fillDecr;
 import static util.sort.Util.fillIncr;
 import static util.sort.Util.fillRandom;
+import static util.sort.Util.fillSinusoidal;
 import static util.sort.Util.fillSkewed;
 import static util.sort.Util.fillTwinBinomial;
 
@@ -18,10 +19,12 @@ public class BleedSort4bTest2 {
 
     private void fillTest(int[] orig, double similarityFactor, double compressionFactor, double mixFactor, 
             double bin_p, int n, double exp, 
-            boolean uniform, boolean decreasing, boolean skewed, boolean binomial, 
-            int peaks)
+            boolean uniform, boolean decreasing, boolean skewed, 
+            boolean binomial, int peaks,
+            boolean sinusoidal, double frequency, double altitude, double mixFrequency)
     {
         if (uniform) fillRandom(orig, similarityFactor, compressionFactor, exp);
+        else if (sinusoidal) fillSinusoidal(orig, frequency, altitude, exp, mixFactor, mixFrequency);
         else if (binomial && peaks == 2) fillTwinBinomial(orig, bin_p, n);
         else if (binomial) fillBinomial(orig, bin_p, n);
         else if (skewed) fillSkewed(orig, bin_p, exp, compressionFactor);
@@ -37,22 +40,27 @@ public class BleedSort4bTest2 {
     @Test
     public void testBS() throws IOException
     {
+        int[] orig = new int[ (int)1e5 ];
+        int[] t = new int[orig.length];
         double  similarityFactor = 0.0;
         double  compressionFactor = 1.0 * 0.10;
-        double  mixFactor = 2.0;
+        double  mixFactor = 0.00001;
         double  bin_p = 0.0;
-        int     n = 1013;
+        int     n = 1016;
         double  exp = 1;
         boolean uniform = false;
-        boolean decreasing = true;
+        boolean decreasing = false;
         boolean skewed = false;
         boolean binomial = false;
+        boolean sinusoidal = true;
         int peaks = 1;
+        double frequency = 1000.0;
+        double altitude = orig.length;
+        double mixFrequency = 0.0001;
         int     trials = 20;
-        int     innerTrials = 2;
-        int[] orig = new int[ (int)1e6 ];
-        int[] t = new int[orig.length];
-
+        int     innerTrials = 50;
+        
+                
         BufferedWriter bf = new BufferedWriter(new FileWriter("bleedsort-4b-times.txt", true));
 
         System.out.println("priming...");
@@ -60,11 +68,13 @@ public class BleedSort4bTest2 {
         for(int y = 1; y < 7; y++)
         {
             fillTest(tu, similarityFactor, compressionFactor, mixFactor, bin_p,
-                    n, exp, uniform, decreasing, skewed, binomial, peaks
+                    n, exp, uniform, decreasing, skewed, 
+                    binomial, peaks, 
+                    sinusoidal, frequency, altitude, mixFrequency
             );
             for(int x = 0; x < 3; x++)
             {
-                copy(orig, t);
+                copy(tu, t);
                 switch(y)
                 {
                     case 0: BleedSort4.bleedSort(t);  break;
@@ -80,7 +90,9 @@ public class BleedSort4bTest2 {
         for(int x = 0; x < trials; x++)
         {
             fillTest(orig, similarityFactor, compressionFactor, mixFactor, bin_p,
-                    n, exp, uniform, decreasing, skewed, binomial, peaks
+                    n, exp, uniform, decreasing, skewed, 
+                    binomial, peaks, 
+                    sinusoidal, frequency, altitude, mixFrequency
             );
 
             elapsed = 0;
@@ -127,7 +139,7 @@ public class BleedSort4bTest2 {
             "bleedsort4 " + (bss=(bs4 / (double)trials / (double)innerTrials))
             + " bleedsort4b " + (bss4=(bs4b / (double)trials / (double)innerTrials))
             + " Arrays.sort " + (ass=(as / (double)trials / (double)innerTrials))
-            + " [ "+(uniform?"rnd":(binomial&peaks==2?"bin2":(binomial?"bin":(skewed?"skewed":(decreasing?"decr":"incr")))))
+            + " [ "+(uniform?"rnd":(sinusoidal?"sin":(binomial&peaks==2?"bin2":(binomial?"bin":(skewed?"skewed":(decreasing?"decr":"incr"))))))
                     +" "+orig.length
                     + " simil. "+similarityFactor
                     + " compr. " +compressionFactor
@@ -136,6 +148,9 @@ public class BleedSort4bTest2 {
                     + " n "+n
                     + " bs4 "+BleedSort4.lastSortStatistics
                     + " bs4b "+BleedSort4b.lastSortStatistics
+                    + " freq " + frequency
+                    + " alt " + altitude
+                    + " mixfq " + mixFrequency
                     +" ]: " + (bss / ass) + " " + (bss4 / ass)
                     + "\n"
             ;
