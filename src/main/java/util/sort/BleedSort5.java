@@ -6,13 +6,14 @@ import util.Int;
 /**
  * @author pvto https://github.com/pvto
  */
-public class BleedSort4b {
+public class BleedSort5 {
 
     public static int lastSortStatistics = 0;
     public static final int 
             TREESORT = 1,
             BLEEDSORT3 = 2,
             BLEEDSORT4 = 4,
+            COMPACT_TREESORT = 8,
             VERY_REPETITIVE = 256,
             REPETITIVE = 512,
             SMALL_RANGE = 1024,
@@ -25,17 +26,33 @@ public class BleedSort4b {
         double[] sampledRepetition = sampleRepetition(a, 20);
         if (sampledRepetition[0] > Math.max(20, a.length / 1000000.0))
         {
-            if (sampledRepetition[1] > 6)
+            double distinctItems = a.length / sampledRepetition[0];
+            if (distinctItems  < 40)
             {
-                lastSortStatistics |= VERY_REPETITIVE + LONG_UNCHANGING_RUNS_IN_DATA + TREESORT;
-                InntTreeSort.inntTreeHungrySort(a);
+                lastSortStatistics |= VERY_REPETITIVE + COMPACT_TREESORT;
+                if (sampledRepetition[1] > 6)
+                {
+                    lastSortStatistics |= VERY_REPETITIVE;
+                    InntTreeSort.smallRangeInntTreeHungrySort(a);
+                    return;
+                }
+                InntTreeSort.smallRangeInntTreeSort(a);
                 return;
             }
-            else
+            else if (distinctItems < 80 || a.length < 2000_000)
             {
-                lastSortStatistics |= VERY_REPETITIVE + TREESORT;
-                InntTreeSort.inntTreeSort(a);
-                return;
+                if (sampledRepetition[1] > 6)
+                {
+                    lastSortStatistics |= VERY_REPETITIVE + LONG_UNCHANGING_RUNS_IN_DATA + TREESORT;
+                    InntTreeSort.inntTreeHungrySort(a);
+                    return;
+                }
+                else 
+                {
+                    lastSortStatistics |= VERY_REPETITIVE + TREESORT;
+                    InntTreeSort.inntTreeSort(a);
+                    return;
+                }
             }
         }
 
@@ -48,7 +65,21 @@ public class BleedSort4b {
         }
         Arrays.sort(sample);
         
-        if (sample[sample.length - 1] - sample[0] < 2048)
+        int range = sample[sample.length - 1] - sample[0];
+        if (range < 4096)
+        {
+            lastSortStatistics |= SMALL_RANGE + COMPACT_TREESORT;
+            if (sampledRepetition[1] > 6)
+            {
+                lastSortStatistics |= LONG_UNCHANGING_RUNS_IN_DATA;
+                InntTreeSort.smallRangeInntTreeHungrySort(a);
+                return;
+            }
+            InntTreeSort.smallRangeInntTreeSort(a);
+            return;
+            
+        }
+        if (range < 32768)
         {
             lastSortStatistics |= SMALL_RANGE + TREESORT;
             InntTreeSort.inntTreeSort(a);
@@ -393,12 +424,13 @@ public class BleedSort4b {
                         while (tmp[place] != x && tmp[place] != Integer.MIN_VALUE)
                             place++;
                         minHelper = place;
+                        //bleedCount += minHelper;
                         minHelper++;
                         if (minHelpCount++ > 100 && i < a.length >>> 1)
                         {   // problem in sample distribution (minimum was estimated too big)
                             fillPartiallyWithCounts(a, tmp, counts);
                             System.out.println("out-left");
-                            Arrays.sort(a);
+                            tryOtherSort(bleedCount, a);
                             return;
                         }
                         tmp[place] = x;
@@ -441,11 +473,12 @@ public class BleedSort4b {
                     while (tmp[place] != x && tmp[place] != Integer.MIN_VALUE)
                         place--;
                     maxHelper = place;
+                    //bleedCount += tmp.length - maxHelper;
                     if (maxHelpCount++ > 100 && i < a.length >>> 1)
                     {   // problem in sample distribution (maximum was estimated too small)
                         fillPartiallyWithCounts(a, tmp, counts);
                         System.out.println("out-right");
-                        Arrays.sort(a);
+                        tryOtherSort(bleedCount, a);
                         return;
                     }
                     tmp[place] = x;
@@ -465,7 +498,7 @@ public class BleedSort4b {
             {
 //                System.out.println("bleed!");
                 fillPartiallyWithCounts(a, tmp, counts);
-                Arrays.sort(a);
+                tryOtherSort(bleedCount, a);
                 return;
             }
             else if (tmp[place] == x || tmp[place] == Integer.MIN_VALUE)
@@ -484,7 +517,7 @@ public class BleedSort4b {
                 {   // excessive bleeding; get out
                     System.out.println("bleed");
                     fillPartiallyWithCounts(a, tmp, counts);
-                    Arrays.sort(a);
+                    tryOtherSort(bleedCount, a);
                     return;
                 };
             }
@@ -524,10 +557,17 @@ public class BleedSort4b {
 //                System.out.println("sorted!");
                 return;
             }
+            else { System.out.println("not sorted..."); }
         }
-        Arrays.sort(a);
+        tryOtherSort(bleedCount, a);
     }
 
+    
+    private static void tryOtherSort(int bleedCount, int[] a)
+    {
+        Arrays.sort(a);
+    }
+    
     
     private static void fillPartially(int[] a, int[] tmp)
     {
