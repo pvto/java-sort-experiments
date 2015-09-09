@@ -39,13 +39,13 @@ public class BleedSort5Test {
     @Test
     public void testBS() throws IOException
     {
-        int[] orig = new int[ (int)1e5 ];
+        int[] orig = new int[ (int)1e7 ];
         int[] t = new int[orig.length];
         double  similarityFactor = 0.0;
         double  compressionFactor = 1.0 * 0.10;
-        double  mixFactor = 40.0;
+        double  mixFactor = 2;
         double  bin_p = 0.0;
-        int     n = 1021;
+        int     n = 1022;
         double  exp = 1;
         boolean uniform = false;
         boolean decreasing = false;
@@ -53,11 +53,11 @@ public class BleedSort5Test {
         boolean binomial = false;
         boolean sinusoidal = true;
         int peaks = 1;
-        double frequency = 1000.0;
-        double altitude = 32;
-        double mixFrequency = 0.0001;
+        double frequency = 18;
+        double altitude = 100000000;
+        double mixFrequency = 1;
         int     trials = 20;
-        int     innerTrials = 100;
+        int     innerTrials = 1;
 
         
         BufferedWriter bf = new BufferedWriter(new FileWriter("bleedsort-5-times.txt", true));

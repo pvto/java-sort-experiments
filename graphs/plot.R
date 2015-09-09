@@ -565,3 +565,56 @@ lines(x, t$V2, col=cols[2])
 lines(x, t$V6, col=cols[3])
 legend(min(x)+(max(x)-min(x))*0.72, ymax, c("bleedsort5", "bleedsort4b", "Arrays.sort"), col=cols, lty=c(1,1))
 title(main=lbl, xlab=xlab, ylab=ylab)
+
+
+
+
+cols = c(rgb(0.3,0.4,0,1), rgb(0,0,1,1), rgb(0,1,0,1), rgb(0,.5,1,1))
+t = read.table("bleedsort-5-times.txt", header=FALSE)
+t = subset(t, t$V21 == 1021)
+t = t[order(t$V29),]
+x = t$V29
+xlab = "x = sine altitude"
+ylab = "y = ms"
+lbl = "1e5, sinusoidal wave, different parameters"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, pch=3, col=cols[1], ylim=c(ymin,ymax), type="p", xlab="", ylab="")
+grid (NULL,NULL, lty = 6, col = "cornsilk2")
+points(x, t$V2, col=cols[2])
+points(x, t$V6, col=cols[3])
+legend(min(x)+(max(x)-min(x))*0.62, ymax, c(
+    paste( "bleedsort5 ", round(sum(t$V4)/length(t$V4), 2) ),
+    paste( "Arrays.sort", round(sum(t$V6)/length(t$V6), 2) ),
+    paste( "bleedsort4b", round(sum(t$V2)/length(t$V2), 2) )
+  ), , col=cols, lty=c(1,1)
+)
+title(main=lbl, xlab=xlab, ylab=ylab)
+
+
+
+
+
+cols = c(rgb(0.3,0.4,0,1), rgb(0,0,1,1), rgb(0,1,0,1), rgb(0,.5,1,1))
+t = read.table("bleedsort-5-times.txt", header=FALSE)
+t = subset(t, t$V21 == 1022)
+t = t[order(t$V29),]
+x = t$V29
+xlab = "x = sine altitude"
+ylab = "y = ms"
+lbl = "1e7, sinusoidal wave, freq. 18, mix 200%"
+
+ymax = max(max(t$V2),max(t$V4),max(t$V6))
+ymin = min(min(t$V2),min(t$V4),min(t$V6))
+plot(x, t$V4, log="xy", pch=3, col=cols[1], ylim=c(ymin,ymax), type="l", xlab="", ylab="")
+grid (NULL,NULL, lty = 6, col = "cornsilk2")
+lines(x, t$V2, col=cols[2])
+lines(x, t$V6, col=cols[3])
+legend(min(x), ymax, c(
+    paste( "bleedsort5 μ=", round(sum(t$V4)/length(t$V4), 2) ),
+    paste( "Arrays.sort μ=", round(sum(t$V6)/length(t$V6), 2) ),
+    paste( "bleedsort4b μ=", round(sum(t$V2)/length(t$V2), 2) )
+  ), , col=cols, lty=c(1,1)
+)
+title(main=lbl, xlab=xlab, ylab=ylab)
