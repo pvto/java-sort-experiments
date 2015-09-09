@@ -32,14 +32,14 @@ public class BleedSort5 {
                 lastSortStatistics |= VERY_REPETITIVE + COMPACT_TREESORT;
                 if (sampledRepetition[1] > 6)
                 {
-                    lastSortStatistics |= VERY_REPETITIVE;
+                    lastSortStatistics |= LONG_UNCHANGING_RUNS_IN_DATA;
                     InntTreeSort.smallRangeInntTreeHungrySort(a);
                     return;
                 }
                 InntTreeSort.smallRangeInntTreeSort(a);
                 return;
             }
-            else if (distinctItems < 80 || a.length < 2000_000)
+            else if (distinctItems < 80 || a.length < 2000_000 && distinctItems < 2048)
             {
                 if (sampledRepetition[1] > 6)
                 {
@@ -82,6 +82,12 @@ public class BleedSort5 {
         if (range < 32768)
         {
             lastSortStatistics |= SMALL_RANGE + TREESORT;
+            if (sampledRepetition[1] > 6)
+            {
+                lastSortStatistics |= LONG_UNCHANGING_RUNS_IN_DATA;
+                InntTreeSort.inntTreeHungrySort(a);
+                return;
+            }
             InntTreeSort.inntTreeSort(a);
             return;
         }

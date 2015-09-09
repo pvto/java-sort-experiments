@@ -107,6 +107,24 @@ public class ExpandingArray<T> {
         {
             return items.length;
         }
+        public void increment(int ind)
+        {
+            if (ind >= items.length)
+            {
+                put(ind, 1);
+                return;
+            }
+            items[ind]++;
+        }
+        public void add(int ind, int val)
+        {
+            if (ind >= items.length)
+            {
+                put(ind, val);
+                return;
+            }
+            items[ind] += val;
+        }
         
     }
     

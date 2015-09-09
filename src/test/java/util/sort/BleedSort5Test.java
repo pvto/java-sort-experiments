@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
-import org.junit.Ignore;
 import org.junit.Test;
 import static util.sort.Util.fillBinomial;
 import static util.sort.Util.fillDecr;
@@ -40,27 +39,27 @@ public class BleedSort5Test {
     @Test
     public void testBS() throws IOException
     {
-        int[] orig = new int[ (int)1e7 ];
+        int[] orig = new int[ (int)1e5 ];
         int[] t = new int[orig.length];
-        double  similarityFactor = 0;
-        double  compressionFactor = 1.0 * 0.999;
-        double  mixFactor = 0.001;
-        double  bin_p = 0.5;
-        int     n = 1020;
+        double  similarityFactor = 0.0;
+        double  compressionFactor = 1.0 * 0.10;
+        double  mixFactor = 40.0;
+        double  bin_p = 0.0;
+        int     n = 1021;
         double  exp = 1;
         boolean uniform = false;
-        boolean decreasing = true;
+        boolean decreasing = false;
         boolean skewed = false;
         boolean binomial = false;
-        boolean sinusoidal = false;
+        boolean sinusoidal = true;
         int peaks = 1;
-        double frequency = 1.0;
-        double altitude = 1;
-        double mixFrequency = 1;
+        double frequency = 1000.0;
+        double altitude = 32;
+        double mixFrequency = 0.0001;
         int     trials = 20;
-        int     innerTrials = 1;
+        int     innerTrials = 100;
+
         
-                
         BufferedWriter bf = new BufferedWriter(new FileWriter("bleedsort-5-times.txt", true));
 
         System.out.println("priming...");
@@ -84,6 +83,28 @@ public class BleedSort5Test {
                 }
             }
         }
+
+        fillTest(orig, similarityFactor, compressionFactor, mixFactor, bin_p,
+                n, exp, uniform, decreasing, skewed, 
+                binomial, peaks, 
+                sinusoidal, frequency, altitude, mixFrequency
+        );
+        int[] tu = null;
+        for(int x = 0; x < 3; x++)
+        {
+            t = Arrays.copyOf(orig, orig.length);
+            switch(x)
+            {
+                case 0: BleedSort4b.bleedSort(t);  break;
+                case 1: BleedSort5.bleedSort(t);  tu = t; break;
+                case 2: Arrays.sort(t);  
+                    for (int i = 0; i < tu.length; i++) {
+                        assertEquals(i + " " + t[i] + " " + tu[i], tu[i], t[i]);
+                    }
+                break;
+            }
+        }
+        tu = null;
 
         System.out.println("benchmark...");
         long bs4 = 0, bs5 = 0, as = 0;

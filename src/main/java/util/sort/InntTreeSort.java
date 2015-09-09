@@ -90,13 +90,17 @@ public class InntTreeSort {
     private static void pasteIntoArray(SmallRangeInntTree it, int[] a)
     {
         int place = 0;
-        for(Object o : it.root.negativeChildren.items) if (o != null)
+        Object[] oo = it.root.negativeChildren.items;
+        for(int j = oo.length - 1; j >= 0; j--) 
         {
+            Object o = oo[j];
+            if (o == null)
+                continue;
             SmallRangeInntTree.Node1 n1 = (SmallRangeInntTree.Node1)o;
-            for(int i = 0; i < n1.children.length; i++) 
+            for(int i = n1.children.size() - 1; i >= 0; i--) 
             {
-                int val = n1.children[i];
-                for(int x = 0; x < n1.counts[i]; x++)
+                int val = n1.children.get(i);
+                for(int x = 0; x < n1.counts.get(i); x++)
                 {
                     a[place++] = val;
                 }
@@ -105,10 +109,10 @@ public class InntTreeSort {
         for(Object o : it.root.children.items) if (o != null)
         {
             SmallRangeInntTree.Node1 n1 = (SmallRangeInntTree.Node1)o;
-            for(int i = 0; i < n1.children.length; i++) 
+            for(int i = 0; i < n1.children.size(); i++) 
             {
-                int val = n1.children[i];
-                for(int x = 0; x < n1.counts[i]; x++)
+                int val = n1.children.get(i);
+                for(int x = 0; x < n1.counts.get(i); x++)
                 {
                     a[place++] = val;
                 }
