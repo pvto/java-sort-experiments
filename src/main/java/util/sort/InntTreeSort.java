@@ -22,19 +22,19 @@ public class InntTreeSort {
     
     public static void inntTreeHungrySort(int[] a)
     {
-        int last = a[0];
+        int prev = a[0];
         int ind = 0;
         InntTree it = new InntTree();
         for(int i = 1; i < a.length; i++)
         {
             int t = a[i];
-            if (t == last)
+            if (t == prev)
                 continue;
-            it.put(last, i - ind);
+            it.put(prev, i - ind);
             ind = i;
-            last = t;
+            prev = t;
         }
-        it.put(last, a.length - ind);
+        it.put(prev, a.length - ind);
      
         pasteIntoArray(it, a);
     }
@@ -70,19 +70,19 @@ public class InntTreeSort {
     
     public static void smallRangeInntTreeHungrySort(int[] a)
     {
-        int last = a[0];
+        int prev = a[0];
         int ind = 0;
         SmallRangeInntTree it = new SmallRangeInntTree();
         for(int i = 1; i < a.length; i++)
         {
             int t = a[i];
-            if (t == last)
+            if (t == prev)
                 continue;
-            it.put(last, i - ind);
+            it.put(prev, i - ind);
             ind = i;
-            last = t;
+            prev = t;
         }
-        it.put(last, a.length - ind);
+        it.put(prev, a.length - ind);
      
         pasteIntoArray(it, a);
     }
