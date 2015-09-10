@@ -19,11 +19,35 @@ public class MergeSort {
     {
         int[] orig = a;
         int[] b = Arrays.copyOf(a, a.length);
-        int size = 8;
+        int size = 7;
         int i = 0;
-        for(; i <= b.length - size; i += size)
+        for(; i <= b.length - size; /*i += size*/)
         {
-            insertionSort(b, i, i + size);
+            //int c=b[i],d=b[i+1],e=b[i+2],f=b[i+3],g=b[i+4],h=b[i+5],m=b[i+6];
+            int c=b[i++],d=b[i++],e=b[i++],f=b[i++],g=b[i++],h=b[i++],m=b[i++];
+            if(d>e){int t=d;d=e;e=t;}  if(f>g){int t=f;f=g;g=t;};  if(h>m){int t=h;h=m;m=t;};
+            if(c>e){int t=c;c=e;e=t;}  if(f>h){int t=f;f=h;h=t;};  if(g>m){int t=g;g=m;m=t;};
+            if(c>d){int t=c;c=d;d=t;}  if(g>h){int t=g;g=h;h=t;};  if(e>m){int t=e;e=m;m=t;};
+            if(c>g){int t=c;c=g;g=t;}  if(d>h){int t=d;d=h;h=t;};
+            if(c>f){int t=c;c=f;f=t;}  if(e>h){int t=e;e=h;h=t;};
+            if(d>f){int t=d;d=f;f=t;}  if(e>g){int t=e;e=g;g=t;};
+            if(e>f){int t=e;e=f;f=t;}
+            //b[i]=c;b[i+1]=d;b[i+2]=e;b[i+3]=f;b[i+4]=g;b[i+5]=h;b[i+6]=m;
+            i-=7;b[i++]=c;b[i++]=d;b[i++]=e;b[i++]=f;b[i++]=g;b[i++]=h;b[i++]=m;
+//            int e = i + size;
+//            for(int m = i + 1; m < e; m++)
+//            {
+//                int x = b[m];
+//                if (x >= b[m - 1])
+//                    continue;
+//                int j = i;
+//                while(b[j] <= x) 
+//                    j++;
+//                for(int k = m; k > j; k--)
+//                    b[k] = b[k-1];
+//                b[j] = x;
+//            }
+//            insertionSort(b, i, i + size);
         }
         if (i < b.length - 1)
         {
@@ -31,16 +55,16 @@ public class MergeSort {
         }
 
         
-        
         while(size <= b.length >>> 1)
         {
+            int xee = b.length - size;
             int ind = 0;
             int x = 0;
-            for(; x < b.length - (size); x += size)
+            for(; x < xee; x += size)
             {
                 int y = x + size;
                 int xe = y;
-                int ye = Math.min(b.length, y + size);
+                int ye = y + size; if (ye > b.length) ye = b.length;
                 for(;;)
                 {
                     if (b[x] <= b[y])
@@ -102,7 +126,6 @@ public class MergeSort {
                     }
                 }
             }
-//            System.out.println("F " + Arrays.toString(a));
             b = a; 
         }
         if (orig != b)
@@ -111,31 +134,58 @@ public class MergeSort {
         }
     }
     
-    public static void insertionSort(int[] a, int s, int e)
+    public static void insertionSort(int[] a, int i, int e)
     {
-        for(int i = s + 1; i < e; i++)
+        for(int m = i + 1; m < e; m++)
         {
-            int x = a[i];
-            if (x >= a[i - 1])
+            int x = a[m];
+            if (x >= a[m - 1])
                 continue;
-            int j = s;
+            int j = i;
             while(a[j] <= x) 
                 j++;
-            for(int k = i; k > j; k--)
+            for(int k = m; k > j; k--)
                 a[k] = a[k-1];
             a[j] = x;
         }
     }
     
-    
-    public static void main(String[] args) {
-        System.out.println(MergeSort.log2(15));
-        System.out.println(MergeSort.log2(16));
-        System.out.println(MergeSort.log2(17));
-        System.out.println(MergeSort.log2(31));
-        System.out.println(MergeSort.log2(32));
-        System.out.println(MergeSort.log2(33));
+    public static void swap2(int[]a, int i, int j)
+    {
+        if(a[j] < a[i])
+        {
+            int tmp = a[i];  a[i] = a[j];  a[j] = tmp;
+        }
     }
+    public static void swap7(int[] a, int s)
+    {
+        swap2(a,s+1,s+2); swap2(a,s+3,s+4);  swap2(a,s+5,s+6);
+        swap2(a,s,s+2); swap2(a,s+3,s+5);  swap2(a,s+4,s+6);
+        swap2(a,s,s+1); swap2(a,s+4,s+5);  swap2(a,s+2,s+6);
+        swap2(a,s,s+4); swap2(a,s+1,s+5);
+        swap2(a,s,s+3); swap2(a,s+2,s+5);
+        swap2(a,s+1,s+3); swap2(a,s+2,s+4);
+        swap2(a,s+2,s+3);
+/*
+[[1,2],[3,4],[5,6]]
+[[0,2],[3,5],[4,6]]
+[[0,1],[4,5],[2,6]]
+[[0,4],[1,5]]
+[[0,3],[2,5]]
+[[1,3],[2,4]]
+[[2,3]]
+        */
+    }
+    
+/*
+        if(d>e){int t=d;d=e;e=t;}  if(f>g){int t=f;f=g;g=t;};  if(h>m){int t=h;h=m;m=t;;};
+        if(c>e){int t=c;c=e;e=t;}  if(f>h){int t=f;f=h;h=t;};  if(g>m){int t=g;g=m;m=t;};
+        if(c>d){int t=c;c=d;d=t;}  if(g>h){int t=g;g=h;h=t;};  if(e>m){int t=e;e=m;m=t;};
+        if(c>g){int t=c;c=g;g=t;}  if(d>h){int t=d;d=h;h=t;};
+        if(c>f){int t=c;c=f;f=t;}  if(e>h){int t=e;e=h;h=t;};
+        if(d>f){int t=d;d=f;f=t;}  if(e>g){int t=e;e=g;g=t;};
+        if(e>f){int t=e;e=f;f=t;}
+    */
             
     
 }

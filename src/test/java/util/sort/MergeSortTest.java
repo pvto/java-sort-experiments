@@ -59,8 +59,9 @@ public class MergeSortTest {
         Util.fillSinusoidal(orig, 3.0, 1000.0, 1.0, 0.0, 1.0);
         long start = System.currentTimeMillis();
         int[] a = null;
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < 20; j++)
         {
+            if (j == 10) start = System.currentTimeMillis();
             a = Arrays.copyOf(orig, orig.length);
             MergeSort.mergeSort(a);
         }
@@ -69,5 +70,21 @@ public class MergeSortTest {
         for (int i = 1; i < a.length; i++) {
             assertTrue(a[i] >= a[i - 1]);
         }
+    }
+    
+    @Test
+    public void benchmarkArraysSort()
+    {
+        int[] orig = new int[1000017];
+        Util.fillSinusoidal(orig, 3.0, 1000.0, 1.0, 0.0, 1.0);
+        long start = System.currentTimeMillis();
+        int[] a = null;
+        for (int j = 0; j < 10; j++)
+        {
+            a = Arrays.copyOf(orig, orig.length);
+            Arrays.sort(a);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println((a.length) + " " + ( (end - start) / 100.0) + "ms/Arrays.sort");
     }
 }
