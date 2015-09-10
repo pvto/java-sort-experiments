@@ -110,14 +110,13 @@ public class BleedSort5 {
                 || q[8] - q[0] < a.length >>> 1)
         {
             lastSortFlags |= REPETITIVE + BLEEDSORT4;
-            countingBleedSort(a, Int.fill(tmpSize >> 1, Integer.MIN_VALUE), q);
+            countingBleedSort(a, Int.fill(tmpSize >> 1, Integer.MIN_VALUE), q, sampledRepetition);
             return;
         }
         else
         {
             lastSortFlags |= BLEEDSORT3;
-            int repetitionBitmap = fillLSDs((int)sampledRepetition[0]);
-            bleedSort3(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
+            bleedSort3(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, sampledRepetition);
             return;
         }
     }
@@ -187,7 +186,7 @@ public class BleedSort5 {
     }
     
     
-    public static void bleedSort3(int[] a, int[] tmp, int[] quantiles, int repetitionBitmap)
+    public static void bleedSort3(int[] a, int[] tmp, int[] quantiles, double[] sampledRepetition)
     {
         int q0 = quantiles[0];
         int q1 = quantiles[1];
@@ -218,13 +217,14 @@ public class BleedSort5 {
         double mult6 = (baseline7 - baseline6) / (double) (q7 - q6);
         double mult7 = (baseline8 - baseline7) / (double) (q8 - q7);
 
+        int repetitionBitmap = fillLSDs((int)sampledRepetition[0]);
         int     // these help in reacting to bad estimates of the distribution
                 minHelper = 0, 
                 minHelpCount = 0,
                 maxHelper = tmp.length - 1, 
                 maxHelpCount = 0,
-                bleedCount = 0
-                ;
+                bleedCount = 0;
+        
         for(int i = 0; i < a.length; i++)
         {
             int x = a[i];
@@ -252,7 +252,7 @@ public class BleedSort5 {
                         {   // problem in sample distribution (minimum was estimated too big)
                             fillPartially(a, tmp);
                             System.out.println("out-left");
-                            Arrays.sort(a);
+                            tryOtherSort(quantiles, sampledRepetition, -1, a);
                             return;
                         }
                         tmp[place] = x;
@@ -298,7 +298,7 @@ public class BleedSort5 {
                     {   // problem in sample distribution (maximum was estimated too small)
                         fillPartially(a, tmp);
                         System.out.println("out-right");
-                        Arrays.sort(a);
+                        tryOtherSort(quantiles, sampledRepetition, -1, a);
                         return;
                     }
                     tmp[place] = x;
@@ -316,7 +316,7 @@ public class BleedSort5 {
             {
 //                System.out.println("bleed!");
                 fillPartially(a, tmp);
-                Arrays.sort(a);
+                tryOtherSort(quantiles, sampledRepetition, -1, a);
                 return;
             }
             else if (tmp[place] == Integer.MIN_VALUE)
@@ -334,7 +334,7 @@ public class BleedSort5 {
                 {   // excessive bleeding; get out
 //                    System.out.println("bleed");
                     fillPartially(a, tmp);
-                    Arrays.sort(a);
+                    tryOtherSort(quantiles, sampledRepetition, -1, a);
                     return;
                 };
             }
@@ -364,13 +364,13 @@ public class BleedSort5 {
                 return;
             }
         }
-        Arrays.sort(a);
+        tryOtherSort(quantiles, sampledRepetition, -1, a);
     }
 
     
     
     
-    public static void countingBleedSort(int[] a, int[] tmp, int[] quantiles)
+    public static void countingBleedSort(int[] a, int[] tmp, int[] quantiles, double[] sampledRepetition)
     {
         int q0 = quantiles[0];
         int q1 = quantiles[1];
@@ -438,7 +438,7 @@ public class BleedSort5 {
                         {   // problem in sample distribution (minimum was estimated too big)
                             fillPartiallyWithCounts(a, tmp, counts);
                             System.out.println("out-left");
-                            tryOtherSort(bleedCount, a);
+                            tryOtherSort(quantiles, sampledRepetition, bleedCount, a);
                             return;
                         }
                         tmp[place] = x;
@@ -486,7 +486,7 @@ public class BleedSort5 {
                     {   // problem in sample distribution (maximum was estimated too small)
                         fillPartiallyWithCounts(a, tmp, counts);
                         System.out.println("out-right");
-                        tryOtherSort(bleedCount, a);
+                        tryOtherSort(quantiles, sampledRepetition, bleedCount, a);
                         return;
                     }
                     tmp[place] = x;
@@ -506,7 +506,7 @@ public class BleedSort5 {
             {
 //                System.out.println("bleed!");
                 fillPartiallyWithCounts(a, tmp, counts);
-                tryOtherSort(bleedCount, a);
+                tryOtherSort(quantiles, sampledRepetition, bleedCount, a);
                 return;
             }
             else if (tmp[place] == x || tmp[place] == Integer.MIN_VALUE)
@@ -525,7 +525,7 @@ public class BleedSort5 {
                 {   // excessive bleeding; get out
                     System.out.println("bleed");
                     fillPartiallyWithCounts(a, tmp, counts);
-                    tryOtherSort(bleedCount, a);
+                    tryOtherSort(quantiles, sampledRepetition, bleedCount, a);
                     return;
                 };
             }
@@ -567,11 +567,11 @@ public class BleedSort5 {
             }
             else { System.out.println("not sorted..."); }
         }
-        tryOtherSort(bleedCount, a);
+        tryOtherSort(quantiles, sampledRepetition, bleedCount, a);
     }
 
     
-    private static void tryOtherSort(int bleedCount, int[] a)
+    private static void tryOtherSort(int[] quantiles, double[] sampledRepetition, int bleedCount, int[] a)
     {
         Arrays.sort(a);
     }
