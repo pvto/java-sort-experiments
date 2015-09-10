@@ -29,15 +29,17 @@ public class BleedSort5 {
             double distinctItems = a.length / sampledRepetition[0];
             if (distinctItems  < 40)
             {
-                lastSortFlags |= VERY_REPETITIVE + COMPACT_TREESORT;
                 if (sampledRepetition[1] > 6)
                 {
-                    lastSortFlags |= LONG_UNCHANGING_RUNS_IN_DATA;
+                    lastSortFlags |= VERY_REPETITIVE + LONG_UNCHANGING_RUNS_IN_DATA + COMPACT_TREESORT;
                     InntTreeSort.smallRangeInntTreeHungrySort(a);
                     return;
                 }
-                InntTreeSort.smallRangeInntTreeSort(a);
-                return;
+                else {
+                    lastSortFlags |= VERY_REPETITIVE + COMPACT_TREESORT;
+                    InntTreeSort.smallRangeInntTreeSort(a);
+                    return;
+                }
             }
             else if (distinctItems < 80 || a.length < 2000_000 && distinctItems < 2048)
             {
@@ -115,7 +117,7 @@ public class BleedSort5 {
         {
             lastSortFlags |= BLEEDSORT3;
             int repetitionBitmap = fillLSDs((int)sampledRepetition[0]);
-            bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
+            bleedSort3(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
             return;
         }
     }
@@ -185,7 +187,7 @@ public class BleedSort5 {
     }
     
     
-    public static void bleedSort(int[] a, int[] tmp, int[] quantiles, int repetitionBitmap)
+    public static void bleedSort3(int[] a, int[] tmp, int[] quantiles, int repetitionBitmap)
     {
         int q0 = quantiles[0];
         int q1 = quantiles[1];
