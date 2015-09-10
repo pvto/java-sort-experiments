@@ -118,7 +118,7 @@ public class BleedSort4bTest2 {
                 if (orig.length > 2e6)
                     System.gc();
             }
-            System.out.println("Bleedsort4b " + elapsed + " " + BleedSort4b.lastSortStatistics);
+            System.out.println("Bleedsort4b " + elapsed + " " + BleedSort4b.lastSortFlags);
             bs4b += elapsed;
 
             elapsed = 0;
@@ -147,7 +147,7 @@ public class BleedSort4bTest2 {
                     + " p "+bin_p + " exp " + exp
                     + " n "+n
                     + " bs4 "+BleedSort4.lastSortStatistics
-                    + " bs4b "+BleedSort4b.lastSortStatistics
+                    + " bs4b "+BleedSort4b.lastSortFlags
                     + " freq " + frequency
                     + " alt " + altitude
                     + " mixfq " + mixFrequency

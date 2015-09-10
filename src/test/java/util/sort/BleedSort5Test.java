@@ -126,7 +126,7 @@ public class BleedSort5Test {
                 elapsed += System.currentTimeMillis() - start;
 //                if (orig.length > 2e6) System.gc();
             }
-            System.out.println("Bleedsort4b " + elapsed + " " + BleedSort4b.lastSortStatistics);
+            System.out.println("Bleedsort4b " + elapsed + " " + BleedSort4b.lastSortFlags);
             bs4 += elapsed;
 
             elapsed = 0;
@@ -138,7 +138,7 @@ public class BleedSort5Test {
                 elapsed += System.currentTimeMillis() - start;
 //                if (orig.length > 2e6) System.gc();
             }
-            System.out.println("Bleedsort5 " + elapsed + " " + BleedSort5.lastSortStatistics);
+            System.out.println("Bleedsort5 " + elapsed + " " + BleedSort5.lastSortFlags);
             bs5 += elapsed;
 
             elapsed = 0;
@@ -165,8 +165,8 @@ public class BleedSort5Test {
                     + " mix. "+mixFactor
                     + " p "+bin_p + " exp " + exp
                     + " n "+n
-                    + " bs4b "+BleedSort4b.lastSortStatistics
-                    + " bs5 "+BleedSort5.lastSortStatistics
+                    + " bs4b "+BleedSort4b.lastSortFlags
+                    + " bs5 "+BleedSort5.lastSortFlags
                     + " freq " + frequency
                     + " alt " + altitude
                     + " mixfq " + mixFrequency

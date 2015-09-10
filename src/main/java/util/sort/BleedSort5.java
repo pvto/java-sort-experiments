@@ -8,7 +8,7 @@ import util.Int;
  */
 public class BleedSort5 {
 
-    public static int lastSortStatistics = 0;
+    public static int lastSortFlags = 0;
     public static final int 
             TREESORT = 1,
             BLEEDSORT3 = 2,
@@ -22,17 +22,17 @@ public class BleedSort5 {
     
     public static void bleedSort(int[] a)
     {
-        lastSortStatistics = 0;
+        lastSortFlags = 0;
         double[] sampledRepetition = sampleRepetition(a, 20);
         if (sampledRepetition[0] > Math.max(20, a.length / 1000000.0))
         {
             double distinctItems = a.length / sampledRepetition[0];
             if (distinctItems  < 40)
             {
-                lastSortStatistics |= VERY_REPETITIVE + COMPACT_TREESORT;
+                lastSortFlags |= VERY_REPETITIVE + COMPACT_TREESORT;
                 if (sampledRepetition[1] > 6)
                 {
-                    lastSortStatistics |= LONG_UNCHANGING_RUNS_IN_DATA;
+                    lastSortFlags |= LONG_UNCHANGING_RUNS_IN_DATA;
                     InntTreeSort.smallRangeInntTreeHungrySort(a);
                     return;
                 }
@@ -43,13 +43,13 @@ public class BleedSort5 {
             {
                 if (sampledRepetition[1] > 6)
                 {
-                    lastSortStatistics |= VERY_REPETITIVE + LONG_UNCHANGING_RUNS_IN_DATA + TREESORT;
+                    lastSortFlags |= VERY_REPETITIVE + LONG_UNCHANGING_RUNS_IN_DATA + TREESORT;
                     InntTreeSort.inntTreeHungrySort(a);
                     return;
                 }
                 else 
                 {
-                    lastSortStatistics |= VERY_REPETITIVE + TREESORT;
+                    lastSortFlags |= VERY_REPETITIVE + TREESORT;
                     InntTreeSort.inntTreeSort(a);
                     return;
                 }
@@ -68,10 +68,10 @@ public class BleedSort5 {
         int range = sample[sample.length - 1] - sample[0];
         if (range < 4096)
         {
-            lastSortStatistics |= SMALL_RANGE + COMPACT_TREESORT;
+            lastSortFlags |= SMALL_RANGE + COMPACT_TREESORT;
             if (sampledRepetition[1] > 6)
             {
-                lastSortStatistics |= LONG_UNCHANGING_RUNS_IN_DATA;
+                lastSortFlags |= LONG_UNCHANGING_RUNS_IN_DATA;
                 InntTreeSort.smallRangeInntTreeHungrySort(a);
                 return;
             }
@@ -81,10 +81,10 @@ public class BleedSort5 {
         }
         if (range < 32768)
         {
-            lastSortStatistics |= SMALL_RANGE + TREESORT;
+            lastSortFlags |= SMALL_RANGE + TREESORT;
             if (sampledRepetition[1] > 6)
             {
-                lastSortStatistics |= LONG_UNCHANGING_RUNS_IN_DATA;
+                lastSortFlags |= LONG_UNCHANGING_RUNS_IN_DATA;
                 InntTreeSort.inntTreeHungrySort(a);
                 return;
             }
@@ -107,13 +107,13 @@ public class BleedSort5 {
         if (sampledRepetition[0] > 4 
                 || q[8] - q[0] < a.length >>> 1)
         {
-            lastSortStatistics |= REPETITIVE + BLEEDSORT4;
+            lastSortFlags |= REPETITIVE + BLEEDSORT4;
             countingBleedSort(a, Int.fill(tmpSize >> 1, Integer.MIN_VALUE), q);
             return;
         }
         else
         {
-            lastSortStatistics |= BLEEDSORT3;
+            lastSortFlags |= BLEEDSORT3;
             int repetitionBitmap = fillLSDs((int)sampledRepetition[0]);
             bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
             return;
