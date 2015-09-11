@@ -51,22 +51,44 @@ public class MergeSortTest {
             }
         }
     }
-
-    @Test
-    public void benchmark()
+    
+    private int size = 1000000;
+    private int n = 20;
+    private void fillSinusoidal(int[] orig)
     {
-        int[] orig = new int[1000017];
-        Util.fillSinusoidal(orig, 3.0, 1000.0, 1.0, 0.0, 1.0);
-        long start = System.currentTimeMillis();
+        Util.fillSinusoidal(orig, 50, 1000.0, 1.0, 0.0, 1.0);
+        //            1e8, freq ~3.5(7) as pro ncms
+        //            1e7, freq ~15(30) as pro ncms
+        //            1e6, freq ~20(40) threshold for as pro ncms
+        //            7e5,      ~40(80) as pro ncms
+        //            5e5,      ~130(260) as pro ncms/ms (ncms faster below)
+        //            2e5, freq ~800(1600) as pro ms 
+        //            1e5, freq ~3000(6000) threshold for as pro ms 
+        //            7e4, freq ~2000(4000) threshold for as pro ms 
+        //            1e4  freq ~17(35) th for ms pro ncms
+        //                      ~80(160) as pro ms
+        //            1e3  as reasonable if not sorted already
+    }
+    @Ignore
+    @Test
+    public void benchmarkMerge()
+    {
+        int[] orig = new int[size];
+        fillSinusoidal(orig);
         int[] a = null;
-        for (int j = 0; j < 20; j++)
+        for (int j = 0; j < Math.min(10,n+1); j++)
         {
-            if (j == 10) start = System.currentTimeMillis();
+            a = Arrays.copyOf(orig, orig.length);
+            MergeSort.mergeSort(a);
+        }
+        long start = System.currentTimeMillis();
+        for (int j = 0; j < n; j++)
+        {
             a = Arrays.copyOf(orig, orig.length);
             MergeSort.mergeSort(a);
         }
         long end = System.currentTimeMillis();
-        System.out.println((a.length) + " " + ( (end - start) / 100.0) + "ms/sort");
+        System.out.println((a.length) + " " + ( (end - start) / (double)n) + "ms/sort");
         for (int i = 1; i < a.length; i++) {
             assertTrue(a[i] >= a[i - 1]);
         }
@@ -75,16 +97,45 @@ public class MergeSortTest {
     @Test
     public void benchmarkArraysSort()
     {
-        int[] orig = new int[1000017];
-        Util.fillSinusoidal(orig, 3.0, 1000.0, 1.0, 0.0, 1.0);
-        long start = System.currentTimeMillis();
+        int[] orig = new int[size];
+        fillSinusoidal(orig);
         int[] a = null;
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < Math.min(10,n+1); j++)
+        {
+            a = Arrays.copyOf(orig, orig.length);
+            MergeSort.naiveMonotonousMergeSort(a);
+        }
+        long start = System.currentTimeMillis();
+        for (int j = 0; j < n; j++)
         {
             a = Arrays.copyOf(orig, orig.length);
             Arrays.sort(a);
         }
         long end = System.currentTimeMillis();
-        System.out.println((a.length) + " " + ( (end - start) / 100.0) + "ms/Arrays.sort");
+        System.out.println((a.length) + " " + ( (end - start) / (double)n) + "ms/Arrays.sort");
+    }
+    
+   @Test
+    public void benchmarkNaiveContinuousMerge()
+    {
+        int[] orig = new int[size];
+        fillSinusoidal(orig);
+        int[] a = null;
+        for (int j = 0; j < Math.min(10,n+1); j++)
+        {
+            a = Arrays.copyOf(orig, orig.length);
+            MergeSort.naiveMonotonousMergeSort(a);
+        }
+        long start = System.currentTimeMillis();
+        for (int j = 0; j < n; j++)
+        {
+            a = Arrays.copyOf(orig, orig.length);
+            MergeSort.naiveMonotonousMergeSort(a);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println((a.length) + " " + ( (end - start) / (double)n) + "ms/cont.sort");
+        for (int i = 1; i < a.length; i++) {
+            assertTrue(a[i] >= a[i - 1]);
+        }
     }
 }
