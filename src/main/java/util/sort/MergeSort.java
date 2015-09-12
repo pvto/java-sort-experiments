@@ -179,6 +179,13 @@ public class MergeSort {
     public static void naiveMonotonousMergeSort(int[] a)
     {
         ArrayList<int[]> mono = getMonotonousSegmentsNaive(a);
+        
+        if (mono.size() == 1)
+        {
+            int[] A = mono.get(0);
+            flipDescSegment(a, A);
+            return;
+        }
         // temporary space for merge sort
         int[] b = new int[a.length];
         
@@ -244,7 +251,8 @@ public class MergeSort {
                 }
                 else
                 {
-                    System.arraycopy(a, C[3], a, ind, C[2]);
+                    if (C[5] == -1) { System.arraycopy(a, C[3]+1, a, ind, C[2]); }
+                    else { System.arraycopy(a, C[3], a, ind, C[2]); }
                     monoTmp.add(new int[]{C[0], C[1], C[2], C[5]==1?ind:ind-1, C[5]==1?a.length:a.length-1, C[5]});
                 }
             }
@@ -317,22 +325,14 @@ public class MergeSort {
     };
     
     
-    
-    public static void main(String[] args)
+    private static void flipDescSegment(int[] a, int[] A)
     {
-                             // 0           6       10              18    21
-        int[] monos = new int[]{1,2,3,4,4,4,3,2,1,0,1,2,3,4,4,4,4,5,4,5,6,3};
-        //1 4 6 0 6 1
-        //0 3 4 5 9 -1
-        //1 5 8 10 18 1
-        //4 6 3 18 21 1
-        //3 3 1 21 22 1
-        ArrayList<int[]> segs = MergeSort.getMonotonousSegmentsNaive(monos);
-        for(int[] seg : segs)
-            System.out.println(Arrays.toString(seg));
-        System.out.println(Arrays.toString(monos));
-        MergeSort.naiveMonotonousMergeSort(monos);
-        System.out.println(Arrays.toString(monos));
+        if (A[5] == 1)
+            return;
+        for(int i = A[3]+1, j = A[4]; i < j;)
+        {
+            int tmp = a[i];  a[i++] = a[j];  a[j--] = tmp;
+        }
     }
     
 }

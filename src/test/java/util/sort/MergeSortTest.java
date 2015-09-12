@@ -38,13 +38,45 @@ public class MergeSortTest {
     }
     
     @Test
+    public void testNaiveContinuousMerge()
+    {
+        int[] x = new int[]{15, 10, 12, 7, 12, 7, 10, 9, 8, 13, 0, 4, 7, 8, 2, 0};
+        MergeSort.naiveMonotonousMergeSort(x);
+        for (int i = 1; i < x.length; i++) { assertTrue(x[i] >= x[i - 1]); }
+        
+        x = new int[]{1, 0, 0};
+        MergeSort.naiveMonotonousMergeSort(x);
+        for (int i = 1; i < x.length; i++) { assertTrue(x[i] >= x[i - 1]); }
+        if (1==0) return;
+        
+        int reasonable = 10000;
+        for (int j = 0; j < reasonable; j++) {
+            int[] a = new int[3+(int)(Math.random()*1024)];
+            Util.fillRandom(a, 0, 1, 1);
+            int[] orig = Arrays.copyOf(a, a.length);
+
+            //MergeSort.mergeSort(orig);
+            MergeSort.naiveMonotonousMergeSort(orig);
+            for (int i = 1; i < orig.length; i++) {
+                if (orig[i] < orig[i - 1])
+                {
+                    System.out.println(orig.length + " " + i + " " + orig[i] + " " + orig[i-1]);
+                    System.out.println(Arrays.toString(a));
+                    System.out.println(Arrays.toString(orig));
+                }
+                assertTrue(orig[i] >= orig[i - 1]);
+            }
+        }
+    }
+    
+    @Test
     public void testMerge()
     {
         int reasonable = 10;   // 10000
         for (int j = 0; j < reasonable; j++) {
             int[] orig = new int[16+(int)(Math.random()*1024)];
             Util.fillRandom(orig, 0, 1, 1);
-
+            
             MergeSort.mergeSort(orig);
             for (int i = 1; i < orig.length; i++) {
                 assertTrue(orig[i] >= orig[i - 1]);
@@ -52,12 +84,13 @@ public class MergeSortTest {
         }
     }
     
-    private int size = 1000000;
-    private int n = 20;
+    private int size = 5000;
+    private int n = 2;
     private void fillSinusoidal(int[] orig)
     {
-        Util.fillSinusoidal(orig, 50, 1000.0, 1.0, 0.0, 1.0);
+        Util.fillSinusoidal(orig, 5, 1000.0, 1.0, 0.0, 1.0);
         //            1e8, freq ~3.5(7) as pro ncms
+        //            5e7       ~5(10) as pro ncms        
         //            1e7, freq ~15(30) as pro ncms
         //            1e6, freq ~20(40) threshold for as pro ncms
         //            7e5,      ~40(80) as pro ncms
