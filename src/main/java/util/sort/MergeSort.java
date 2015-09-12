@@ -180,6 +180,18 @@ public class MergeSort {
     {
         ArrayList<int[]> mono = getMonotonousSegmentsNaive(a);
         
+        monotonousMergeSort(a, mono);
+    }
+
+    public static void aggressiveMonotonousMergeSort(int[] a)
+    {
+        ArrayList<int[]> mono = getMonotonousSegmentsAggressive(a);
+        
+        monotonousMergeSort(a, mono);
+    }
+    
+    public static void monotonousMergeSort(int[] a, ArrayList<int[]> mono)
+    {
         if (mono.size() == 1)
         {
             int[] A = mono.get(0);
@@ -308,6 +320,61 @@ public class MergeSort {
         }
         return mono;
     }
+    
+
+    /** Returns a list of monotonous segments.
+     * 
+     * Where segments are very short, aggressively reorders target array.
+     */
+    public static ArrayList<int[]> getMonotonousSegmentsAggressive(int[] a)
+    {
+        ArrayList<int[]> mono = new ArrayList<>();
+        int start = 0;
+        int x = a[start];
+        int increasing = 0;
+        for(int i = 1; i < a.length; i++)
+        {
+            int y = a[i];
+            if (increasing == 1)
+            {
+                if (y >= x)
+                {
+                    x = y;
+                    continue;
+                }
+                mono.add(new int[]{a[start], a[i-1], i-start, start, i, 1});
+                start = i;
+                increasing = 0;
+            }
+            else if (increasing == -1)
+            {
+                if (y <= x)
+                {
+                    x = y; 
+                    continue;
+                }
+                mono.add(new int[]{a[i-1], a[start], i-start, start-1, i-1, -1});
+                start = i;
+                increasing = 0;
+            }
+            else
+            {
+                increasing = (y < x ? -1 : (y > x ? 1 : 0));
+            }
+            x = y;
+        }
+        if (increasing >= 0)
+        {
+            mono.add(new int[]{a[start], a[a.length - 1], a.length - start, start, a.length, 1});
+        }
+        else
+        {
+            mono.add(new int[]{a[a.length - 1], a[start], a.length - start, start-1, a.length-1, -1});
+        }
+        return mono;
+    }
+    
+    
     
     
     public static Comparator<int[]> monoSegComparator = new Comparator<int[]>() {
