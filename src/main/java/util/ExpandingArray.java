@@ -93,6 +93,10 @@ public class ExpandingArray<T> {
                 {
                     newItems[i] = DEFAULT_VALUE;
                 }
+                for (int i = ind + 1; i < newItems.length; i++)
+                {
+                    newItems[i] = DEFAULT_VALUE;
+                }
             }
             items = newItems;
             items[ind] = o;
