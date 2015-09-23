@@ -1,6 +1,9 @@
 package util.sort;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * @author Paavo Toivanen https://github.com/pvto
@@ -21,7 +24,7 @@ public class MergeSort {
         int[] b = Arrays.copyOf(a, a.length);
         int size = 7;
         int i = 0;
-        for(; i <= b.length - size; /*i += size*/)
+        while(i <= b.length - size)
         {
             //int c=b[i],d=b[i+1],e=b[i+2],f=b[i+3],g=b[i+4],h=b[i+5],m=b[i+6];
             int c=b[i++],d=b[i++],e=b[i++],f=b[i++],g=b[i++],h=b[i++],m=b[i++];
@@ -32,7 +35,7 @@ public class MergeSort {
             if(c>f){int t=c;c=f;f=t;}  if(e>h){int t=e;e=h;h=t;};
             if(d>f){int t=d;d=f;f=t;}  if(e>g){int t=e;e=g;g=t;};
             if(e>f){int t=e;e=f;f=t;}
-            //b[i]=c;b[i+1]=d;b[i+2]=e;b[i+3]=f;b[i+4]=g;b[i+5]=h;b[i+6]=m;
+            //b[i]=c;b[i+1]=d;b[i+2]=e;b[i+3]=f;b[i+4]=g;b[i+5]=h;b[i+6]=m; i += size;
             i-=7;b[i++]=c;b[i++]=d;b[i++]=e;b[i++]=f;b[i++]=g;b[i++]=h;b[i++]=m;
 //            int e = i + size;
 //            for(int m = i + 1; m < e; m++)
@@ -166,26 +169,237 @@ public class MergeSort {
         swap2(a,s,s+3); swap2(a,s+2,s+5);
         swap2(a,s+1,s+3); swap2(a,s+2,s+4);
         swap2(a,s+2,s+3);
-/*
-[[1,2],[3,4],[5,6]]
-[[0,2],[3,5],[4,6]]
-[[0,1],[4,5],[2,6]]
-[[0,4],[1,5]]
-[[0,3],[2,5]]
-[[1,3],[2,4]]
-[[2,3]]
-        */
     }
     
-/*
-        if(d>e){int t=d;d=e;e=t;}  if(f>g){int t=f;f=g;g=t;};  if(h>m){int t=h;h=m;m=t;;};
-        if(c>e){int t=c;c=e;e=t;}  if(f>h){int t=f;f=h;h=t;};  if(g>m){int t=g;g=m;m=t;};
-        if(c>d){int t=c;c=d;d=t;}  if(g>h){int t=g;g=h;h=t;};  if(e>m){int t=e;e=m;m=t;};
-        if(c>g){int t=c;c=g;g=t;}  if(d>h){int t=d;d=h;h=t;};
-        if(c>f){int t=c;c=f;f=t;}  if(e>h){int t=e;e=h;h=t;};
-        if(d>f){int t=d;d=f;f=t;}  if(e>g){int t=e;e=g;g=t;};
-        if(e>f){int t=e;e=f;f=t;}
-    */
-            
+
+    
+    
+    
+    
+    public static void naiveMonotonousMergeSort(int[] a)
+    {
+        ArrayList<int[]> mono = getMonotonousSegmentsNaive(a);
+        
+        monotonousMergeSort(a, mono);
+    }
+
+    public static void aggressiveMonotonousMergeSort(int[] a)
+    {
+        ArrayList<int[]> mono = getMonotonousSegmentsAggressive(a);
+        
+        monotonousMergeSort(a, mono);
+    }
+    
+    public static void monotonousMergeSort(int[] a, ArrayList<int[]> mono)
+    {
+        if (mono.size() == 1)
+        {
+            int[] A = mono.get(0);
+            flipDescSegment(a, A);
+            return;
+        }
+        // temporary space for merge sort
+        int[] b = new int[a.length];
+        
+        while(mono.size() > 1)
+        {
+            // we now have a list of monotonous sequences; order it by (length, min_value)
+            Collections.sort(mono, monoSegComparator);
+            // on each iteration, we get a new halved list of mergeable segments... it will become mono
+            ArrayList<int[]> monoTmp = new ArrayList<int[]>((mono.size()>>>1)+1);
+            // now proceed to merge segments
+            int mergeInd = 0;
+            int ind = 0;
+            while(mergeInd < mono.size() - 1)
+            {
+                int xind = ind;
+                int[] A = mono.get(mergeInd++);
+                int[] B = mono.get(mergeInd++);
+                if (A[5] == 1 && B[5] == 1) {   // both segments are increasing
+                    int i = A[3], ie = A[4], j = B[3], je = B[4];
+                    for(;;) {
+                        if (a[j] < a[i]) { b[ind++] = a[j++];
+                            if (j == je) { do { b[ind++] = a[i++]; } while(i < ie);  break; }
+                        } else { b[ind++] = a[i++];
+                            if (i == ie) { do { b[ind++] = a[j++]; } while(j < je);  break; }
+                        }
+                    }
+                } else if (A[5] == 1 && B[5] == -1) {   // inc,dec
+                    int i = A[3], ie = A[4], j = B[4], je = B[3];
+                    for(;;) {
+                        if (a[j] < a[i]) { b[ind++] = a[j--];
+                            if (j == je) { do { b[ind++] = a[i++]; } while(i < ie);  break; }
+                        } else { b[ind++] = a[i++];
+                            if (i == ie) { do { b[ind++] = a[j--]; } while(j > je);  break; }
+                        }
+                    }                    
+                } else if (A[5] == -1 && B[5] == 1) {   // dec,inc
+                    int i = A[4], ie = A[3], j = B[3], je = B[4];
+                    for(;;) {
+                        if (a[j] < a[i]) { b[ind++] = a[j++];
+                            if (j == je) { do { b[ind++] = a[i--]; } while(i > ie);  break; }
+                        } else { b[ind++] = a[i--];
+                            if (i == ie) { do { b[ind++] = a[j++]; } while(j < je);  break; }
+                        }
+                    }
+                } else {    // dec,dec
+                    int i = A[4], ie = A[3], j = B[4], je = B[3];
+                    for(;;) {
+                        if (a[j] < a[i]) { b[ind++] = a[j--];
+                            if (j == je) { do { b[ind++] = a[i--]; } while(i > ie);  break; }
+                        } else { b[ind++] = a[i--];
+                            if (i == ie) { do { b[ind++] = a[j--]; } while(j > je);  break; }
+                        }
+                    }
+                }
+                monoTmp.add(new int[]{b[xind], b[ind-1], ind-xind, xind, ind, 1});
+            }
+            if (mergeInd < mono.size())
+            {
+                int[] C = mono.get(mergeInd);
+                if (C[3] == ind)
+                {
+                    monoTmp.add(C);
+                }
+                else
+                {
+                    if (C[5] == -1) { System.arraycopy(a, C[3]+1, a, ind, C[2]); }
+                    else { System.arraycopy(a, C[3], a, ind, C[2]); }
+                    monoTmp.add(new int[]{C[0], C[1], C[2], C[5]==1?ind:ind-1, C[5]==1?a.length:a.length-1, C[5]});
+                }
+            }
+            System.arraycopy(b, 0, a, 0, ind);
+            mono = monoTmp;
+        }
+    }
+
+    public static ArrayList<int[]> getMonotonousSegmentsNaive(int[] a)
+    {
+        ArrayList<int[]> mono = new ArrayList<>();
+        int start = 0;
+        int x = a[start];
+        int increasing = 0;
+        for(int i = 1; i < a.length; i++)
+        {
+            int y = a[i];
+            if (increasing == 1)
+            {
+                if (y >= x)
+                {
+                    x = y;
+                    continue;
+                }
+                mono.add(new int[]{a[start], a[i-1], i-start, start, i, 1});
+                start = i;
+                increasing = 0;
+            }
+            else if (increasing == -1)
+            {
+                if (y <= x)
+                {
+                    x = y; 
+                    continue;
+                }
+                mono.add(new int[]{a[i-1], a[start], i-start, start-1, i-1, -1});
+                start = i;
+                increasing = 0;
+            }
+            else
+            {
+                increasing = (y < x ? -1 : (y > x ? 1 : 0));
+            }
+            x = y;
+        }
+        if (increasing >= 0)
+        {
+            mono.add(new int[]{a[start], a[a.length - 1], a.length - start, start, a.length, 1});
+        }
+        else
+        {
+            mono.add(new int[]{a[a.length - 1], a[start], a.length - start, start-1, a.length-1, -1});
+        }
+        return mono;
+    }
+    
+
+    /** Returns a list of monotonous segments.
+     * 
+     * Where segments are very short, aggressively reorders target array.
+     */
+    public static ArrayList<int[]> getMonotonousSegmentsAggressive(int[] a)
+    {
+        ArrayList<int[]> mono = new ArrayList<>();
+        int start = 0;
+        int x = a[start];
+        int increasing = 0;
+        for(int i = 1; i < a.length; i++)
+        {
+            int y = a[i];
+            if (increasing == 1)
+            {
+                if (y >= x)
+                {
+                    x = y;
+                    continue;
+                }
+                mono.add(new int[]{a[start], a[i-1], i-start, start, i, 1});
+                start = i;
+                increasing = 0;
+            }
+            else if (increasing == -1)
+            {
+                if (y <= x)
+                {
+                    x = y; 
+                    continue;
+                }
+                mono.add(new int[]{a[i-1], a[start], i-start, start-1, i-1, -1});
+                start = i;
+                increasing = 0;
+            }
+            else
+            {
+                increasing = (y < x ? -1 : (y > x ? 1 : 0));
+            }
+            x = y;
+        }
+        if (increasing >= 0)
+        {
+            mono.add(new int[]{a[start], a[a.length - 1], a.length - start, start, a.length, 1});
+        }
+        else
+        {
+            mono.add(new int[]{a[a.length - 1], a[start], a.length - start, start-1, a.length-1, -1});
+        }
+        return mono;
+    }
+    
+    
+    
+    
+    public static Comparator<int[]> monoSegComparator = new Comparator<int[]>() {
+
+        @Override
+        public int compare(int[] o1, int[] o2)
+        {
+            if (o1[2] < o2[2]) return -1;
+            if (o1[2] > o2[2]) return 1;
+            if (o1[0] < o2[0]) return -1;
+            if (o1[0] > o2[0]) return 1;
+            return 0;
+        }
+        
+    };
+    
+    
+    private static void flipDescSegment(int[] a, int[] A)
+    {
+        if (A[5] == 1)
+            return;
+        for(int i = A[3]+1, j = A[4]; i < j;)
+        {
+            int tmp = a[i];  a[i++] = a[j];  a[j--] = tmp;
+        }
+    }
     
 }
