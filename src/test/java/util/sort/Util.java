@@ -124,4 +124,30 @@ public class Util {
                 a[y] = tmp;
             }
     }
+    
+    
+    
+    
+    
+    public static void fillTest(int[] orig, double similarityFactor, double compressionFactor, double mixFactor, 
+            double bin_p, int n, double exp, 
+            boolean uniform, boolean decreasing, boolean skewed, 
+            boolean binomial, int peaks,
+            boolean sinusoidal, double frequency, double altitude, double mixFrequency)
+    {
+        if (uniform) fillRandom(orig, similarityFactor, compressionFactor, exp);
+        else if (sinusoidal) fillSinusoidal(orig, frequency, altitude, exp, mixFactor, mixFrequency);
+        else if (binomial && peaks == 2) fillTwinBinomial(orig, bin_p, n);
+        else if (binomial) fillBinomial(orig, bin_p, n);
+        else if (skewed) fillSkewed(orig, bin_p, exp, compressionFactor);
+        else if (decreasing) fillDecr(orig, mixFactor, similarityFactor, compressionFactor);
+        else if (!decreasing) fillIncr(orig, mixFactor, similarityFactor, compressionFactor);
+    }
+
+    public static void copy(int[] src, int[] dest)
+    {
+        System.arraycopy(src, 0, dest, 0, src.length);
+    }
+
+
 }
