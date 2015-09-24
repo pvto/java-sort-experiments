@@ -18,6 +18,7 @@ public class QuickSort {
         return ret;
     }
     
+    @Deprecated
     public static int quickSort(int[] arr)
     {
         long sum = 0;
@@ -36,7 +37,7 @@ public class QuickSort {
         return quickSort(arr, start, end, pivot, maxIsThreshold(arr.length));
     }
     
-    
+    @Deprecated
     public static int quickSort(int[] arr, int left, int right, int medianEstimate, int MAX_INSERTION_SORT)
     {
         int length = right - left;
@@ -46,7 +47,7 @@ public class QuickSort {
         if (length < MAX_INSERTION_SORT)
         {   // falling back to insertion sort for small subarrays;
             // this is adopted from Java 8 standard library (java.util.DualPivotQuicksort);
-            // copyright for this block is Oracle's and authors' named in java.util.DualPivotQuicksort.java
+            // copyright for this block is Oracle's and of the authors named in java.util.DualPivotQuicksort.java
             if (left == 0)
             {
                 for (int i = left, j = i; i < right; j = ++i) {
