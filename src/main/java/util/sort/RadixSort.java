@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public class RadixSort {
 
-    public static void radix16(int[] a)
+    public static void radix8(int[] a)
     {
         int FULL = 256;
         int LAST = FULL - 1;
@@ -46,7 +46,7 @@ public class RadixSort {
 
     
     
-    public static void radix32(int[] a)
+    public static void radix16(int[] a)
     {
         int FULL = 256*256;
         int LAST = FULL - 1;
@@ -75,7 +75,7 @@ public class RadixSort {
     
     public static void main(String[] args) {
         int[] a = new int[]{Integer.MIN_VALUE, 0, 256, -256, 15, 257, 9, -1, -2};
-        radix32(a);
+        radix16(a);
         System.out.println(Arrays.toString(a));
     }
 }
