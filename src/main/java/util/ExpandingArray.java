@@ -2,7 +2,7 @@ package util;
 
 
 /** A thin wrapper around Object[].  Works the same way as java.util.ArrayList
- * does, expanding by the factor of two until put(index) fits in.
+ * does, but expanding by the factor of two until put(index) fits in.
  * 
  * put() expands automatically, failing only with negative indices and on
  * OutOfMemoryError.
