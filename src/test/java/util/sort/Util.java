@@ -150,4 +150,79 @@ public class Util {
     }
 
 
+    public interface TestSorter {
+        void sort(int[] a);
+        String name();
+        String lastSortDescription();
+    }
+    public static class TestSorters {
+        
+        public static TestSorter bleedSort4bSorter() { return new BleedSort4bSorter(); }
+        public static TestSorter bleedSort5Sorter() { return new BleedSort5Sorter(); }
+        public static TestSorter countingBleedSortSorter() { return new CountingBleedSortSorter(); }
+        public static TestSorter inntTreeSorter() { return new InntTreeSorter(); }
+        public static TestSorter inntTreeHungrySorter() { return new InntTreeHungrySorter(); }
+        public static TestSorter smallInntTreeSorter() { return new SmallInntTreeSorter(); }
+        public static TestSorter smallInntTreeHungrySorter() { return new SmallInntTreeHungrySorter(); }
+        public static TestSorter arraysSortSorter() { return new ArraysSortSorter(); }
+        public static TestSorter radix8Sorter() { return new Radix8Sorter(); }
+        public static TestSorter radix16Sorter() { return new Radix16Sorter(); }
+        public static TestSorter radix11Sorter() { return new Radix11Sorter(); }
+        
+        public static class BleedSort4bSorter implements TestSorter {
+            @Override public void sort(int[] a) { BleedSort4b.bleedSort(a); }
+            @Override public String name() { return BleedSort4b.class.getSimpleName(); }
+            @Override public String lastSortDescription() { return BleedSort4b.lastSortFlags + ""; }
+        }
+        public static class BleedSort5Sorter implements TestSorter {
+            @Override public void sort(int[] a) { BleedSort5.bleedSort(a); }
+            @Override public String name() { return BleedSort5.class.getSimpleName(); }
+            @Override public String lastSortDescription() { return BleedSort5.lastSortFlags + ""; }
+        }
+        public static class CountingBleedSortSorter implements TestSorter {
+            @Override public void sort(int[] a) { BleedSort6.countingBleedSort(a); }
+            @Override public String name() { return "bleedsort-counting"; }
+            @Override public String lastSortDescription() { return ""; }
+        }
+        public static class InntTreeSorter implements TestSorter {
+            @Override public void sort(int[] a) { InntTreeSort.inntTreeSort(a); }
+            @Override public String name() { return "intttree"; }
+            @Override public String lastSortDescription() { return ""; }
+        }
+        public static class InntTreeHungrySorter implements TestSorter {
+            @Override public void sort(int[] a) { InntTreeSort.inntTreeHungrySort(a); }
+            @Override public String name() { return "intttree-hungry"; }
+            @Override public String lastSortDescription() { return ""; }
+        }
+        public static class SmallInntTreeSorter implements TestSorter {
+            @Override public void sort(int[] a) { InntTreeSort.smallRangeInntTreeSort(a); }
+            @Override public String name() { return "intttree-small"; }
+            @Override public String lastSortDescription() { return ""; }
+        }
+        public static class SmallInntTreeHungrySorter implements TestSorter {
+            @Override public void sort(int[] a) { InntTreeSort.smallRangeInntTreeHungrySort(a); }
+            @Override public String name() { return "intttree-small-hungry"; }
+            @Override public String lastSortDescription() { return ""; }
+        }
+        public static class ArraysSortSorter implements TestSorter {
+            @Override public void sort(int[] a) { java.util.Arrays.sort(a); }
+            @Override public String name() { return "Arrays.sort"; }
+            @Override public String lastSortDescription() { return ""; }
+        }
+        public static class Radix8Sorter implements TestSorter {
+            @Override public void sort(int[] a) { RadixSort.radix8(a); }
+            @Override public String name() { return "radix8"; }
+            @Override public String lastSortDescription() { return ""; }
+        }
+        public static class Radix16Sorter implements TestSorter {
+            @Override public void sort(int[] a) { RadixSort.radix16(a); }
+            @Override public String name() { return "radix16"; }
+            @Override public String lastSortDescription() { return ""; }
+        }
+        public static class Radix11Sorter implements TestSorter {
+            @Override public void sort(int[] a) { RadixSort.radix11(a); }
+            @Override public String name() { return "radix11"; }
+            @Override public String lastSortDescription() { return ""; }
+        }
+    }
 }

@@ -16,18 +16,18 @@ public class RadixSortTest {
     @Test
     public void testRadix() throws IOException
     {
-        int[] orig = new int[ (int)1e8 ];
+        int[] orig = new int[ (int)1e7 ];
         int[] t = new int[orig.length];
-        double  similarityFactor = 0.0;
+        double  similarityFactor = 2.0;
         double  compressionFactor = 1.0 * 1;
-        double  mixFactor = 10;
+        double  mixFactor = 0;
         double  bin_p = 0.25;
         int     n = 5000;
-        double  exp = 1;
+        double  exp = 3;
         boolean uniform = false;
-        boolean decreasing = false;
+        boolean decreasing = true;
         boolean skewed = false;
-        boolean binomial = true;
+        boolean binomial = false;
         boolean sinusoidal = false;
         int peaks = 1;
         double frequency = 1;
@@ -39,6 +39,11 @@ public class RadixSortTest {
         
         BufferedWriter bf = new BufferedWriter(new FileWriter("radix8-bs5-times.txt", true));
 
+        Util.TestSorter baseSorter = Util.TestSorters.arraysSortSorter();
+        Util.TestSorter mySorter = Util.TestSorters.radix11Sorter();
+        Util.TestSorter competingSorter = Util.TestSorters.radix8Sorter();
+        
+        
         System.out.println("priming...");
         for(int y = 1; y < 7; y++)
         {
@@ -54,9 +59,9 @@ public class RadixSortTest {
                 copy(tu, tmp);
                 switch(y)
                 {
-                    case 0: BleedSort5.bleedSort(tmp);  break;
-                    case 1: RadixSort.radix8(tmp);  break;
-                    case 2: Arrays.sort(tmp);  break;
+                    case 0: mySorter.sort(tmp);  break;
+                    case 1: competingSorter.sort(tmp);  break;
+                    case 2: baseSorter.sort(tmp);  break;
                 }
             }
         }
@@ -72,9 +77,9 @@ public class RadixSortTest {
             t = Arrays.copyOf(orig, orig.length);
             switch(x)
             {
-                case 0: BleedSort5.bleedSort(t);  break;
-                case 1: RadixSort.radix8(t);  tu = t; break;
-                case 2: Arrays.sort(t);  
+                case 0: mySorter.sort(t);  break;
+                case 1: competingSorter.sort(t);  tu = t; break;
+                case 2: baseSorter.sort(t);  
                     for (int i = 0; i < tu.length; i++) {
                         assertEquals(i + " " + t[i] + " " + tu[i], tu[i], t[i]);
                     }
@@ -84,7 +89,7 @@ public class RadixSortTest {
         tu = null;
 
         System.out.println("benchmark...");
-        long bs5 = 0, rad8 = 0, as = 0;
+        long myTime = 0, compTime = 0, baseTime = 0;
         long start, elapsed;
         for(int x = 0; x < trials; x++)
         {
@@ -99,42 +104,42 @@ public class RadixSortTest {
             {
                 t = Arrays.copyOf(orig, orig.length);
                 start = System.currentTimeMillis();
-                BleedSort5.bleedSort(t);
+                mySorter.sort(t);
                 elapsed += System.currentTimeMillis() - start;
 //                if (orig.length > 2e6) System.gc();
             }
-            System.out.println("Bleedsort5 " + elapsed + " " + BleedSort5.lastSortFlags);
-            bs5 += elapsed;
+            System.out.println(mySorter.name() + " " + elapsed + " " + mySorter.lastSortDescription());
+            myTime += elapsed;
 
             elapsed = 0;
             for(int j = 0; j < innerTrials; j++)
             {
                 t = Arrays.copyOf(orig, orig.length);
                 start = System.currentTimeMillis();
-                RadixSort.radix8(t);
+                competingSorter.sort(t);
                 elapsed += System.currentTimeMillis() - start;
 //                if (orig.length > 2e6) System.gc();
             }
-            System.out.println("Radix8 " + elapsed);
-            rad8 += elapsed;
+            System.out.println(competingSorter.name() + " " + elapsed + " " + competingSorter.lastSortDescription());
+            compTime += elapsed;
 
             elapsed = 0;
             for(int j = 0; j < innerTrials; j++)
             {
                 t = Arrays.copyOf(orig, orig.length);
                 start = System.currentTimeMillis();
-                java.util.Arrays.sort(t);
+                baseSorter.sort(t);
                 elapsed += System.currentTimeMillis() - start;
 //                if (orig.length > 2e6) System.gc();
             }
-            System.out.println("Arrays.sort " + elapsed);
-            as += elapsed;
+            System.out.println(baseSorter.name() + " " + elapsed + " " + baseSorter.lastSortDescription());
+            baseTime += elapsed;
         }
-        double bss5, radix, ass;
+        double my, compet, base;
         String s =
-            "bleedsort5 " + (bss5=(bs5 / (double)trials / (double)innerTrials))
-            + " radix8 " + (radix=(rad8 / (double)trials / (double)innerTrials))
-            + " Arrays.sort " + (ass=(as / (double)trials / (double)innerTrials))
+            mySorter.name() + " " + (my=(myTime / (double)trials / (double)innerTrials))
+            + " " + competingSorter.name() + " " + (compet=(compTime / (double)trials / (double)innerTrials))
+            + " " + baseSorter.name() + " " + (base=(baseTime / (double)trials / (double)innerTrials))
             + " [ "+(uniform?"rnd":(sinusoidal?"sin":(binomial&peaks==2?"bin2":(binomial?"bin":(skewed?"skewed":(decreasing?"decr":"incr"))))))
                     +" "+orig.length
                     + " simil. "+similarityFactor
@@ -142,12 +147,12 @@ public class RadixSortTest {
                     + " mix. "+mixFactor
                     + " p "+bin_p + " exp " + exp
                     + " n "+n
-                    + " bs5 "+BleedSort5.lastSortFlags
+                    + " my "+mySorter.lastSortDescription()
                     + " 0 0"
                     + " freq " + frequency
                     + " alt " + altitude
                     + " mixfq " + mixFrequency
-                    +" ]: " + (bss5 / ass) + " " + (radix / ass)
+                    +" ]: " + (my / base) + " " + (compet / base)
                     + "\n"
             ;
         System.out.print(s);
