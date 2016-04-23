@@ -1,6 +1,7 @@
 
-package util.sort;
+package util.sort.ints;
 
+import util.sort.ints.BleedSort2;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,10 +9,10 @@ import java.util.Arrays;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
-import static util.sort.Util.fillDecr;
-import static util.sort.Util.fillIncr;
-import static util.sort.Util.fillRandom;
-import static util.sort.Util.fillSkewed;
+import static util.sort.ints.Util.fillDecr;
+import static util.sort.ints.Util.fillIncr;
+import static util.sort.ints.Util.fillRandom;
+import static util.sort.ints.Util.fillSkewed;
 
 public class BleedSort2Test {
 

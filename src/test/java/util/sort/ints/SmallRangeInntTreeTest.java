@@ -1,6 +1,7 @@
 
-package util.sort;
+package util.sort.ints;
 
+import util.sort.ints.SmallRangeInntTree;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

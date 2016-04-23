@@ -1,4 +1,4 @@
-package util.sort;
+package util.sort.ints;
 
 import java.util.Arrays;
 import util.Int;

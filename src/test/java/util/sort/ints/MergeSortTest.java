@@ -1,11 +1,12 @@
 
-package util.sort;
+package util.sort.ints;
 
+import util.sort.ints.MergeSort;
 import java.util.Arrays;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.Ignore;
-import static util.sort.MergeSort.insertionSort;
+import static util.sort.ints.MergeSort.insertionSort;
 
 public class MergeSortTest {
 

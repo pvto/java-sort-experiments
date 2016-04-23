@@ -1,5 +1,6 @@
-package util.sort;
+package util.sort.ints;
 
+import util.sort.ints.QuickSort;
 import java.util.Arrays;
 import org.junit.Test;
 import static org.junit.Assert.*;

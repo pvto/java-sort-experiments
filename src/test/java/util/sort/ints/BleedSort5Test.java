@@ -1,13 +1,15 @@
-package util.sort;
+package util.sort.ints;
 
+import util.sort.ints.BleedSort5;
+import util.sort.ints.BleedSort4b;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static util.sort.Util.copy;
-import static util.sort.Util.fillTest;
+import static util.sort.ints.Util.copy;
+import static util.sort.ints.Util.fillTest;
 
 public class BleedSort5Test {
 

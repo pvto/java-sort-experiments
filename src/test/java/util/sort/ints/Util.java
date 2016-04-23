@@ -1,4 +1,4 @@
-package util.sort;
+package util.sort.ints;
 
 import util.Prob;
 

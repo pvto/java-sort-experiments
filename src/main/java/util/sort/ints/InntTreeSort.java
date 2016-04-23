@@ -1,8 +1,8 @@
 
-package util.sort;
+package util.sort.ints;
 
-import util.sort.InntTree.Node1;
-import util.sort.InntTree.Node2;
+import util.sort.ints.InntTree.Node1;
+import util.sort.ints.InntTree.Node2;
 
 /**
  *

@@ -1,5 +1,6 @@
-package util.sort;
+package util.sort.ints;
 
+import util.sort.ints.BleedSort;
 import org.junit.Ignore;
 import org.junit.Test;
 import util.Prob;

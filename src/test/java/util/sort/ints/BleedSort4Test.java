@@ -1,5 +1,7 @@
-package util.sort;
+package util.sort.ints;
 
+import util.sort.ints.BleedSort4;
+import util.sort.ints.BleedSort3;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,12 +9,12 @@ import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 import org.junit.Ignore;
 import org.junit.Test;
-import static util.sort.Util.fillBinomial;
-import static util.sort.Util.fillDecr;
-import static util.sort.Util.fillIncr;
-import static util.sort.Util.fillRandom;
-import static util.sort.Util.fillSkewed;
-import static util.sort.Util.fillTwinBinomial;
+import static util.sort.ints.Util.fillBinomial;
+import static util.sort.ints.Util.fillDecr;
+import static util.sort.ints.Util.fillIncr;
+import static util.sort.ints.Util.fillRandom;
+import static util.sort.ints.Util.fillSkewed;
+import static util.sort.ints.Util.fillTwinBinomial;
 
 public class BleedSort4Test {
 
