@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author pvto https://github.com/pvto
  */
-public class Int {
+public class Ints {
 
     static public int sign(int x)
     {

@@ -1,7 +1,7 @@
 package util.sort.ints;
 
 import java.util.Arrays;
-import util.Int;
+import util.Ints;
 
 /**
  * @author pvto https://github.com/pvto
@@ -71,14 +71,14 @@ public class BleedSort4b {
                 || q[8] - q[0] < a.length >>> 1)
         {
             lastSortFlags |= REPETITIVE + BLEEDSORT4;
-            countingBleedSort(a, Int.fill(tmpSize >> 1, Integer.MIN_VALUE), q);
+            countingBleedSort(a, Ints.fill(tmpSize >> 1, Integer.MIN_VALUE), q);
             return;
         }
         else
         {
             lastSortFlags |= BLEEDSORT3;
             int repetitionBitmap = fillLSDs((int)sampledRepetition[0]);
-            bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
+            bleedSort(a, Ints.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
             return;
         }
     }

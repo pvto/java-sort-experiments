@@ -1,7 +1,7 @@
 package util.sort.ints;
 
 import java.util.Arrays;
-import util.Int;
+import util.Ints;
 
 /**
  * @author pvto https://github.com/pvto
@@ -29,7 +29,7 @@ public class BleedSort2 {
                     ind = (int) (Math.random() * (a.length - 1)),
                     x1 = a[ind],
                     x2 = a[ind + 1],
-                    signChange = Int.sign(x2 - x1)
+                    signChange = Ints.sign(x2 - x1)
                     ;
             if (signChange != sign)
                 signChanges++;
@@ -86,7 +86,7 @@ public class BleedSort2 {
                 tmpSize = (int)((a.length * 4))
                 ;
 
-        bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, sameness, 0);
+        bleedSort(a, Ints.fill(tmpSize, Integer.MIN_VALUE), q, sameness, 0);
     }
     
     public static int fillLSDs(int x)
@@ -266,7 +266,7 @@ public class BleedSort2 {
     private static int[] newTmpArr(int[] tmp, int[] a)
     {
         if (tmp.length / (double)a.length < 16)
-            tmp = Int.fill((int) ((long)tmp.length * 3L >>> 1), Integer.MIN_VALUE);
+            tmp = Ints.fill((int) ((long)tmp.length * 3L >>> 1), Integer.MIN_VALUE);
         return tmp;
     }
     

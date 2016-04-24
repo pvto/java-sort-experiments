@@ -1,6 +1,6 @@
 package util.sort.ints;
 
-import util.Int;
+import util.Ints;
 
 /**
  *
@@ -30,7 +30,7 @@ public class BleedSort {
                     ind = (int) (Math.random() * (a.length - 1)),
                     x1 = a[ind],
                     x2 = a[ind + 1],
-                    signChange = Int.sign(x2 - x1)
+                    signChange = Ints.sign(x2 - x1)
                     ;
             if (signChange != sign)
                 signChanges++;
@@ -73,7 +73,7 @@ public class BleedSort {
 //                "sample %d min %d max %d mean %d signChanges %.2f tmpSize %d", 
 //                sample, min, max, mean, factor, tmpSize
 //        ));
-        bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), min, max, mean, sameness, 0);
+        bleedSort(a, Ints.fill(tmpSize, Integer.MIN_VALUE), min, max, mean, sameness, 0);
     }
     
     public static int fillLSDs(int x)
@@ -195,7 +195,7 @@ public class BleedSort {
     private static int[] newTmpArr(int[] tmp, int[] a)
     {
         if (tmp.length / (double)a.length < 16)
-            tmp = Int.fill((int) ((long)tmp.length * 3L >>> 1), Integer.MIN_VALUE);
+            tmp = Ints.fill((int) ((long)tmp.length * 3L >>> 1), Integer.MIN_VALUE);
         return tmp;
     }
     

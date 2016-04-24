@@ -1,7 +1,7 @@
 package util.sort.ints;
 
 import java.util.Arrays;
-import util.Int;
+import util.Ints;
 
 /**
  * @author pvto https://github.com/pvto
@@ -41,7 +41,7 @@ public class BleedSort3 {
         q[8] = sample[sample.length - 1];
 
         int tmpSize = (int) (a.length * 4);
-        bleedSort(a, Int.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
+        bleedSort(a, Ints.fill(tmpSize, Integer.MIN_VALUE), q, repetitionBitmap);
     }
     
     public static double sampleRepetition(int[] a, int sampleSize)
