@@ -8,7 +8,8 @@ import static org.junit.Assert.*;
 public class StringTrieTest {
 
     @Test
-    public void testMatch() {
+    public void testMatch()
+    {
         StringTrie trie = new StringTrie();
         trie.put("a");
         trie.put("b");
@@ -29,7 +30,8 @@ public class StringTrieTest {
     }
     
     @Test
-    public void testGetOrderedStrings() {
+    public void testGetOrderedStrings()
+    {
         StringTrie trie = new StringTrie();
         trie.put("a");
         trie.put("b");

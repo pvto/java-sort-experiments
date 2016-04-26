@@ -133,15 +133,25 @@ public class StringTrie {
     
     public List<String> getOrderedStrings()
     {
+        return getOrderedStrings(false);
+    }
+    
+    public List<String> getOrderedStringsWithDuplicates()
+    {
+        return getOrderedStrings(true);
+    }
+    
+    public List<String> getOrderedStrings(boolean duplicates)
+    {
         List<String> res = new ArrayList<>();
         
         String cur = "";
         Bits b0 = root;
-        _getOrderedStrings(res, cur, b0);
+        _getOrderedStrings(res, cur, b0, duplicates);
         return res;
     }
     
-    public void _getOrderedStrings(List<String> res, String cur, Bits b0)
+    public void _getOrderedStrings(List<String> res, String cur, Bits b0, boolean duplicates)
     {
         for(int i = 0; i < 256; i++)
         {
@@ -167,9 +177,11 @@ public class StringTrie {
                                         String d = cur + c;
                                         if (b02.termin > 0)
                                         {
-                                            res.add(d);
+                                            int n = (duplicates ? b02.termin : 1);
+                                            for(int x = 0; x < n; x++)
+                                                res.add(d);
                                         }
-                                        _getOrderedStrings(res, d, b02);
+                                        _getOrderedStrings(res, d, b02, duplicates);
                                     }
                                 }
                             }
