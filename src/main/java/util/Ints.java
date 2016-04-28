@@ -91,4 +91,12 @@ public class Ints {
         Arrays.fill(tmp, val);
         return tmp;
     }
+
+    public static long sum(List<Long> A)
+    {
+        long res = 0;
+        for(Long x : A)
+            res += x;
+        return res;
+    }
 }
