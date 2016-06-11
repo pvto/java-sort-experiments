@@ -1,4 +1,4 @@
-package util.sort.ints;
+package util;
 
 
 /**
