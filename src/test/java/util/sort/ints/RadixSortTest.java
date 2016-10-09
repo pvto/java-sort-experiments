@@ -16,18 +16,18 @@ public class RadixSortTest {
     @Test
     public void testRadix() throws IOException
     {
-        int[] orig = new int[ (int)1e7 ];
+        int[] orig = new int[ (int)8e6 ];
         int[] t = new int[orig.length];
-        double  similarityFactor = 2.0;
-        double  compressionFactor = 1.0 * 1;
+        double  similarityFactor = 0.0;
+        double  compressionFactor = 1.0 * 1000;
         double  mixFactor = 0;
         double  bin_p = 0.25;
-        int     n = 5000;
+        int     n = 0;
         double  exp = 3;
-        boolean uniform = false;
+        boolean uniform = true;
         boolean decreasing = false;
         boolean skewed = false;
-        boolean binomial = true;
+        boolean binomial = false;
         boolean sinusoidal = false;
         int peaks = 1;
         double frequency = 1;
@@ -41,7 +41,7 @@ public class RadixSortTest {
 
         Util.TestSorter baseSorter = Util.TestSorters.arraysSortSorter();
         Util.TestSorter mySorter = Util.TestSorters.radix11Sorter();
-        Util.TestSorter competingSorter = Util.TestSorters.radix8Sorter();
+        Util.TestSorter competingSorter = Util.TestSorters.bleedSort6Sorter();
         
         
         System.out.println("priming...");

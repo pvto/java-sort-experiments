@@ -159,6 +159,7 @@ public class Util {
         
         public static TestSorter bleedSort4bSorter() { return new BleedSort4bSorter(); }
         public static TestSorter bleedSort5Sorter() { return new BleedSort5Sorter(); }
+        public static TestSorter bleedSort6Sorter() { return new BleedSort6Sorter(); }
         public static TestSorter countingBleedSortSorter() { return new CountingBleedSortSorter(); }
         public static TestSorter inntTreeSorter() { return new InntTreeSorter(); }
         public static TestSorter inntTreeHungrySorter() { return new InntTreeHungrySorter(); }
@@ -168,7 +169,7 @@ public class Util {
         public static TestSorter radix8Sorter() { return new Radix8Sorter(); }
         public static TestSorter radix16Sorter() { return new Radix16Sorter(); }
         public static TestSorter radix11Sorter() { return new Radix11Sorter(); }
-        
+
         public static class BleedSort4bSorter implements TestSorter {
             @Override public void sort(int[] a) { BleedSort4b.bleedSort(a); }
             @Override public String name() { return BleedSort4b.class.getSimpleName(); }
@@ -179,6 +180,12 @@ public class Util {
             @Override public String name() { return BleedSort5.class.getSimpleName(); }
             @Override public String lastSortDescription() { return BleedSort5.lastSortFlags + ""; }
         }
+        public static class BleedSort6Sorter implements TestSorter {
+            @Override public void sort(int[] a) { BleedSort6.bleedSort(a); }
+            @Override public String name() { return BleedSort6.class.getSimpleName(); }
+            @Override public String lastSortDescription() { return BleedSort6.lastSortFlags + ""; }
+        }
+
         public static class CountingBleedSortSorter implements TestSorter {
             @Override public void sort(int[] a) { BleedSort6.countingBleedSort(a); }
             @Override public String name() { return "bleedsort-counting"; }
