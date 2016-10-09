@@ -2,7 +2,7 @@ package util;
 
 
 /** A thin wrapper around Object[].  Works the same way as java.util.ArrayList
- * does, expanding by the factor of two until put(index) fits in.
+ * does, but expanding by the factor of two until put(index) fits in.
  * 
  * put() expands automatically, failing only with negative indices and on
  * OutOfMemoryError.
@@ -90,6 +90,10 @@ public class ExpandingArray<T> {
             if (DEFAULT_VALUE != 0)
             {
                 for(int i = items.length; i < ind; i++)
+                {
+                    newItems[i] = DEFAULT_VALUE;
+                }
+                for (int i = ind + 1; i < newItems.length; i++)
                 {
                     newItems[i] = DEFAULT_VALUE;
                 }
